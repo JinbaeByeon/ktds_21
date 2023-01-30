@@ -1,0 +1,5 @@
+#written by FileProperties
+#Wed Jan 18 12:22:41 KST 2023
+month=4
+year=2004
+day=21

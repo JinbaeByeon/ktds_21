@@ -1,0 +1,10 @@
+1674104905226	Delete element
+1674105271782	Rename type 'Hospital'
+1674105640422	Rename field 'disease'
+1674105930951	Rename method 'getDisease'
+1674106633494	Rename method 'getPrescription'
+1674106831269	Rename method 'takePrescript'
+1674106871580	Rename method 'prescript'
+1674107478806	Rename type 'Main'
+1674108767354	Rename type 'HangeulConvertor'
+1674108804581	Rename method 'convertBySupport'

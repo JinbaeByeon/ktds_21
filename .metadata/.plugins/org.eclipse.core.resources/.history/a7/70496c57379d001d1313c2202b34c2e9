@@ -1,0 +1,9 @@
+package market;
+
+public class Market {
+	private int price;
+	public void proceed(Trader buyer,Trader seller, int amount) {
+		buyer.buy(amount,price);
+		seller.sell(amount,price);
+	}
+}

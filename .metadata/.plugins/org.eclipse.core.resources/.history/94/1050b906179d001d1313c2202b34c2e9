@@ -1,0 +1,15 @@
+package access;
+
+public class Main {
+	public static void main(String[] args) {
+		Public pub = new Public();
+		
+		Private pri = new Private();
+		pub.add();
+		pub.number1=10;
+		pub.number2=10;
+		pub.add();
+		
+//		pri.add();
+	}
+}

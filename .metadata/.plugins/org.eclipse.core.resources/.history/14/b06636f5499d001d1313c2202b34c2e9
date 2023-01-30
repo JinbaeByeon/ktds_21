@@ -1,0 +1,7 @@
+package gas_station;
+
+public class Fuel {
+	private int sort;
+	private int remain;
+
+}

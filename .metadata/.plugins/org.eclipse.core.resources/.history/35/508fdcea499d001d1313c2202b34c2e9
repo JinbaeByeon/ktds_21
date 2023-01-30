@@ -1,0 +1,19 @@
+package gas_station;
+
+public class Fuel {
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getRemain() {
+		return remain;
+	}
+	public void setRemain(int remain) {
+		this.remain = remain;
+	}
+	private int remain;
+
+}

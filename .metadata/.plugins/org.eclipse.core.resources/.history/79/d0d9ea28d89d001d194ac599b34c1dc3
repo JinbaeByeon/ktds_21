@@ -1,0 +1,56 @@
+package gas_station;
+
+public class Customer {
+	private Fuel fuel = new Fuel();
+	private int money;
+
+	public Customer(Fuel fuel, int money) {
+		this.fuel = fuel;
+		this.money = money;
+	}
+
+	public Fuel getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(Fuel fuel) {
+		this.fuel = fuel;
+	}
+
+	/**
+	 * 구매 (gasStation에게 type의 Fuel을 amount만큼 구매)
+	 * 
+	 * @param gasStation 주유소
+	 * @param type       연료의 종류(Gasoline=0, Diesel=1,Lpg=2)
+	 * @param amount     연료의 양
+	 */
+	public void buy(GasStation gasStation, int type, int amount) {
+		double price = amount * GasStation.PRICE_OF_OIL[type];
+		if (!checkMoney(price)) {
+			return;
+		}
+		if (gasStation.sell(type, amount)) {
+			fuel.add(amount);
+			pay(gasStation, price);
+		}
+	}
+
+	public void pay(GasStation gasStation, double price) {
+		money -= price;
+		gasStation.income(price);
+	}
+
+	private boolean checkMoney(double price) {
+		if (money < price) {
+			System.out.println("잔액이 부족합니다.");
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "[고객] " + fuel + "/ 자본금: " + money;
+	}
+
+}

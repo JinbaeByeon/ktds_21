@@ -1,0 +1,24 @@
+package gas_station;
+
+public class Customer {
+	private Fuel fuel = new Fuel();
+	private int money;
+	
+	public Fuel getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(Fuel fuel) {
+		this.fuel = fuel;
+	}
+	
+	public void buy(GasStation gasStation,int sort, int amount) {
+		
+	}
+	
+	public boolean ableToBuy() {
+		
+	}
+	
+
+}

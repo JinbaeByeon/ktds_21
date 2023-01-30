@@ -1,0 +1,53 @@
+package gas_station;
+
+public class GasStation {
+	public static final double[] PRICE_OF_OIL = {1569.67,1651.15,1039.35};	
+	
+	private Fuel[] fuels = 
+		{new Fuel(Fuel.GASOLINE),new Fuel(Fuel.DIESEL),new Fuel(Fuel.LPG)};
+
+	
+	private int money;
+	
+	public boolean sell(int type,int amount) {
+		if(!checkRemain(type,amount)) {
+			return false;
+		}
+		fuels[type].subtract(amount);
+		return true;
+	}
+	public Fuel getFuel(int type) {
+		return fuels[type];
+	}
+	public void setFuels(int type,Fuel fuel) {
+		this.fuels[type] = fuel;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	
+	public void income(double price) {
+		money -= price;
+	}
+	
+	private boolean checkRemain(int sort,int amount) {
+		if(fuels[sort].getRemain() < amount) {
+			System.out.println("기름 잔량이 부족합니다.");
+			return false;			
+		}
+		return true;
+	}
+	@Override
+	public String toString() {
+		String res = "[주유소]\n";
+		for(Fuel fuel : fuels) {
+			res += fuel +"\n";
+		}
+		res += "자본금: " +money;
+		return res;
+		
+	}
+}

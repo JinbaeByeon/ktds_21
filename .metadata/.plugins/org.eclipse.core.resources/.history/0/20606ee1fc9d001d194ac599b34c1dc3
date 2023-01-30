@@ -1,0 +1,73 @@
+package address_book;
+
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable.BinaryOp.Add;
+
+public class AddressHandler {
+
+	private Address[] addressArray = new Address[5];
+	private int nAddress = 0;
+
+	public static void main(String[] args) {
+		AddressHandler adHandler = new AddressHandler();
+		adHandler.create();
+		adHandler.read();
+
+	}
+
+	// CRUD
+	// 추가
+	public void create(int idx, Address address) {
+		addresses[idx] = address;
+		++nAddress;
+	}
+
+	public void create(int idx, String name,String PhoneNumber, String addr) {
+		Address address = new Address();
+		address.setName(name);
+		address.setPhoneNumber(PhoneNumber);
+		address.setAddress(addr);
+		
+		addresses[idx] = address;
+		++nAddress;
+	}
+	public void create(Address address) {
+		addresses[nAddress++] = address;
+	}
+
+	public void create() {
+		Address address = new Address();
+		address.setName("변진배");
+		address.setAddress("서울");
+		address.setPhoneNumber("010-6339-9713");
+		addresses[nAddress++] = address;
+	}
+
+	// 조회
+	public void read(int idx) {
+		if (addresses[idx] != null) {
+			System.out.println(addresses[idx]);
+		}
+	}
+
+	public void read() {
+		if (nAddress > 0 && addresses[nAddress - 1] != null) {
+			System.out.println(addresses[nAddress - 1]);
+		}
+	}
+
+	// 갱신
+	public void update(int idx, Address address) {
+		addresses[idx] = address;
+	}
+
+	// 삭제
+	public void delete(int idx) {
+		addresses[idx] = null;
+	}
+
+	public void delete() {
+		if (nAddress > 0)
+			addresses[--nAddress] = null;
+	}
+
+}

@@ -1,0 +1,31 @@
+package gas_station;
+
+public class Fuel {
+	private int sort;
+	private int remain;
+	
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+	public int getRemain() {
+		return remain;
+	}
+	public void setRemain(int remain) {
+		this.remain = remain;
+	}
+	Fuel(int sort){
+		this.sort = sort;
+	}
+	Fuel(){
+		
+	}
+
+	@Override
+	public String toString() {
+		String[] oilName = {"휘발유","경유","LPG"};
+		return "기름 종류: " + oilName[sort] + "잔량: " + remain;
+	}
+}

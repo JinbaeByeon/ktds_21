@@ -1,0 +1,8 @@
+package calculator;
+
+public class Main {
+	public static void Main(String[] args) {
+		Calculator calc = new Calculator();
+		System.out.println(calc.remains(10, 3));
+	}
+}

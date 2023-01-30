@@ -1,0 +1,26 @@
+package address_book;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AddressListHandler {
+	private List<Address> addressList = new ArrayList<>();
+	
+	public void create(String name, String phoneNumber, String address) {
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		AddressListHandler hdr = new AddressListHandler();
+		
+		Address addr = new Address();
+		hdr.addressList.add(addr);
+		// list 추가
+		// list 조회
+		// list 삭제
+		// list 수정
+	}
+
+}

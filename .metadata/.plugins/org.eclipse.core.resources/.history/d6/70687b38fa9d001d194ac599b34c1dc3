@@ -1,0 +1,33 @@
+package address_book;
+
+public class AddressHandler {
+	
+	private Address address1;
+	public static void main(String[] args) {
+		AddressHandler adHandler = new AddressHandler();
+	}
+
+	// CRUD
+	// 추가
+	public void create() {		
+		address1 = new Address();
+		address1.setName("변진배");
+		address1.setPhoneNumber("010-6339-9713");
+		address1.setAddress("서울");
+	}
+
+	// 조회
+	public void read() {
+
+	}
+
+	// 갱신
+	public void update() {
+
+	}
+
+	// 삭제
+	public void delete() {
+
+	}
+}

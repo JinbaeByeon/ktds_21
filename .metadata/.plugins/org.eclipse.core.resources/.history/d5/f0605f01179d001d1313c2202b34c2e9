@@ -1,0 +1,12 @@
+package access;
+
+public class Private {
+	private int number1;
+	private int number2;
+	
+	public int add() {
+		int res = number1 + number2;
+		System.out.println(res);
+		return res;
+	}
+}

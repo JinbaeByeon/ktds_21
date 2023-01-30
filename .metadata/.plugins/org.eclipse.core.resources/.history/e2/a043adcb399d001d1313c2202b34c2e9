@@ -1,0 +1,12 @@
+package market;
+/**
+ * 판매자
+ * @author User
+ *
+ */
+public class Seller extends Trader {
+	public void sell(int amount, int price) {
+		money += amount * price;
+		stock -= amount;
+	}
+}

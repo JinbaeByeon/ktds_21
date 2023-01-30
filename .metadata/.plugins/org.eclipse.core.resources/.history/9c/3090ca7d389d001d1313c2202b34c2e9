@@ -1,0 +1,9 @@
+package market;
+
+public class Buyer extends Trader{
+
+	public void buy(int amount,int price) {
+		money -= amount*price;
+		apples += amount;
+	}
+}

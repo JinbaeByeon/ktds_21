@@ -1,0 +1,36 @@
+package address_book;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AddressListHandler {
+	private List<Address> addressList = new ArrayList<>();
+	
+	public void create(String name, String phoneNumber, String address) {
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		AddressListHandler hdr = new AddressListHandler();
+		
+		Address addr = new Address();
+		addr.setName("aaa");
+		addr.setPhoneNumber("1234");
+		addr.setAddress("qweqwe");
+		hdr.addressList.add(addr);
+		
+		addr.setName("bbb");
+		hdr.addressList.add(addr);
+		
+		for(Address adr : hdr.addressList) {
+			System.out.println(adr.getName());
+		}
+		// list 추가
+		// list 조회
+		// list 삭제
+		// list 수정
+	}
+
+}

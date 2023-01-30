@@ -1,0 +1,14 @@
+package gas_station;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+	public static void main(String[] args) {
+		List<Customer> customers = new ArrayList<>();
+		for(Customer customer: customers) {
+			customer.get
+			customer.buy(GasStation,,)
+		}
+	}
+}

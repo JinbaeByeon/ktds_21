@@ -1,0 +1,24 @@
+package gas_station;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+	public static void main(String[] args) {
+		List<Customer> customers = new ArrayList<>();
+		customers.add(new Customer());
+		customers.add(new Customer());
+		customers.add(new Customer());
+		
+		GasStation gasStation = new GasStation();
+		
+		for(Customer customer: customers) {
+			int sort = customer.getFuel().getType();
+			customer.buy(gasStation,sort,10);
+		}
+		for(Customer customer: customers) {
+			System.out.println(customer);
+		}
+		System.out.println(gasStation);
+	}
+}

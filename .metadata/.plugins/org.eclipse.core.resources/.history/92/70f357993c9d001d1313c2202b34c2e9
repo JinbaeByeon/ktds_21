@@ -1,0 +1,27 @@
+package market;
+
+/**
+ * 판매자
+ * 
+ * @author User
+ *
+ */
+public class Seller extends Trader {
+	/**
+	 * 판매
+	 * (buyer에게 amount만큼 판매)
+	 * @param buyer 구매자
+	 * @param amount 주문개수
+	 */
+	public int sell(Buyer buyer, int amount) {
+		int res = buyer.pay(this,amount);
+		if(res==0) {
+			return 0;
+		}
+		if(stock < amount) {
+			return 0;
+		}
+		stock-=amount;
+		
+	}
+}

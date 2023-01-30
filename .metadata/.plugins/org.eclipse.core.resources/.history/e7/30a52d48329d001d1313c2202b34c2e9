@@ -1,0 +1,17 @@
+package calculator;
+
+public class Main {
+	public static void main(String[] args) {
+		Calculator calc = new Calculator();
+		int resAdd = calc.add(10, 3);
+		int resSub = calc.subtract(10, 3);
+		int resMul = calc.multiply(10, 3);
+		double resDiv = calc.divide(10, 3);
+		int resRem = calc.remain(10, 3);
+		System.out.println("resAdd = " + resAdd);
+		System.out.println("resSub = " + resSub);
+		System.out.println("resMul = " + resMul);
+		System.out.println("resDiv = " + resDiv);
+		System.out.println("resRem = " + resRem);
+	}
+}

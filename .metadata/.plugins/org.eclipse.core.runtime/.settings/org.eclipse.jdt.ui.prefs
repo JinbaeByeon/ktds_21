@@ -1,0 +1,14 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.List"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="stream.ExampleCode"><rhs name\="stream.ExampleCode"/></lhs><lhs name\="java.util.Random"><rhs name\="java.util.Random"/></lhs><lhs name\="access.Public"><rhs name\="access.Public"/></lhs><lhs name\="access.Private"><rhs name\="access.Private"/></lhs><lhs name\="calculator.Calculator"><rhs name\="calculator.Calculator"/></lhs><lhs name\="market.Buyer"><rhs name\="market.Buyer"/></lhs><lhs name\="market.Seller"><rhs name\="market.Seller"/></lhs><lhs name\="market.Trader"><rhs name\="market.Buyer"/><rhs name\="market.Seller"/></lhs><lhs name\="market.Market"><rhs name\="market.Market"/></lhs><lhs name\="gas_station.Fuel"><rhs name\="gas_station.Fuel"/></lhs><lhs name\="gas_station.GasStation"><rhs name\="gas_station.GasStation"/></lhs><lhs name\="address_book.AddressHandler"><rhs name\="address_book.AddressHandler"/></lhs><lhs name\="address_book.Address"><rhs name\="address_book.Address"/></lhs><lhs name\="address_book.AddressListHandler"><rhs name\="address_book.AddressListHandler"/></lhs><lhs name\="bulletin_board.BulletinBoard"><rhs name\="bulletin_board.BulletinBoard"/></lhs><lhs name\="bulletin_board.Bulletin"><rhs name\="bulletin_board.Bulletin"/></lhs></history>
+content_assist_number_of_computers=17
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+markOccurrences=false
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=22
+sourceHoverBackgroundColor=255,255,225
+spelling_locale_initialized=true
+typefilter_migrated_2=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

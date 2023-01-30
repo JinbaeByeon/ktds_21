@@ -1,0 +1,8 @@
+package address_book;
+
+public class AddressHandler {
+	Address[] addresses;
+	//추가
+	//조회
+	//삭제
+}

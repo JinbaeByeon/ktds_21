@@ -1,0 +1,20 @@
+package market;
+
+public class Trader {
+	protected int money;
+	protected int apples;
+	
+	Trader()
+	{
+		
+	}
+	Trader(int money, int apples){
+		this.money = money;
+		this.apples = apples;
+	}
+	
+	public void show() {
+		System.out.println("사과 재고: " + apples + ", 자본금: " + money);
+	}
+	
+}

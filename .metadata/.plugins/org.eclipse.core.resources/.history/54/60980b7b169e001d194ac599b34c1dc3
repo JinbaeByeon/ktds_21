@@ -1,0 +1,9 @@
+package bulletin_board;
+
+public class Bulletin {
+	String title;
+	String writer;
+	int number;
+	int hits;
+	
+}

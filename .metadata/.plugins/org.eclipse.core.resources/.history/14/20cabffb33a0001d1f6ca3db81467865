@@ -1,0 +1,23 @@
+package board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class boardService {
+
+	private List<BoardVO> boarList = new ArrayList<>();
+
+	public void create() {
+		
+	}
+	public void update() {
+		
+	}
+	public void delete() {
+		
+	}
+	
+	public void read() {
+		
+	}
+}

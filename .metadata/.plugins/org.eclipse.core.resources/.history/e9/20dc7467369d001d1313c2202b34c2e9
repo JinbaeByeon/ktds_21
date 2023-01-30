@@ -1,0 +1,8 @@
+package market;
+
+public class Market {
+	public void proceed() {
+		Trader buyer = new Trader();
+		Trader seller = new Trader();
+	}
+}

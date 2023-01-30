@@ -1,0 +1,9 @@
+package bulletin_board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BulletinBoard {
+	List<Bulletin> bulletins = new ArrayList<>();
+
+}

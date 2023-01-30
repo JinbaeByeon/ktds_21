@@ -1,0 +1,23 @@
+package access;
+
+import java.util.Arrays;
+
+public class Main {
+	public static void main(String[] args) {
+		Public pub = new Public();
+		
+		/*
+		 * pub.add(); int publicNumberOne = pub.getNumber1();
+		 * System.out.println(publicNumberOne);
+		 * 
+		 * pub.setNumber1(10);
+		 * 
+		 * publicNumberOne = pub.getNumber1(); System.out.println(publicNumberOne);
+		 * 
+		 * pub.add();
+		 */
+		
+		
+		
+	}
+}

@@ -1,0 +1,19 @@
+package calculator;
+
+public class Main {
+	public static void main(String[] args) {
+		Calculator calc = new Calculator();
+		int resAdd = calc.add(10, 10);
+		int resSub = calc.subtract(10, 8);
+		int resMul = calc.multiply(5,2);
+		double resDiv = calc.divide(50, 3);
+		int resRem = calc.remain(50, 3);
+		
+		System.out.println("resAdd = " + resAdd);
+		System.out.println("resSub = " + resSub);
+		System.out.println("resMul = " + resMul);
+		System.out.println("resDiv = " + resDiv);
+		System.out.println("resRem = " + resRem);
+		
+	}
+}

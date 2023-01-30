@@ -1,0 +1,28 @@
+package market;
+
+/**
+ * 구매자
+ * @author User
+ *
+ */
+public class Buyer extends Trader {
+	/**
+	 * 주문
+	 * (seller에게 amount 만큼 주문)
+	 * @param seller 판매자
+	 * @param amount 주문개수
+	 * @param price 단가
+	 */
+	public void buy(Seller seller,int amount) {
+		
+	}
+	/**
+	 * 지불
+	 * (seller에게 amount*price 만큼 지불)
+	 * @param seller 판매자
+	 * @param amount 주문개수
+	 */
+	public void pay(Seller seller, int amount) {
+		
+	}
+}

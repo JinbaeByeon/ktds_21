@@ -1,0 +1,31 @@
+package bulletin_board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BulletinBoard {
+	private List<Bulletin> bulletins = new ArrayList<>();
+	
+	public void create(String title,String writer,int number,int hits) {
+		Bulletin bulletin = new Bulletin();
+		
+		bulletins.add(null)
+	}
+	
+	public void view() {
+		
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void delete() {
+		
+	}
+	
+	public static void main(String[] args) {
+		BulletinBoard bBoard = new BulletinBoard();
+		
+	}
+}
