@@ -5,26 +5,30 @@ import java.util.Collections;
 import java.util.List;
 
 public class GasStation {
-	public static List<Double> PRICE_OF_OIL = new ArrayList<>();
+	public static List<Double> PRICE_OF_OIL;
 
-	private List<Fuel> fuels = new ArrayList<>();
-
+	private List<Fuel> fuels;
 	private int money;
 
 	private void init() {
-		PRICE_OF_OIL.add(Fuel.GASOLINE, 1569.67);
-		PRICE_OF_OIL.add(Fuel.DIESEL, 1651.15);
-		PRICE_OF_OIL.add(Fuel.LPG, 1039.35);
-		PRICE_OF_OIL = Collections.unmodifiableList(PRICE_OF_OIL);
+		if (PRICE_OF_OIL.isEmpty()) {
+			PRICE_OF_OIL.add(Fuel.GASOLINE, 1569.67);
+			PRICE_OF_OIL.add(Fuel.DIESEL, 1651.15);
+			PRICE_OF_OIL.add(Fuel.LPG, 1039.35);
+			PRICE_OF_OIL = Collections.unmodifiableList(PRICE_OF_OIL);
+		}
+		if (fuels.isEmpty()) {
+			fuels.add(new Fuel(Fuel.GASOLINE, 5_000));
+			fuels.add(new Fuel(Fuel.DIESEL, 3_000));
+			fuels.add(new Fuel(Fuel.LPG, 1_000));
+		}
 
-		fuels.add(new Fuel(Fuel.GASOLINE, 6000));
-		fuels.add(new Fuel(Fuel.DIESEL, 1000));
-		fuels.add(new Fuel(Fuel.LPG, 500));
-
-		setMoney(5_000_000);
+		setMoney(1_000_000);
 	}
 
 	public GasStation() {
+		PRICE_OF_OIL = new ArrayList<>();
+		fuels = new ArrayList<>();
 		init();
 	}
 
@@ -33,7 +37,7 @@ public class GasStation {
 	}
 
 	public void setFuels(int type, Fuel fuel) {
-		fuels.add(type, fuel);
+		fuels.set(type, fuel);
 	}
 
 	public int getMoney() {
@@ -56,16 +60,13 @@ public class GasStation {
 	 * @return
 	 */
 	public boolean sell(int type, int amount) {
-		boolean res = false;
-
 		if (checkRemain(type, amount)) {
 			fuels.get(type).subtract(amount);
-			res = true;
+			return true;
 		} else {
 			System.out.println("기름 잔량이 부족합니다.");
+			return false;
 		}
-
-		return res;
 	}
 
 	/**
@@ -76,12 +77,7 @@ public class GasStation {
 	 * @return
 	 */
 	private boolean checkRemain(int type, int amount) {
-		boolean res = false;
-
-		if (fuels.get(type).getRemain() >= amount) {
-			res = true;
-		}
-		return res;
+		return fuels.get(type).getRemain() >= amount;
 	}
 
 	@Override

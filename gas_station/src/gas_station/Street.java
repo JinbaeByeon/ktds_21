@@ -8,14 +8,15 @@ public class Street {
 		
 		GasStation gasStation = new GasStation();
 		
-		List<Customer> customers = new ArrayList<>();		
+		List<Customer> customers = new ArrayList<>();
+		
 		customers.add(new Customer(new Fuel(Fuel.GASOLINE),1_000_000));
 		customers.add(new Customer(new Fuel(Fuel.DIESEL,50),1_000_000));
 		customers.add(new Customer(new Fuel(Fuel.LPG),1_000_000));
 		
 		for(Customer customer: customers) {
-			int sort = customer.getFuel().getType();
-			customer.buy(gasStation,sort,500);
+			int type = customer.getFuel().getType();
+			customer.buy(gasStation,type,50);
 		}
 		for(Customer customer: customers) {
 			System.out.println(customer);

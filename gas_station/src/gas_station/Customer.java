@@ -1,7 +1,7 @@
 package gas_station;
 
 public class Customer {
-	private Fuel fuel = new Fuel();
+	private Fuel fuel;
 	private int money;
 
 	public Customer(Fuel fuel, int money) {
@@ -54,10 +54,7 @@ public class Customer {
 	 * @return
 	 */
 	private boolean checkMoney(double price) {
-		if (money < price) {
-			return false;
-		}
-		return true;
+		return money >= price;
 	}
 
 	@Override

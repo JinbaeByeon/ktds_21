@@ -31,13 +31,13 @@ public class AddressListHandler {
 
 	public void readAllFor() {
 		for (int i = 0; i < addressList.size(); ++i) {
-			addressList.forEach(addr -> System.out.println(addr));
+			read(i);
 		}
 	}
 
 	public void readAllForEach() {
-		for(Address addr: addressList) {
-			System.out.println(addr);			
+		for (Address addr : addressList) {
+			System.out.println(addr);
 		}
 	}
 
@@ -59,6 +59,13 @@ public class AddressListHandler {
 		hdr.read(2);
 
 		hdr.delete(2);
+		
+		System.out.println("FOR");
+		hdr.readAllFor();
+		System.out.println("FOR-EACH");
+		hdr.readAllForEach();
+		System.out.println("LIST-FOR-EACH");
+		hdr.readAllListForEach();
 	}
 
 }
