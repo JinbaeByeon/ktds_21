@@ -1,9 +1,0 @@
-package calculator;
-
-public class Main {
-	public static void main(String[] args) {
-		Calculator calc = new Calculator();
-		int res = calc.add(10, 3);
-		System.out.println(res);
-	}
-}

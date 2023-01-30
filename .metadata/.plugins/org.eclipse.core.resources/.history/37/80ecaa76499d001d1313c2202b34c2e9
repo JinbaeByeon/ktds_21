@@ -1,7 +1,0 @@
-package gas_station;
-
-public class Fuel {
-	private String name;
-	private int remain;
-
-}

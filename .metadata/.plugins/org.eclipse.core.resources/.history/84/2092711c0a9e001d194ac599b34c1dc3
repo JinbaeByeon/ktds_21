@@ -1,8 +1,0 @@
-package address_book;
-
-import java.util.List;
-
-public class AddressListHandler {
-	private Lists<Address> addressList = ArrayList<>();
-
-}

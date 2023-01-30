@@ -1,9 +1,0 @@
-package address_book;
-
-public class Address {
-	String name;
-	int phoneNumber;
-	String address;
-	
-
-}

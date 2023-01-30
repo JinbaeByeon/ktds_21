@@ -1,7 +1,0 @@
-package gas_station;
-
-public class Customer {
-	private Fuel fuel = new Fuel();
-	
-
-}

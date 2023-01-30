@@ -1,9 +1,0 @@
-package market;
-
-public class main {
-	public static void main(String[] args) {
-		Market market = new Market();
-		market.proceed();
-		market.show();
-	}
-}

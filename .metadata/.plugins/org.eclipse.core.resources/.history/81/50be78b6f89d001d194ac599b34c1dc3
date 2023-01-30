@@ -1,9 +1,0 @@
-package address;
-
-public class Address {
-	String name;
-	int phoneNumber;
-	String address;
-	
-
-}
