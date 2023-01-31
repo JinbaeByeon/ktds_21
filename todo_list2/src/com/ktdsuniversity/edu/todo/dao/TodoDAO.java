@@ -3,7 +3,10 @@ package com.ktdsuniversity.edu.todo.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.ktdsuniversity.edu.todo.vo.TodoVO;
 import com.ktdsuniversity.edu.todo.vo.VO;
@@ -26,11 +29,13 @@ public class TodoDAO implements DAO{
 		return dataSource.get(key);
 	}
 
-	public List<VO> readAll() {		
-		return dataSource.entrySet()
-							.stream()
-							.map(entry -> entry.getValue())
-							.collect(Collectors.toList());
+	public List<VO> readAll() {
+		Set<Entry<Integer,TodoVO>> entrySet = dataSource.entrySet();
+		Stream<Entry<Integer,TodoVO>> stream = entrySet.stream();
+		Stream<TodoVO> map = stream.map(entry -> entry.getValue());
+		List<VO> list = map.collect(Collectors.toList());
+		
+		return list;
 	}
 
 	public int update(int key, boolean isComplete) {
