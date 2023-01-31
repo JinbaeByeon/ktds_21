@@ -1,11 +1,17 @@
 package todo_list;
 
 public class TodoItemVO {
-	boolean isComplete;
-	String name;
+	/**
+	 * 완료 여부
+	 */
+	private boolean isComplete;
+	/**
+	 * 아이템 명
+	 */
+	private String name;
 
 	public TodoItemVO(String name) {
-		this.name = name;
+		setName(name);
 	}
 
 	public boolean isComplete() {
@@ -26,14 +32,13 @@ public class TodoItemVO {
 
 	@Override
 	public String toString() {
-		String res = "[";
-		if (isComplete) {
-			res += "X";
-		} else {
-			res += " ";
-		}
-		res += "] " + name;
-		
-		return res;
+//		String res = "[ ";
+//		if (isComplete) {
+//			res += "[X";
+//		}
+//		res += "] " + name;
+//		return res;
+		return "[" + (isComplete ? "X" : " ") + "] " + name;
+
 	}
 }

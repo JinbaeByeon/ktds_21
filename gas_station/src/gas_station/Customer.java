@@ -24,8 +24,8 @@ public class Customer {
 	 * @param type       연료의 종류(GASOLINE, DIESEL, LPG)
 	 * @param amount     연료의 양
 	 */
-	public void buy(GasStation gasStation, int type, int amount) {
-		double price = amount * GasStation.PRICE_OF_OIL.get(type);
+	public void buy(GasStation gasStation, FuelType type, int amount) {
+		double price = amount * GasStation.PRICES.get(type);
 		
 		if (!checkMoney(price)) {
 			System.out.println("잔액이 부족합니다.");

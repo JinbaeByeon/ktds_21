@@ -10,12 +10,12 @@ public class Street {
 		
 		List<Customer> customers = new ArrayList<>();
 		
-		customers.add(new Customer(new Fuel(Fuel.GASOLINE),1_000_000));
-		customers.add(new Customer(new Fuel(Fuel.DIESEL,50),1_000_000));
-		customers.add(new Customer(new Fuel(Fuel.LPG),1_000_000));
+		customers.add(new Customer(new Fuel(FuelType.GASOLINE),1_000_000));
+		customers.add(new Customer(new Fuel(FuelType.DIESEL,50),1_000_000));
+		customers.add(new Customer(new Fuel(FuelType.LPG),1_000_000));
 		
 		for(Customer customer: customers) {
-			int type = customer.getFuel().getType();
+			FuelType type = customer.getFuel().getType();
 			customer.buy(gasStation,type,50);
 		}
 		for(Customer customer: customers) {

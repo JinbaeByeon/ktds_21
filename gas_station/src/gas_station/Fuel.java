@@ -1,17 +1,14 @@
 package gas_station;
 
-public class Fuel {
-	public static final int GASOLINE =0;
-	public static final int DIESEL =1;
-	public static final int LPG =2;
-	
-	private int type;
+public class Fuel {	
+	private FuelType type;
 	private int remain;
 	
-	public int getType() {
+	
+	public FuelType getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(FuelType type) {
 		this.type = type;
 	}
 	public int getRemain() {
@@ -26,11 +23,11 @@ public class Fuel {
 	public void subtract(int amount) {
 		remain -= amount;
 	}
-	Fuel(int type,int remain){
+	Fuel(FuelType type,int remain){
 		this.type = type;
 		this.remain = remain;
 	}
-	Fuel(int type){
+	Fuel(FuelType type){
 		this.type = type;
 	}
 	Fuel(){
@@ -39,7 +36,6 @@ public class Fuel {
 
 	@Override
 	public String toString() {
-		String[] oilName = {"휘발유","경유","LPG"};
-		return "기름 종류: " + oilName[type] + ", 잔량: " + remain;
+		return "기름 종류: " + type + ", 잔량: " + remain;
 	}
 }
