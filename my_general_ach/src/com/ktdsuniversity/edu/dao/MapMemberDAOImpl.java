@@ -31,12 +31,6 @@ public class MapMemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO read(int idx) {
-		System.out.println("index 접근이 불가능합니다.");
-		return null;
-	}
-
-	@Override
 	public MemberVO read(String key) {
 		return 	dataSource.get(key);
 	}
