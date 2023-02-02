@@ -26,7 +26,6 @@ public class CSV {
 				System.out.println(words[0] + "과목의 점수는 "+ words[1] + "점이고, 등급은 " +words[2] +"입니다." );
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
