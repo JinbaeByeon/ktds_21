@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class WordRelay {
+public class WordRelayTryCatch {
 	List<String> wordsList;
 
-	public WordRelay() {
+	public WordRelayTryCatch() {
 		wordsList = new ArrayList<>();
 	}
 
-	private boolean isCorrectWord(String str, String lastWord) {
+	private void checkWord(String str, String lastWord) {
 		if (str.equals("포기") || !str.startsWith(lastWord)) {
-			System.out.println("\"" + str + "\"" + StringUtil.selectBySupport(lastWord, "을", "를") + " 입력했습니다.");
-			return false;
-		} else {
-			return true;
+			throw new ExitWordException();
+		}
+		if(str.length()<3) {
+			throw new WordLengthException();
 		}
 	}
 
@@ -28,7 +28,7 @@ public class WordRelay {
 
 	public void gameStart() {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("끝말잇기 게임 시작\n시작단어를 입력하세요.(3글자 이상)");
+		System.out.println("끝말잇기 게임 - tryCatch 시작\n시작단어를 입력하세요.(3글자 이상)");
 		new ArrayList<>();
 		String str = null;
 		int len = 0;
@@ -42,16 +42,21 @@ public class WordRelay {
 			str = scan.nextLine().trim().replace(" ", "");
 			len = str.length();
 
-			if (!isCorrectWord(str, lastWord)) {
-				System.out.println("게임이 종료됩니다.");
-				break;
-			} else if (len < 3) {
-				System.out.println("\"" + str + "\"" + StringUtil.selectBySupport(str, "은 ", "는 ") + len
-						+ "글자 입니다. 3글자 이상 단어를 입력하세요.");
-			} else {
+			try {
+				checkWord(str,lastWord);
 				wordsList.add(str);
 				lastWord = str.substring(len - 1);
 			}
+			catch(ExitWordException e) {
+				System.out.println("\"" + str + "\"" + StringUtil.selectBySupport(str, "을", "를") + " 입력했습니다.");
+				System.out.println("게임이 종료됩니다.");
+				break;
+			}
+			catch(WordLengthException e) {
+				System.out.println("\"" + str + "\"" + StringUtil.selectBySupport(str, "은 ", "는 ") + len
+						+ "글자 입니다.\n3글자 이상 단어를 입력하세요.");				
+			}
+			
 		}
 		printWordsList();
 		scan.close();
@@ -59,7 +64,7 @@ public class WordRelay {
 	}
 
 	public static void main(String[] args) {
-		WordRelay cont = new WordRelay();
+		WordRelayTryCatch cont = new WordRelayTryCatch();
 		cont.gameStart();
 	}
 }
