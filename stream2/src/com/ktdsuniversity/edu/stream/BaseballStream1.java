@@ -121,9 +121,9 @@ public class BaseballStream1 {
 		List<Stream<String>> uniqueCharactersMap
 							= words.stream() 				// Stream<String>
 		 				   		   .map(w -> w.split(""))	// Stream<String[]>
-		 				   		   // {{"J","a","v","a","8"},{"L","a","m","b","d","a","s"}}
-				 				   .map(Arrays::stream)		// Stream<Stream<String>>
-		 				   		   // {{"J"},{"a"},{"v"},{"a"},{"8"}},{{"L"},{"a"},{"m"},{"b"},{"d"},{"a"},{"s"}}}
+		 				   		   // {["J","a","v","a","8"],["L","a","m","b","d","a","s"]}
+		 				   		   .map(Arrays::stream)		// Stream<Stream<String>>
+		 				   		   // {{{"J"},{"a"},{"v"},{"a"},{"8"}},{{"L"},{"a"},{"m"},{"b"},{"d"},{"a"},{"s"}}}
 				 				   .distinct()
 				 				   .collect(Collectors.toList());
 		
@@ -131,7 +131,7 @@ public class BaseballStream1 {
 		System.out.println("-----------------");
 		List<String> uniqueCharactersFlatMap 
 							= words.stream()
-								   .map(w -> w.split(",")) 	//List<String> -> List<String[]>
+								   .map(w -> w.split("")) 	//List<String> -> List<String[]>
 		 				   		   // {{"J","a","v","a","8"},{"L","a","m","b","d","a","s"}}
 								   .flatMap(Arrays::stream)	//List<String[]> -> Stream<String>
 		 				   		   // {"J","a","v","a","8","L","a","m","b","d","a","s"}
