@@ -207,5 +207,7 @@ public class BaseballStream2 {
 														.collect(Collectors.groupingBy(s -> s.substring(0,1)));
 		
 		System.out.println("");
+		
+		
 	}
 }

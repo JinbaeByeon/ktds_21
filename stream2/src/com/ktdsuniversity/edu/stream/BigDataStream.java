@@ -19,8 +19,6 @@ public class BigDataStream {
 						vo.setKey(strArr[0].trim());
 						if(strArr.length>=2) {						
 							vo.setValue(strArr[1].trim());
-						} else {
-							vo.setValue("");
 						}
 						return vo;
 					})
@@ -32,7 +30,6 @@ public class BigDataStream {
 	}
 	
 	public static void main(String[] args) {
-
 		List<TextVO> list = readTextFile();
 		System.out.println("10K.ID.CONTENTS의 줄 수\n > " + list.size());
 		System.out.println("---------------------------------------------------------");
@@ -63,9 +60,7 @@ public class BigDataStream {
 		// 9. 10K.ID.CONTENTS 파일에서 ""7670637"에 몇 개의 단어가 있는지 출력
 		long cnt = list.parallelStream()
 					   .filter(vo -> vo.getKey().equals("7670637"))
-					   .map(vo -> {
-						  return List.of(vo.getValue().split(" "));
-					   })
+					   .map(vo -> List.of(vo.getValue().split(" ")))
 					   .findFirst()
 					   .orElse(new ArrayList<>()).size();
 		
@@ -82,15 +77,15 @@ public class BigDataStream {
 		System.out.println("---------------------------------------------------------");
 		// 11. 두 개의 단어로만 이루어진 "번호"는 몇 개인지 출력
 		cnt = list.parallelStream()
-				  .filter(vo ->  {
-					  return vo.getValue().split(" ").length == 2;
-				  })
+				  .filter(vo -> vo.getValue() != null)
+				  .filter(vo ->  vo.getValue().split(" ").length == 2)
 				  .count();
 		System.out.println("11. 두 개의 단어로만 이루어진 \"번호\"의 개수\n > " + cnt);
 		
 		System.out.println("---------------------------------------------------------");
 		// 12. 내용에 "that"이 포함된 글은 몇 개인지 출력
 		cnt = list.parallelStream()
+				  .filter(vo -> vo.getValue() != null)
 				  .filter(vo -> vo.getValue().contains("that"))
 				  .count();
 		System.out.println("12. 내용에 \"that\"이 포함된 글의 개수\n > " + cnt );
@@ -98,31 +93,35 @@ public class BigDataStream {
 		System.out.println("---------------------------------------------------------");
 		// 13. 글 번호가 6자리
 		cnt = list.parallelStream()
-				  .filter(vo -> {
-					  return vo.getKey().length()==6;
-				  })
+				  .filter(vo -> vo.getKey().length()==6)
 				  .count();				  
 		System.out.println("13. 글 번호가 6자리\n > " + cnt);
 		
 		System.out.println("---------------------------------------------------------");
 		// 14. 글 번호가 7자리
 		cnt = list.parallelStream()
-				  .filter(vo -> {
-					  return vo.getKey().length()==7;
-				  })
+				  .filter(vo -> vo.getKey().length()==7)
 				  .count();
 				  
 		System.out.println("14. 글 번호가 7자리\n > " + cnt);
 		
 		System.out.println("---------------------------------------------------------");
 		// 15. 글 번호가 9로 시작하는 모든 글들의 첫 번째 단어
-		List<String> firstWordList = list.parallelStream()
-									 	 .filter(vo -> vo.getKey().startsWith("9"))
-									 	 .map(vo -> vo.getValue().split(" ")[0])
-									 	 .collect(Collectors.toList());
 		System.out.println("15. 글 번호가 9로 시작하는 모든 글들의 첫 번째 단어");
-		firstWordList.forEach(w -> System.out.println("[" + w + "]"));
+		list.parallelStream()
+			.filter(vo -> vo.getKey().startsWith("9"))
+			.map(vo -> vo.getValue() == null ? "" : vo.getValue().split(" ")[0])
+			.forEach(w -> System.out.println("[" + w + "]"));
 		
 		System.out.println("---------------------------------------------------------");
+		// 16. 파일에서 내용이 있으며 글 번호가 7로 시작하는 모든 글들의 첫 번째 단어
+		System.out.println("16. 내용이 있으며 글 번호가 7로 시작하는 모든 글들의 첫 번째 단어");
+		list.parallelStream()
+			.filter(vo -> vo.getValue() != null && !vo.getValue().isEmpty())
+			.filter(vo -> vo.getKey().startsWith("7"))
+			.map(vo -> vo.getValue().split(" ")[0])
+			.filter(w -> !w.equals(""))
+			.forEach(w -> System.out.println("[" + w + "]"));
 	}
+	
 }
