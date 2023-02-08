@@ -1,7 +1,7 @@
 package calculator;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		Calculator calc = new Calculator();
 		int resAdd = calc.add(10, 10);
 		int resSub1 = calc.subtract(10, 3);
