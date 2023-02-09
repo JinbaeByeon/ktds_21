@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Review {
-	public static void main(String[] args) {
-		test();
-//		test2();
-	}
+	private static Scanner scan = new Scanner(System.in);
 
 	public static void test() {
 		System.out.println("1. 정수형 변수 number를 생성하고 7을 할당한 후 출력하기");
@@ -22,22 +20,20 @@ public class Review {
 		int empty;
 //		System.out.println(empty);  
 		System.out.println("empty 변수에 값을 할당하지 않아서 실행안됨 (주석처리함)");
-		
+
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("3. 정수형 변수 result를 생성하고 7과 7을 더한 후 출력하기");
 		int result = 7 + 7;
 		System.out.println(result);
 
 		System.out.println("\n-------------------------------------------------------------------");
-		System.out.println("4. 정수형 변수 overflow를 생성하고 Integer.MAX_VALUE를 할당하고 출력하기"); //"2^31 -1
+		System.out.println("4. 정수형 변수 overflow를 생성하고 Integer.MAX_VALUE를 할당하고 출력하기"); // "2^31 -1
 		int overflow = Integer.MAX_VALUE; // 0111'1111|1111'1111|1111'1111|1111'1111
 		System.out.println(overflow);
 
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("5. 정수형 변수 overflow에 1을 더해 할당하고 출력하기");
 		System.out.println(++overflow); // 1000'0000|0000'0000|0000'0000|0000'0000
-
-		
 
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("6. overflow 의 값이 이상하게 출력된 이유를 옆 사람에게 설명하기");
@@ -237,16 +233,16 @@ public class Review {
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("45. \"안녕하세요\" 를 출력하는 printHello 메소드를 작성하고 실행하기");
 		printHello();
-		
+
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("46. 문자열 변수 name을 입력받아 \"name님 안녕하세요\" 를 출력하는 printHello 메소드를 작성하고 실행하기");
 		printHello("이름");
-		
+
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("47. 정수형 변수 두 개를 입력받아 각 값을 곱하여 출력하는 multiplyNumbers 메소드를 작성하고 실행하기");
 		multiplyNumbers(10, 20);
 
-		System.out.println("\n-------------------------------------------------------------------");		
+		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("48. 정수형 변수 세 개를 입력받아 각 값을 더하여 출력하는 plusNumbers 메소드를 작성하고 실행하기");
 		plusNumbers(10, 20, 30);
 
@@ -331,11 +327,11 @@ public class Review {
 	}
 
 	private static void plusNumbers(int i, int j, int k) {
-		System.out.println(i+j+k);
+		System.out.println(i + j + k);
 	}
 
 	private static void multiplyNumbers(int i, int j) {
-		System.out.println(i*j);
+		System.out.println(i * j);
 	}
 
 	private static void printHello(String name) {
@@ -350,55 +346,162 @@ public class Review {
 	 * 교육 시간 나가는 실습 예제는 여기다가 테스트
 	 */
 	public static void test2() {
+//		Random rd = new Random();
+//		avgCalcArr(rd);
+//		avgCalcList(rd);
+//		avgCalcMap(rd);
+//		watchMovie();
+//		loop3();
+//		infinityLoop(rd);
+		printNumber();
+	}
+
+	public static void printNumber() {
 		Random rd = new Random();
-		avgCalcArr(rd);
-		avgCalcList(rd);
-		avgCalcMap(rd);
+		int[] arr = new int[50];
+		
+		for (int i = 0; i < arr.length; ++i) {
+			arr[i] = rd.nextInt(100);
+		}
+
+		for (int num : arr) {
+			if (num % 3 == 0 && num != 0) {
+				System.out.println(num);
+			}
+		}
+	}
+
+	public static void infinityLoop(Random rd) {
+		String str = "";
+		while (true) {
+			System.out.println("명령어를 입력하세요.");
+			str = scan.nextLine();
+			if (str.contains("keep")) {
+				if (str.contains("1")) {
+					avgCalcArr(rd);
+				} else if (str.contains("2")) {
+					avgCalcList(rd);
+				} else {
+					avgCalcMap(rd);
+				}
+			} else if (str.equals("quit")) {
+				break;
+			}
+		}
+	}
+
+	public static void loop3() {
+
+		int age = 0;
+		for (int i = 0; i < 3; ++i) {
+			System.out.println("나이를 입력하세요.");
+			age = scan.nextInt();
+			scan.nextLine();
+			if (age >= 19) {
+				System.out.println("성인입니다.");
+			} else {
+				System.out.println("미성년입니다.");
+			}
+		}
+		System.out.println();
+	}
+
+	public static void watchMovie() {
+		int money = 20_000;
+		int age = 27;
+		if (money >= 18000 && age >= 27) {
+			System.out.println("슬램덩크 볼 수 있음");
+		}
+	}
+
+	public static void gradeByAvg(double avg) {
+		System.out.println("평균 : " + avg);
+		String grade = "F";
+//		if (0b110_0100 > avg && avg >= 0b101_1111) {
+//			grade = "A+";
+//		} else if (0b101_1111 > avg && avg >= 0b101_1010) {
+//			grade = "A";
+//		} else if (0b101_1010 > avg && avg >= 0b101_0101) {
+//			grade = "B+";
+//		} else if (0b101_0101 > avg && avg >= 0b101_0000) {
+//			grade = "B";
+//		} else if (0b101_0000 > avg && avg >= 0b100_0110) {
+//			grade = "C";
+//		} else if (0b100_0110 > avg && avg >= 0b011_1011) {
+//			grade = "D";
+//		} else if (0b000_0000 <= avg && avg < 0b011_1011) {
+//			grade = "F";
+//		}
+
+		if (0x64 > avg && avg >= 0x5f) {
+			grade = "A+";
+		} else if (0x5f > avg && avg >= 0x5a) {
+			grade = "A";
+		} else if (0x5a > avg && avg >= 0x55) {
+			grade = "B+";
+		} else if (0x55 > avg && avg >= 0x50) {
+			grade = "B";
+		} else if (0x50 > avg && avg >= 0x46) {
+			grade = "C";
+		} else if (0x46 > avg && avg >= 0x3b) {
+			grade = "D";
+		} else if (0x00 <= avg && avg < 0x3b) {
+			grade = "F";
+		}
+		System.out.println(grade);
 	}
 
 	public static void avgCalcArr(Random rd) {
 		double avg = 0;
 		int[] scoreArr = new int[4];
-		for (int i = 0; i < 4; ++i) {
-			scoreArr[i] = 50 + rd.nextInt(51);
+		int lenArr = scoreArr.length;
+
+		for (int i = 0; i < lenArr; ++i) {
+			scoreArr[i] = 55 + rd.nextInt(46);
 			System.out.println("과목" + i + " 점수 : " + scoreArr[i]);
 		}
-		for (int i = 0; i < 4; ++i) {
-			avg += scoreArr[i] / 4.;
+		for (int score : scoreArr) {
+			avg += score / (double) lenArr;
 		}
-		System.out.println("평균 : " + avg);
+		gradeByAvg(avg);
 	}
 
 	public static void avgCalcList(Random rd) {
 		double avg = 0;
 		List<Integer> scoreList = new ArrayList<>();
 		for (int i = 0; i < 4; ++i) {
-			scoreList.add(50 + rd.nextInt(51));
+			scoreList.add(55 + rd.nextInt(46));
 			System.out.println("과목" + i + " 점수 : " + scoreList.get(i));
 		}
-
 		for (int score : scoreList) {
-			avg += score / 4.;
+			avg += score / (double) scoreList.size();
 
 		}
-		System.out.println("평균 : " + avg);
+		gradeByAvg(avg);
 	}
 
 	public static void avgCalcMap(Random rd) {
 		double avg = 0;
 		Map<String, Integer> scoreMap = new HashMap<>();
-		scoreMap.put("수학", 50 + rd.nextInt(51));
-		scoreMap.put("물리", 50 + rd.nextInt(51));
-		scoreMap.put("영어", 50 + rd.nextInt(51));
-		scoreMap.put("프로그래밍", 50 + rd.nextInt(51));
+		scoreMap.put("수학", 55 + rd.nextInt(46));
+		scoreMap.put("물리", 55 + rd.nextInt(46));
+		scoreMap.put("영어", 55 + rd.nextInt(46));
+		scoreMap.put("프로그래밍", 55 + rd.nextInt(46));
 
 		for (Entry<String, Integer> e : scoreMap.entrySet()) {
 			String subject = e.getKey();
 			int score = e.getValue();
 			System.out.println(subject + " 점수 : " + score);
-			avg += score / 4.;
+			avg += score;
 		}
+		avg /= (double) scoreMap.size();
 
-		System.out.println("평균 : " + avg);
+		gradeByAvg(avg);
+	}
+
+	public static void main(String[] args) {
+//		test();
+		test2();
+		scan.close();
 	}
 }
