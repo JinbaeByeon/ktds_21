@@ -95,4 +95,6 @@ replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
 
+# svn folders
 general_achi/
+max_min_avg/
