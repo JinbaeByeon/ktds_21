@@ -1,22 +1,20 @@
 package com.ktdsuniversity.edu.infext;
 
-public class VipMemberServiceImpl implements VipMemberService {
+public class VipMemberServiceImpl extends MemberServcieImpl implements VipMemberService {
 	int point = 0;
 
 	@Override
 	public void regist() {
+//		super.regist();
 		System.out.println("VIP regist complete");
 		addPoint(1000);
 	}
-
-	@Override
-	public void unregist() {
-		System.out.println("VIP unregist complete");
-	}
-
+	
 	@Override
 	public void updateMyInfo() {
+//		super.updateMyInfo();
 		System.out.println("VIP update complete");
+		addPoint(50);
 	}
 
 	@Override
