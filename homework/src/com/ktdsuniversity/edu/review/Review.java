@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class Review {
 	private static Scanner scan = new Scanner(System.in);
-
-	public static void test() {
+	
+	public static void test() {		
 		System.out.println("1. 정수형 변수 number를 생성하고 7을 할당한 후 출력하기");
 		int number = 7;
 		System.out.println(number);
@@ -277,6 +277,42 @@ public class Review {
 		System.out.println("\n-------------------------------------------------------------------");
 		System.out.println("56. 문자열 변수 세 개를 입력받아 첫 번째 문자열에서 두 번째 문자열을 세 번째 문자열로 교체하여 반환하는 getReplaced 메소드를 작성하고 실행하기");
 		System.out.println(getReplaced("이 문자열에서 두 번째 문자열이 있으면 세 번째 문자열로 교체", "문자열", "String"));
+		
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("57. 여러 개의 상품(상품명, 가격)을 가지는 클래스를 만들고 \"상품명 | 가격\" 형태로 반환하는 toString 메소드를 작성하고 실행하기");
+
+		ProductHandler ph = new ProductHandler();
+		System.out.println(ph);
+		
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("58. 여러 개의 상품(상품명, 가격)을 가지는 클래스를 만들고 \"상품명\"을 입력하면 재고 하나를 제거하는 removeOne(상품명) 메소드를 작성하고 실행하기");
+		System.out.println("\"a\" 제거");
+		ph.removeOne("a");
+		System.out.println(ph);
+		
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("59. 여러 개의 상품(상품명, 가격)과 금액을 가지는 클래스를 만들고 \"상품명\"을 입력하면 재고하나를 제거하고 금액을 상품가격만큼 증가시키는 order(상품명) 메소드를 작성하고 실행하기");
+		System.out.println("\"b\" 주문");
+		ph.order("b");
+		System.out.println(ph);
+		
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("60. 여러 개의 상품(상품명, 가격)과 금액을 가지는 클래스를 만들고 모든 상품이 제거될 때까지 무한 반복시키는 orderAll 메소드를 작성하고 실행하기");
+		System.out.println("전부 주문");
+		ph.orderAll();
+		System.out.println(ph);
+		
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("61. 여러 개의 상품(상품명, 가격)과 금액을 가지는 클래스를 만들고 상품을 추가하는 addProduct(상품)를 작성하고 실행하기");
+		System.out.println("a 상품 한개 추가");
+		ph.addProduct(new Product("a",1000));
+		System.out.println(ph);
+		
+		System.out.println("\n-------------------------------------------------------------------");
+		System.out.println("62. 여러 개의 상품(상품명, 가격)과 금액을 가지는 클래스를 만들고 상품을 추가하면 상품이 개수만큼 추가되고 금액이 가격만큼 빠지는 addProduct(상품, 개수)를 작성하고 실행하기");
+		System.out.println("b 상품 5개 추가");
+		ph.addProduct(new Product("b",2000),5);
+		System.out.println(ph);
 	}
 
 	private static String getReplaced(String str, String oldStr, String newStr) {
@@ -500,8 +536,8 @@ public class Review {
 	}
 
 	public static void main(String[] args) {
-//		test();
-		test2();
+		test();
+//		test2();
 		scan.close();
 	}
 }
