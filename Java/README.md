@@ -7,22 +7,22 @@ Java
    
   ##### *bulletin_board는 과제로 먼저 만든 프로젝트
 
-## [calculator](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/calculator)
+## [calculator](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/calculator/src/calculator)
  
-## [class_test](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/class_test)
+## [class_test](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/class_test/src/class_test)
 
-## [example](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/example)
+## [example](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/example/src)
 
-## [gas_station](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/gas_station)
+## [gas_station](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/gas_station/src/gas_station)
 
-## [hospital](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/hospital)
+## [hospital](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/hospital/src/hospital)
 
-## [lotto](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/lotto)
+## [lotto](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/lotto/src/lotto)
   
-## [market](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/market)
+## [market](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/market/src/market)
  
-## [store](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/store)
+## [store](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/store/src/store)
 
-## [stream](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/stream)
+## [stream](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/stream/src/stream)
 
-## [todo_list](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/todo_list)
+## [todo_list](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/todo_list/src/todo_list)
