@@ -83,7 +83,7 @@ Java
   - CSV
     - csv파일을 Files.readAllLines("Path") 메소드로 List<String>에 넣어 반복문으로 출력
   
-## [market]](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/market)
+## [market](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/market)
   - 사과 시장 프로그램
   - Trader
     - 항목: 잔액, 남은 사과의 수
