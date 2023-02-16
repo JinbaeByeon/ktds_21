@@ -3,7 +3,6 @@ Java
  
 ## [address](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/address/src/address_book)
 
-
 ## [board](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/board/src/board)/[bulletin_board](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/bulletin_board)
    
   ##### *bulletin_board는 과제로 먼저 만든 프로젝트
