@@ -1,11 +1,11 @@
-ktds_21
+Java
 ==========
  
-## address
+## [address](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/address/src/address_book)
   - 주소록 실습
   - 배열, List를 활용한 CRUD 구현
 
-## board/bulletin_board
+## [board](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/board/src/board)/[bulletin_board](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/bulletin_board)
   - 게시판 프로그램
   - BoardVO
     * 항목: 이름, 제목, 작성자, 조회수
@@ -21,18 +21,18 @@ ktds_21
    
   ##### *bulletin_board는 과제로 먼저 만든 프로젝트
 
-## calculator
+## [calculator](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/calculator)
   - 계산기 프로그램
   - 정수 계산 실습 (더하기, 빼기, 곱하기, 나누기, 나머지)
  
-## class_test
+## [class_test](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/class_test)
   - 클래스 및 메소드 실습
   - 평균구하기, 계산기, 온도변화기 등 기능에 따라 클래스와 메소드로 나눔
 
-## example
+## [example](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/example)
   - Java를 활용한 디자인패턴 예제
 
-## gas_station
+## [gas_station](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/gas_station)
  - 주유소 프로그램
  - GasStation
    - 항목: 기름 별 가격, Fuel 리스트, 보유금
@@ -59,7 +59,7 @@ ktds_21
    - main 실행 
      - gasStation과 customer를 생성해 customer가 gasStation에서 필요한 타입의 기름을 필요량만큼 구매함
 
-## hospital
+## [hospital](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/hospital)
   - Comvertor
     - 기능: 한글의 종성에 따라 뒤에 붙는 글자를 반환해주는 기능
 
@@ -75,7 +75,7 @@ ktds_21
  - Program
    - main 실행 -> 약국에 환자를 추가하고 약국에서 환자에게 처방을 해줌
 
-## lotto
+## [lotto](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/lotto)
   - 반복문 실습
   - Lotto
     - for, for-each, List for-each / String.split(" ")으로 띄어쓰기로 나눈 문자들을 String[]에 넣어 for문으로 출력
@@ -83,7 +83,7 @@ ktds_21
   - CSV
     - csv파일을 Files.readAllLines("Path") 메소드로 List<String>에 넣어 반복문으로 출력
   
-## market 
+## [market]](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/market)
   - 사과 시장 프로그램
   - Trader
     - 항목: 잔액, 남은 사과의 수
@@ -109,7 +109,7 @@ ktds_21
   - Main
     - main 실행 -> Market 인스턴스를 생성한 후 proceed,show를 호출
  
-## store
+## [store](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/store)
  - 재고 확인 프로그램
  - Product
    - 항목: 이름, 재고
@@ -126,7 +126,7 @@ ktds_21
    
  - Main : main 실행
 
-## stream
+## [stream](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/stream)
  - stream 예제 코드
  - Dish
    - 항목: 칼로리, 이름
@@ -140,7 +140,7 @@ ktds_21
      - example(int i) -> i에 따라 다른 예제 코드들을 실행
  
  - Main : ExampleCode 실행
-## todo_list
+## [todo_list](https://github.com/JinbaeByeon/ktds_21/tree/master/Java/eclipse-workspace/bulletin_board/src/todo_list)
  - TODO LIST 프로그램
  - TodoItemService
    - 항목: Todo 아이템 리스트
