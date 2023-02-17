@@ -31,6 +31,7 @@ public class Main {
 											  new NumberVO(8),	
 											  new NumberVO(9),	
 											  new NumberVO(10));
+				
 		
 		printEvenNumber(listNumberVO,NumberVO::isEven);
 		// =
