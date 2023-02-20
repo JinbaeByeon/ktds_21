@@ -1,0 +1,325 @@
+/*
+ * 1. 부서장 정보 조회
+ *  - 부서장들의 부서명, 사원정보
+ */
+
+-- Case 1: Scala Query
+SELECT D.DEPARTMENT_NAME 
+	 , (SELECT FIRST_NAME
+	 	  FROM EMPLOYEES
+	 	 WHERE EMPLOYEE_ID = D.MANAGER_ID) FIRST_NAME 
+	 , (SELECT LAST_NAME 
+	 	  FROM EMPLOYEES
+	 	 WHERE EMPLOYEE_ID = D.MANAGER_ID) LAST_NAME 
+  FROM DEPARTMENTS D
+ WHERE D.MANAGER_ID IS NOT NULL
+;		
+
+-- Scala Query 한번만 사용 (두 컬럼을 하나의 컬럼으로 합침)
+SELECT MANAGER_ID
+	 , DEPARTMENT_NAME
+	 , (SELECT FIRST_NAME || ' ' || LAST_NAME
+	 	  FROM EMPLOYEES
+	 	 WHERE EMPLOYEE_ID = D.MANAGER_ID) NAME
+  FROM DEPARTMENTS D
+ WHERE MANAGER_ID IS NOT NULL
+;
+
+-- Case 2: Join (D의 데이터 수 * E의 데이터 수)
+SELECT D.DEPARTMENT_NAME 
+	 , E.FIRST_NAME 
+	 , E.LAST_NAME 
+  FROM DEPARTMENTS D
+  JOIN EMPLOYEES E 
+  	ON E.EMPLOYEE_ID = D.MANAGER_ID
+;
+
+ 
+/* 
+ * 2. 재귀 조인
+ *  - 사원들의 상사를 조회
+ */
+
+-- SCALA QUERY
+SELECT E.EMPLOYEE_ID 
+	 , E.FIRST_NAME || ' ' || E.LAST_NAME EMP_NAME
+	 , (SELECT EMPLOYEE_ID 
+	 	  FROM EMPLOYEES
+	 	 WHERE EMPLOYEE_ID = E.MANAGER_ID) MGR_ID
+	 , (SELECT FIRST_NAME || ' ' || LAST_NAME
+	 	  FROM EMPLOYEES
+	 	 WHERE EMPLOYEE_ID = E.MANAGER_ID) MGR_NAME
+  FROM EMPLOYEES E -- 부하직원
+ WHERE MANAGER_ID IS NOT NULL
+;
+
+-- JOIN
+SELECT EMP.EMPLOYEE_ID
+	 , (EMP.FIRST_NAME || ' ' || EMP.LAST_NAME) EMP_NAME 
+	 , (MGR.EMPLOYEE_ID) MGR_ID
+	 , (MGR.FIRST_NAME || ' ' || MGR.LAST_NAME) MGR_NAME
+  FROM EMPLOYEES EMP
+  JOIN EMPLOYEES MGR
+  	ON EMP.MANAGER_ID = MGR.EMPLOYEE_ID
+;
+
+
+SELECT (MGR.EMPLOYEE_ID) MGR_ID
+	 , (MGR.FIRST_NAME || ' ' || MGR.LAST_NAME) MGR_NAME
+	 , EMP.EMPLOYEE_ID
+	 , (EMP.FIRST_NAME || ' ' || EMP.LAST_NAME) EMP_NAME
+  FROM EMPLOYEES MGR
+  JOIN EMPLOYEES EMP
+ 	ON MGR.EMPLOYEE_ID = EMP.MANAGER_ID 
+ ORDER BY MGR_ID
+;
+
+/* 3. 계층 조회
+ *  - 계층으로 보여주기
+ *  - 메뉴 보여줄 때 사용
+ */
+ SELECT LEVEL
+ 	  , (LPAD(' ',4*(LEVEL-1)) || EMPLOYEE_ID) EMP_ID
+ 	  , FIRST_NAME
+ 	  , LAST_NAME 
+ 	  , E.MANAGER_ID
+ 	  , D.DEPARTMENT_NAME 
+   FROM EMPLOYEES E
+   JOIN DEPARTMENTS D 
+   	 ON D.DEPARTMENT_ID = E.DEPARTMENT_ID 
+  START WITH E.MANAGER_ID IS NULL
+CONNECT BY PRIOR EMPLOYEE_ID = E.MANAGER_ID
+;
+
+-- 4. 113번 사원의 모든 상사 조회
+ SELECT LEVEL 
+ 	  , EMPLOYEE_ID 
+ 	  , FIRST_NAME 
+ 	  , LAST_NAME 
+ 	  , MANAGER_ID 
+   FROM EMPLOYEES
+  START WITH EMPLOYEE_ID = 113
+CONNECT BY PRIOR MANAGER_ID = EMPLOYEE_ID  
+  ORDER BY LEVEL DESC
+;
+
+-- 어떠한 데이터가 존재하지 않는 데이터를 조회할 떄, 조인이 안되는 경우 사용
+
+-- 서브쿼리 안에서 외부 테이블 안갖고 올 경우 서브쿼리만 먼저 돌려짐
+-- 서브쿼리 안에서 외부 테이블 컬럼을 가져와서 비교할 경우 조인과 동작이 같다
+
+-- 5. (NOT) EXISTS 피연산자가 없어서 인덱스 스캔을 못쓰고 풀스캔만 돌리기 때문에 느림
+-- 6. (NOT) IN : 성능을 위해 EXISTS를 IN으로 바꿔야함
+
+-- 부하직원이 없는 말단사원의 모든 사원정보 조회
+SELECT *
+  FROM EMPLOYEES E
+ WHERE NOT EXISTS (SELECT 1
+ 				 	 FROM EMPLOYEES OTHER
+ 				 	WHERE OTHER.MANAGER_ID = E.EMPLOYEE_ID)
+;
+-- NOT EXISTS => NOT IN 
+SELECT *
+  FROM EMPLOYEES E
+ WHERE EMPLOYEE_ID NOT IN (SELECT DISTINCT MANAGER_ID
+ 							 FROM EMPLOYEES OTHER
+ 							WHERE MANAGER_ID IS NOT NULL)
+;
+-- IN : NULL이 있어도 조회 가능/ NOT IN : NULL이 있으면 조회 불가능
+
+
+-- 부하직원이 있는 사원의 모든 사원정보 조회
+SELECT *
+  FROM EMPLOYEES E
+ WHERE EXISTS (SELECT 1
+ 			 	 FROM EMPLOYEES OTHER
+ 			 	WHERE OTHER.MANAGER_ID = E.EMPLOYEE_ID)
+;
+-- EXISTS => IN
+SELECT *
+  FROM EMPLOYEES E
+ WHERE EMPLOYEE_ID IN (SELECT DISTINCT MANAGER_ID
+ 						 FROM EMPLOYEES OTHER)
+-- 						WHERE OTHER.MANAGER_ID = E.EMPLOYEE_ID)
+;
+
+
+
+/* 7. DECODE
+ * AD_PRES -> AP
+ * AD_VP -> AV
+ * IT_PROG -> IP
+ * FI_MGR -> FM
+ * FI_ACCOUNT -> FA
+ * PU_MAN -> PM
+ * 다 아니면 '-'
+ * 으로 변환하여 조회
+ */
+SELECT EMPLOYEE_ID 
+	 , FIRST_NAME 
+	 , LAST_NAME 
+	 , JOB_ID 
+	 , DECODE(JOB_ID
+	 		, 'AD_PRES','AP'
+	 		, 'AD_VP','AV'
+	 		, 'IT_PROG','IP'
+	 		, 'FI_MGR','FM'
+	 		, 'FI_ACCOUNT','FA'
+	 		, 'PU_MAN','PM'
+	 		, '-') MIN_JOB_ID
+  FROM EMPLOYEES
+;
+
+/* JOB_ID의 자리수가 4라면 FOUR
+ *				   5라면 'FIVE'
+ *				   6이라면 'SIX'
+ *				   그 외 '-'
+ */
+SELECT JOB_ID 
+	 , DECODE(LENGTH(JOB_ID)
+	 		, 4, 'FOUR'
+	 		, 5, 'FIVE'
+	 		, 6, 'SIX'
+	 		, '-') LEN
+  FROM EMPLOYEES 
+;
+
+/* 8. CASE
+ * 연봉이 평균연봉보다 많이 받으면 "고액연봉"
+ * 연봉이 평균연봉보다 적게 받으면 "저연봉"
+ * 둘 다 아니면, "평균연봉"으로 조회
+ */
+SELECT JOB_ID
+  	 , CASE 
+	  	  WHEN SALARY > (SELECT AVG(SALARY) + 200
+  	 					   FROM EMPLOYEES) THEN
+  	 		 '고액연봉'
+  	   	  WHEN SALARY < (SELECT AVG(SALARY) - 200
+  	 					   FROM EMPLOYEES) THEN
+  	   	 	 '저연봉'
+  	   	  ELSE 
+  	   	 	 '평균연봉'
+  	 	END ALIAS
+  FROM EMPLOYEES E 
+;
+  
+/* 9. NVL
+ * Oracle, TIBERO :NVL / MariaVB, MySQL IFNULL
+ * NullPointerException이 생기지 않도록 하기 위해 미리 변환
+ */
+
+-- 상사가 없는 경우 '-'로 출력
+
+-- NVL
+SELECT EMPLOYEE_ID
+	 , MANAGER_ID
+	 , NVL(MANAGER_ID, -1) MANAGER_ID2
+	 , NVL(TO_CHAR(MANAGER_ID), '-') MANAGER_ID3
+  FROM EMPLOYEES
+;
+
+-- CASE
+SELECT EMPLOYEE_ID
+	 , MANAGER_ID
+	 , CASE
+	 	WHEN MANAGER_ID IS NULL THEN
+	 		'-'
+	 	ELSE
+	 		TO_CHAR(MANAGER_ID)
+	   END NVL_MANAGER_ID
+  FROM EMPLOYEES
+;	 
+  
+
+--10. LPAD
+SELECT LPAD(EMPLOYEE_ID,7,'B')
+  FROM EMPLOYEES
+;
+--11. RPAD
+SELECT RPAD(EMPLOYEE_ID,5,'A')
+  FROM EMPLOYEES
+;
+
+--12. TO_CHAR
+SELECT HIRE_DATE
+	 , TO_CHAR(HIRE_DATE) HIRE_DATE1
+	 , TO_CHAR(HIRE_DATE, 'YYYY/MM/DD HH:MI') HIRE_DATE2
+	 , TO_CHAR(HIRE_DATE, 'YYYY-MM-DD HH24:MI:SS') HIRE_DATE3
+  FROM EMPLOYEES
+;
+--13. TO_DATE
+SELECT '20230220162457' CHAR_DATE
+	 , TO_DATE('20230220162457','YYYY-MM-DD HH24:MI:SS') DATE_DATE
+  FROM DUAL -- 데이터가 없는 더미 테이블. FROM에 필요한 테이블이 없을 경우 사용 
+;
+
+--14. SUBSTR(COLUMN,START_IDX,SIZE) 시작은 1부터
+SELECT FIRST_NAME
+	 , SUBSTR(FIRST_NAME,1,2)
+	 , SUBSTR(FIRST_NAME,3)
+	 , SUBSTR(FIRST_NAME,5,2)
+  FROM EMPLOYEES
+;
+
+--15. LENGTH - 검증용
+SELECT FIRST_NAME
+	 , LENGTH(FIRST_NAME)
+  FROM EMPLOYEES
+;
+/*
+ * DB로 오는 데이터는 JAVA에서 검증을 거친 후 넘어오기 때문에 TRIM을 따로 해서 데이터를 정제하진 않는다
+ * TRIM을 한 데이터와 안한 데이터가 같은지 검증할 때 사용
+ */
+
+--16. LTRIM
+SELECT '   AAA   '
+	 , LTRIM('   AAA   ')
+  FROM DUAL
+;
+--17. RTRIM
+SELECT '   AAA   '
+	 , RTRIM('   AAA   ')
+  FROM DUAL
+;
+--18. TRIM
+SELECT '   AAA   '
+	 , TRIM('   AAA   ')
+  FROM DUAL
+;
+--19. REPLACE
+SELECT '   A A A   '
+	 , REPLACE('   A A A   ',' ','')
+  FROM DUAL
+;
+--20. ADD_MONTHS
+SELECT ADD_MONTHS(SYSDATE, 1) "한달 후"
+	 , ADD_MONTHS(SYSDATE, -2) "두달 전"
+	 , ADD_MONTHS(SYSDATE, -12) "1년 전"  
+	 , ADD_MONTHS(SYSDATE, 12) "1년 후"
+  FROM DUAL
+;
+
+-- 입사일에서 한시간 씩 뺀 날짜를 조회
+SELECT HIRE_DATE 
+	 , HIRE_DATE - 1/24
+  FROM EMPLOYEES
+
+SELECT FLOOR((SYSDATE - HIRE_DATE)/30/12) || '년' YEARS
+	 , MOD(FLOOR((SYSDATE -HIRE_DATE)/30),12) || '개월' MONTHS
+	 , MOD(FLOOR(SYSDATE -HIRE_DATE),30) || '일' DAYS
+  FROM EMPLOYEES
+
+--21. SYSDATE
+SELECT SYSDATE 현재날짜
+	 , SYSDATE - 1 "하루 전"
+	 , SYSDATE + 1 "하루 후"
+	 , SYSDATE - (1/24/60) "1분 전"
+	 , SYSDATE - (1/24) "1시간 전"
+	 , SYSDATE - (1/24) "1시간 전"
+	 , TO_CHAR(SYSDATE,'HH24:MI') 
+	 , TO_CHAR(SYSDATE,'YY-MM-DD') DATE_CHAR
+  FROM DUAL
+
+
+
+
