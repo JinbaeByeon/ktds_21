@@ -239,7 +239,9 @@ public class GoodGagDAO {
 		MemberDAO memDAO = new MemberDAOImpl();
 //		List<MemberVO> listMember = memDAO.readAll();
 //		listMember.forEach(System.out::println);
-		memDAO.update("bb@gmail.com");
+		MemberVO memVO = new MemberVO();
+		memVO.setEmail("bb@gmail.com");
+		memDAO.update(memVO);
 		MemberVO member = memDAO.read("bb@gmail.com", "adasdasdasdwqqweqe");
 		System.out.println(member);
 		

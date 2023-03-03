@@ -59,7 +59,10 @@ public abstract class AbstractDaoSupport<T> {
 			rs = pstmt.executeQuery();
 			List<T> result = new ArrayList<>();
 			while (rs.next()) {
-				result.add(rm.map(rs));
+				T res = rm.map(rs);
+				if(res !=null) {
+					result.add(res);
+				}
 			}
 			return result;
 		}

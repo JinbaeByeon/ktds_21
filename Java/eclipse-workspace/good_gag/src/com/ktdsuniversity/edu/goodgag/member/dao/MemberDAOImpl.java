@@ -1,17 +1,40 @@
 package com.ktdsuniversity.edu.goodgag.member.dao;
 
 import java.util.List;
-import java.util.Scanner;
 
 import com.ktdsuniversity.edu.goodgag.member.vo.MemberVO;
-import com.ktdsuniversity.edu.goodgag.utils.db.AbstractDaoSupport;
+import com.ktdsuniversity.edu.goodgag.utils.db.AbstractDaoPoolSupport;
 
-public class MemberDAOImpl extends AbstractDaoSupport<MemberVO> implements MemberDAO {
+public class MemberDAOImpl extends AbstractDaoPoolSupport<MemberVO> implements MemberDAO {
 
 	@Override
-	public int create(MemberVO vo) {
+	public int create(MemberVO memberVO) {
 		StringBuffer sql = new StringBuffer();
-		return insert(sql.toString(), (pstmt) -> {});
+		sql.append(" INSERT INTO MEMBERS     ");
+		sql.append("  (EML                   ");
+		sql.append(" , NCKNM                 ");
+		sql.append(" , VRFD_TF               ");
+		sql.append(" , PWD                   ");
+		sql.append(" , RGST_DT               ");
+		sql.append(" , RNK)                  ");
+		sql.append(" VALUES                  ");
+		sql.append("  (? /*EML*/ ");
+		sql.append(" , ? /*NCKNM*/");
+		sql.append(" , ? /*VRFD_TF*/");
+		sql.append(" , ? /*PWD*/");
+		sql.append(" , SYSDATE ");
+		sql.append(" , 'RANK_02')  ");
+		
+		return insert(sql.toString(), (pstmt) -> {
+			pstmt.setString(1,memberVO.getEmail());
+			pstmt.setString(2,memberVO.getNickName());
+			String verified = "BOOLEAN_F";
+			if(memberVO.getVerified() != null) {
+				verified = memberVO.getVerified();
+			} 
+			pstmt.setString(3, verified);
+			pstmt.setString(4,memberVO.getPassword());
+		});
 	}
 
 	@Override
@@ -69,28 +92,7 @@ public class MemberDAOImpl extends AbstractDaoSupport<MemberVO> implements Membe
 	}
 
 	@Override
-	public List<MemberVO> readAll() {
-		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT EML ");
-		sql.append("	  , NCKNM ");
-		sql.append("	  , VRFD_TF ");
-		sql.append("	  , PWD ");
-		sql.append("	  , TO_CHAR(RGST_DT,'YYYY-MM-DD') RGST_DT ");
-		sql.append("	  , RNK ");
-		sql.append("   FROM MEMBERS ");
-		return select(sql.toString(), null, (rs) -> {
-			MemberVO memVO = new MemberVO();
-			memVO.setEmail(rs.getString("EML"));
-			memVO.setNickName(rs.getString("NCKNM"));
-			memVO.setVerified(rs.getString("VRFD_TF"));
-			memVO.setPassword(rs.getString("PWD"));
-			memVO.setRegistDate(rs.getString("RGST_DT"));
-			memVO.setRank(rs.getString("RNK"));
-			return memVO;
-		});
-	}
-	
-	private MemberVO readByNick(String nickName) {
+	public MemberVO readByNick(String nickName) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT EML ");
 		sql.append("	  , NCKNM ");
@@ -113,38 +115,60 @@ public class MemberDAOImpl extends AbstractDaoSupport<MemberVO> implements Membe
 			memVO.setRank(rs.getString("RNK"));
 			return memVO;
 		});
-		
 	}
-
 	@Override
-	public int update(String email) {
+	public List<MemberVO> readAll() {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT EML ");
+		sql.append("	  , NCKNM ");
+		sql.append("	  , VRFD_TF ");
+		sql.append("	  , PWD ");
+		sql.append("	  , TO_CHAR(RGST_DT,'YYYY-MM-DD') RGST_DT ");
+		sql.append("	  , RNK ");
+		sql.append("   FROM MEMBERS ");
+		return select(sql.toString(), null, (rs) -> {
+			MemberVO memVO = new MemberVO();
+			memVO.setEmail(rs.getString("EML"));
+			memVO.setNickName(rs.getString("NCKNM"));
+			memVO.setVerified(rs.getString("VRFD_TF"));
+			memVO.setPassword(rs.getString("PWD"));
+			memVO.setRegistDate(rs.getString("RGST_DT"));
+			memVO.setRank(rs.getString("RNK"));
+			return memVO;
+		});
+	}
+	
+	@Override
+	public int update(MemberVO memberVO) {
 		int res = 0;
 		StringBuffer sql = new StringBuffer();
 		sql.append(" UPDATE MEMBERS  ");
 		sql.append("    SET NCKNM = ?");
 		sql.append("  WHERE EML = ?  ");
 		
-		final MemberVO member = new MemberVO();
-		while (member.getNickName() == null) {
-			Scanner scan = new Scanner(System.in);
-			System.out.println("변경할 닉네임을 입력하세요.");
-			member.setNickName(scan.nextLine());
-			if(readByNick(member.getNickName()) != null) {
-				System.out.println("이미 존재하는 닉네임입니다.");
-				member.setNickName(null);
-			}
-		}
 		res = update(sql.toString(), (pstmt) -> {			
-			pstmt.setString(1, member.getNickName());
-			pstmt.setString(2, email);
+			pstmt.setString(1, memberVO.getNickName());
+			pstmt.setString(2, memberVO.getEmail());
 		});
 		return res;
 	}
 	
 	@Override
-	public int delete(String email) {
-		return 1;
+	public int delete(MemberVO memberVO) {
+		int res = 0;
+		StringBuffer sql = new StringBuffer();
+		sql.append(" DELETE ");
+		sql.append("   FROM MEMBERS ");
+		sql.append("  WHERE EML = ?  "
+				 + "    AND PWD = ? ");
+
+		res = update(sql.toString(), (pstmt) -> {			
+			pstmt.setString(1, memberVO.getEmail());
+			pstmt.setString(2, memberVO.getPassword());
+		});
+		return res;
 	}
+
 
 
 }
