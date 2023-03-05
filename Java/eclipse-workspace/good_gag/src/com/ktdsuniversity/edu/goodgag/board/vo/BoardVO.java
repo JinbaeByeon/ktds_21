@@ -13,7 +13,7 @@ public class BoardVO {
 	private String registDate;
 	private String source;
 	private String noticeTf;	
-
+	
 	/**
 	 * 게시글을 작성한 회원의 정보
 	 */
@@ -23,6 +23,9 @@ public class BoardVO {
 	 * 게시글에 등록된 댓글의 목록
 	 */
 	private List<ReplyVO> replyList;
+	
+	private List<MemberVO> likeMemberList;
+	private List<MemberVO> disLikeMemberList;
 	
 	public String getBoardID() {
 		return boardID;
@@ -94,6 +97,22 @@ public class BoardVO {
 
 	public void setReplyList(List<ReplyVO> replyList) {
 		this.replyList = replyList;
+	}
+
+	public List<MemberVO> getLikeMemberList() {
+		return likeMemberList;
+	}
+
+	public void setLikeMemberList(List<MemberVO> likeMemberList) {
+		this.likeMemberList = likeMemberList;
+	}
+
+	public List<MemberVO> getDisLikeMemberList() {
+		return disLikeMemberList;
+	}
+
+	public void setDisLikeMemberList(List<MemberVO> dislikeMemberList) {
+		this.disLikeMemberList = dislikeMemberList;
 	}
 
 	@Override

@@ -54,14 +54,20 @@ public class GoodGagMain {
 		List<BoardVO> boardList = bs.readAll();
 		boardList.forEach(System.out::println);
 		System.out.println("게시글 목록 조회 끝");
-		return boardList.get(0).getBoardID();
+		if(boardList.isEmpty()) {
+			return null;
+		}
+		else {
+			return boardList.get(0).getBoardID();
+		}
 	}
 
-	private void readBoard(String boardID) {
+	private BoardVO readBoard(String boardID) {
 		System.out.println("게시글 상세 조회");
 		BoardVO boardVO = bs.read(boardID);
 		System.out.println(boardVO);
 		System.out.println("게시글 상세 조회 끝");
+		return boardVO;
 	}
 	private void updateBoard(String boardID) {
 		System.out.println("게시글 수정");
@@ -85,7 +91,18 @@ public class GoodGagMain {
 		System.out.println("댓글 수정");
 		System.out.println("댓글 수정 끝");		
 	}
-	
+
+	private void recommendBoard(BoardVO boardVO, boolean recommend) {
+		System.out.println("게시글 추천 " + recommend);
+		bs.recommend(boardVO, myAccount, recommend);
+		System.out.println("게시글 추천 " + recommend + " 끝");
+	}
+
+	private void deleteBoard(String boardID) {
+		System.out.println("게시글 삭제");
+		bs.delete(boardID);
+		System.out.println("게시글 삭제 끝");
+	}
 	public static void main(String[] args) {
 		GoodGagMain ggm = new GoodGagMain();
 		// 회원 가입
@@ -98,20 +115,23 @@ public class GoodGagMain {
 		ggm.readBoards();
 		
 		// 게시글 상세 조회 (댓글 포함)
-		ggm.readBoard(bID);
+		BoardVO boardVO = ggm.readBoard(bID);
 		
 		// 게시글 수정
 //		ggm.updateBoard(bID);
 		
 		// 댓글 작성
 		ggm.writeReply(bID);
-		
+
 		// 댓글 수정
 		ggm.updateReply(bID);
 		// 게시글 삭제
+		ggm.deleteBoard(bID);
 		// 댓글 삭제
 		// 게시글 좋아요
+		ggm.recommendBoard(boardVO, true);
 		// 게시글 싫어요
+//		ggm.recommendBoard(boardVO, false);
 		// 게시글 신고
 		// 댓글 좋아요
 		// 댓글 싫어요

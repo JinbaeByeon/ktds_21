@@ -173,8 +173,15 @@ public class BoardDAOImpl extends AbstractDaoPoolSupport<BoardVO> implements Boa
 	}
 
 	@Override
-	public int delete(BoardVO boardVO) {
-		return 0;
+	public int delete(String boardID) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" DELETE          ");
+		sql.append("   FROM BOARDS     ");
+		sql.append("  WHERE BRD_ID = ?");
+		
+		return delete(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, boardID);
+		});
 	}
 
 	@Override
@@ -205,4 +212,73 @@ public class BoardDAOImpl extends AbstractDaoPoolSupport<BoardVO> implements Boa
 		
 		return null;
 	}
+
+
+	@Override
+	public String readRecommend(String boardID, String email) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT RCMD             ");
+		sql.append("   FROM BOARD_RECOMMENDS ");
+		sql.append("  WHERE EML = ?   ");
+		sql.append("    AND BRD_ID = ?");
+		
+		return selectOneString(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, email);
+			pstmt.setString(2, boardID);
+		}, (rs) -> {
+			return rs.getString("RCMD");
+		});
+	}
+
+	@Override
+	public int addRecommend(String boardID, String email, boolean recommend) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append(" INSERT INTO BOARD_RECOMMENDS");
+		sql.append("  (EML                       ");
+		sql.append(" , BRD_ID                    ");
+		sql.append(" , RCMD)                     ");
+		sql.append(" VALUES                      ");
+		sql.append(" ( ?               ");
+		sql.append(" , ?      		   ");
+		sql.append(" , ?)              ");
+
+		return insert(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, email);
+			pstmt.setString(2, boardID);
+			pstmt.setString(3,  recommend ? "BOOLEAN_T" : "BOOLEAN_F");
+		});		
+	}
+
+	@Override
+	public int deleteRecommend(String boardID, String email) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append(" DELETE                    ");
+		sql.append("   FROM BOARD_RECOMMENDS   ");
+		sql.append("  WHERE EML = ?   ");
+		sql.append("    AND BRD_ID = ?");
+		
+		return delete(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, email);
+			pstmt.setString(2, boardID);
+		});		
+	}
+
+	@Override
+	public int updateRecommend(String boardID, String email, boolean recommend) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("UPDATE BOARD_RECOMMENDS   ");
+		sql.append("   SET RCMD = ?   ");
+		sql.append(" WHERE EML = ?    ");
+		sql.append("   AND BRD_ID = ? ");
+
+		return update(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, recommend ? "BOOLEAN_T" : "BOOLEAN_F");
+			pstmt.setString(2, email);
+			pstmt.setString(3, boardID);
+		});
+	}
+
 }
