@@ -17,7 +17,7 @@ public class GoodGagMain {
 	BoardService bs;
 	ReplyService rs;
 	MemberVO myAccount;
-	
+
 	private GoodGagMain() {
 		ms = new MemberServiceImpl();
 		bs = new BoardServiceImpl();
@@ -31,7 +31,7 @@ public class GoodGagMain {
 		memberVO.setNickName("진배1");
 		memberVO.setPassword("1q2w3e4r");
 		myAccount = memberVO;
-		if(ms.create(memberVO)==1) {
+		if (ms.create(memberVO) == 1) {
 			System.out.println("회원가입 완료");
 		}
 	}
@@ -45,7 +45,7 @@ public class GoodGagMain {
 		boardVO.setSource("출처");
 		bs.create(boardVO);
 		System.out.println("게시글 작성 완료");
-		
+
 		return boardVO.getBoardID();
 	}
 
@@ -54,10 +54,9 @@ public class GoodGagMain {
 		List<BoardVO> boardList = bs.readAll();
 		boardList.forEach(System.out::println);
 		System.out.println("게시글 목록 조회 끝");
-		if(boardList.isEmpty()) {
+		if (boardList.isEmpty()) {
 			return null;
-		}
-		else {
+		} else {
 			return boardList.get(0).getBoardID();
 		}
 	}
@@ -69,13 +68,14 @@ public class GoodGagMain {
 		System.out.println("게시글 상세 조회 끝");
 		return boardVO;
 	}
+
 	private void updateBoard(String boardID) {
 		System.out.println("게시글 수정");
 		BoardVO boardVO = new BoardVO();
 		boardVO.setBoardID(boardID);
 		System.out.println("게시글 수정 끝");
 	}
-	
+
 	private void writeReply(String boardID) {
 		System.out.println("댓글 작성");
 		ReplyVO replyVO = new ReplyVO();
@@ -86,10 +86,10 @@ public class GoodGagMain {
 		rs.create(replyVO);
 		System.out.println("댓글 작성 끝");
 	}
-	
+
 	private void updateReply(String boardID) {
 		System.out.println("댓글 수정");
-		System.out.println("댓글 수정 끝");		
+		System.out.println("댓글 수정 끝");
 	}
 
 	private void recommendBoard(BoardVO boardVO, boolean recommend) {
@@ -103,6 +103,7 @@ public class GoodGagMain {
 		bs.delete(boardID);
 		System.out.println("게시글 삭제 끝");
 	}
+
 	public static void main(String[] args) {
 		GoodGagMain ggm = new GoodGagMain();
 		// 회원 가입
@@ -113,13 +114,13 @@ public class GoodGagMain {
 		String bID = "BO-20230228-00003";
 		// 게시글 목록 조회 (댓글 개수 포함)
 		ggm.readBoards();
-		
+
 		// 게시글 상세 조회 (댓글 포함)
 		BoardVO boardVO = ggm.readBoard(bID);
-		
+
 		// 게시글 수정
 //		ggm.updateBoard(bID);
-		
+
 		// 댓글 작성
 		ggm.writeReply(bID);
 
@@ -129,13 +130,16 @@ public class GoodGagMain {
 		ggm.deleteBoard(bID);
 		// 댓글 삭제
 		// 게시글 좋아요
-		ggm.recommendBoard(boardVO, true);
+		if (boardVO != null) {
+			ggm.recommendBoard(boardVO, true);
+		}
 		// 게시글 싫어요
-//		ggm.recommendBoard(boardVO, false);
+		if (boardVO != null) {
+			ggm.recommendBoard(boardVO, false);
+		}
 		// 게시글 신고
 		// 댓글 좋아요
 		// 댓글 싫어요
 	}
-
 
 }
