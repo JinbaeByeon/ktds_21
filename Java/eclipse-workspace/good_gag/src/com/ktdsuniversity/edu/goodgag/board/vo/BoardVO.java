@@ -1,6 +1,8 @@
 package com.ktdsuniversity.edu.goodgag.board.vo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ktdsuniversity.edu.goodgag.member.vo.MemberVO;
 import com.ktdsuniversity.edu.goodgag.reply.vo.ReplyVO;
@@ -24,8 +26,7 @@ public class BoardVO {
 	 */
 	private List<ReplyVO> replyList;
 	
-	private List<MemberVO> likeMemberList;
-	private List<MemberVO> disLikeMemberList;
+	private Map<MemberVO,Boolean> RecommendMap;
 	
 	public String getBoardID() {
 		return boardID;
@@ -99,20 +100,12 @@ public class BoardVO {
 		this.replyList = replyList;
 	}
 
-	public List<MemberVO> getLikeMemberList() {
-		return likeMemberList;
+	public Map<MemberVO, Boolean> getRecommendMap() {
+		return RecommendMap == null ? new HashMap<>() : RecommendMap;
 	}
 
-	public void setLikeMemberList(List<MemberVO> likeMemberList) {
-		this.likeMemberList = likeMemberList;
-	}
-
-	public List<MemberVO> getDisLikeMemberList() {
-		return disLikeMemberList;
-	}
-
-	public void setDisLikeMemberList(List<MemberVO> dislikeMemberList) {
-		this.disLikeMemberList = dislikeMemberList;
+	public void setRecommendMap(Map<MemberVO, Boolean> recommendList) {
+		RecommendMap = recommendList;
 	}
 
 	@Override

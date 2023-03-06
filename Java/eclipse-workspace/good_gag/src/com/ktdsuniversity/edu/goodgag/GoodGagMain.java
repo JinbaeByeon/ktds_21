@@ -110,8 +110,8 @@ public class GoodGagMain {
 		ggm.createUser();
 
 		// 게시글 작성;
-//		String bID = ggm.writeBoard();
-		String bID = "BO-20230228-00003";
+		String bID = ggm.writeBoard();
+//		String bID = "BO-20230228-00003";
 		// 게시글 목록 조회 (댓글 개수 포함)
 		ggm.readBoards();
 

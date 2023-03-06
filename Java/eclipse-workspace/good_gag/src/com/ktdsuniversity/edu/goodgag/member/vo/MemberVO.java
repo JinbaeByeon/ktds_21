@@ -54,4 +54,9 @@ public class MemberVO {
 			 + "registDate : " + registDate + '\t'
 			 + "rank : " + rank + '\t';
 	}
+	
+	@Override
+	public boolean equals(Object member) {
+		return email.equals(((MemberVO)member).email);
+	}
 }
