@@ -12,32 +12,32 @@ public class GnrServiceImpl implements GnrService {
 		gnrDAO = new GnrDAOImpl();
 	}
 	@Override
-	public boolean createGnr(GnrVO gnrVO) {
+	public boolean create(GnrVO gnrVO) {
 		return gnrDAO.createGnr(gnrVO) > 0;
 	}
 
 	@Override
-	public GnrVO readGnr(int gnrID) {
+	public GnrVO read(Integer gnrID) {
 		return gnrDAO.readGnr(gnrID);
 	}
 
-	@Override
-	public GnrVO readGnrByName(String gnrName) {
-		return gnrDAO.readGnrByName(gnrName);
-	}
+//	@Override
+//	public GnrVO readByName(String gnrName) {
+//		return gnrDAO.readGnrByName(gnrName);
+//	}
 	
 	@Override
-	public List<GnrVO> readAllGnr() {
+	public List<GnrVO> readAll() {
 		return gnrDAO.readAllGnr();
 	}
 
 	@Override
-	public boolean updateGnr(GnrVO gnrVO) {
+	public boolean update(GnrVO gnrVO) {
 		return gnrDAO.updateGnr(gnrVO) > 0;
 	}
 
 	@Override
-	public boolean deleteGnr(int gnrID) {
+	public boolean delete(Integer gnrID) {
 		return gnrDAO.deleteGnr(gnrID) > 0;
 	}
 

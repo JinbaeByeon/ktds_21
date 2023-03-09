@@ -13,27 +13,27 @@ public class FmsLnServiceImpl implements FmsLnService {
 		fmsLnDAO = new FmsLnDAOImpl();
 	}
 	@Override
-	public boolean createFmsLn(FmsLnVO fmsLnVO) {
+	public boolean create(FmsLnVO fmsLnVO) {
 		return fmsLnDAO.createFmsLn(fmsLnVO) > 0;
 	}
 
 	@Override
-	public FmsLnVO readFmsLn(String fmsLnId) {
+	public FmsLnVO read(String fmsLnId) {
 		return fmsLnDAO.readFmsLn(fmsLnId);
 	}
 
 	@Override
-	public List<FmsLnVO> readAllFmsLn() {
+	public List<FmsLnVO> readAll() {
 		return fmsLnDAO.readAllFmsLn();
 	}
 
 	@Override
-	public boolean updateFmsLn(FmsLnVO fmsLnVO) {
+	public boolean update(FmsLnVO fmsLnVO) {
 		return fmsLnDAO.updateFmsLn(fmsLnVO) > 0;
 	}
 
 	@Override
-	public boolean deleteFmsLn(String fmsLnId) {
+	public boolean delete(String fmsLnId) {
 		return fmsLnDAO.deleteFmsLn(fmsLnId) > 0;
 	}
 

@@ -37,9 +37,9 @@ public abstract class AbstractDaoPoolSupport<T> {
 		}
 	}
 	
-	private Connection getConnection() {
+	protected Connection getConnection() {
 		if (connectionPool.size() == this.poolSize) {
-			throw new RuntimeException("모든 Conneciton이 사용 중입니다.");
+			throw new RuntimeException("모든 Connection이 사용 중입니다.");
 		}
 		
 		try {
@@ -51,7 +51,7 @@ public abstract class AbstractDaoPoolSupport<T> {
 		}
 	}
 	
-	private void closeAll(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+	protected void closeAll(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		if (conn != null) {
 			try {
 				conn.close();
@@ -89,6 +89,7 @@ public abstract class AbstractDaoPoolSupport<T> {
 			if (pm != null) {
 				pm.map(pstmt);
 			}
+			
 			rs = pstmt.executeQuery();
 			String result = null;
 			if (rs.next()) {
@@ -134,11 +135,12 @@ public abstract class AbstractDaoPoolSupport<T> {
 						}
 					}
 				}
+				
 				if (!isDuplicated) {
-					t.add(rm.map(rs, null, key));
+					t.add((T) rm.map(rs, null, key));
 				}
 			}
-			return t;
+			return (List<T>) t;
 		}
 		catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException sqle) {
 			sqle.printStackTrace();
@@ -149,7 +151,7 @@ public abstract class AbstractDaoPoolSupport<T> {
 		
 		return null;
 	}
-	
+
 	public List<T> select(String query, ParamMapper pm, ResultMapper<T> rm) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -163,6 +165,7 @@ public abstract class AbstractDaoPoolSupport<T> {
 			}
 			rs = pstmt.executeQuery();
 			List<T> t = new ArrayList<>();
+			
 			while (rs.next()) {
 				t.add(rm.map(rs));
 			}
@@ -292,4 +295,6 @@ public abstract class AbstractDaoPoolSupport<T> {
 	public static interface ResultKeyMapper<T> {
 		public T map(ResultSet rs, T t, String keyValue) throws SQLException;
 	}
+	
+	
 }

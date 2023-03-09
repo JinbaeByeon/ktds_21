@@ -20,7 +20,7 @@ public interface VdController {
 		vdVO.setVdUrl(vdUrl);
 		
 		System.out.print(ttl + " - ");
-		if (vs.createVd(vdVO)) {
+		if (vs.create(vdVO)) {
 			System.out.println("동영상 등록 성공");
 		} else {
 			System.out.println("동영상 등록 실패");
@@ -28,7 +28,7 @@ public interface VdController {
 	}
 
 	default public void readAllVd(VdService mps) {
-		List<VdVO> list = mps.readAllVd();
+		List<VdVO> list = mps.readAll();
 		list.forEach(System.out::println);
 	}
 
@@ -49,7 +49,7 @@ public interface VdController {
 		
 		
 		System.out.print(vdId + " - ");
-		if (vs.updateVd(vdVO)) {
+		if (vs.update(vdVO)) {
 			System.out.println("동영상 수정 성공");
 		} else {
 			System.out.println("동영상 수정 실패");
@@ -57,12 +57,12 @@ public interface VdController {
 	}
 
 	default public void readVd(VdService vs, String vdId) {
-		System.out.println(vs.readVd(vdId));
+		System.out.println(vs.read(vdId));
 	}
 	
 	default public void deleteVd(VdService vs, String vdId) {
 		System.out.print(vdId + " - ");
-		if(vs.deleteVd(vdId)) {
+		if(vs.delete(vdId)) {
 			System.out.println("동영상 삭제 성공");
 		} else {
 			System.out.println("동영상 삭제 실패");

@@ -9,7 +9,7 @@ public interface CntrController {
 	default public void createCntr(CntrService cs, String cntrNm) {
 		CntrVO cntrVO = new CntrVO();
 		cntrVO.setCntrNm(cntrNm);
-		if (cs.createCntr(cntrVO)) {
+		if (cs.create(cntrVO)) {
 			System.out.println("국가 등록 성공");
 		} else {
 			System.out.println("국가 등록 실패");
@@ -17,7 +17,7 @@ public interface CntrController {
 	}
 
 	default public void readAllCntr(CntrService cs) {
-		List<CntrVO> list = cs.readAllCntr();
+		List<CntrVO> list = cs.readAll();
 		list.forEach(System.out::println);
 	}
 
@@ -25,7 +25,7 @@ public interface CntrController {
 		CntrVO cntrVO = new CntrVO();
 		cntrVO.setCntrId(cntrId);
 		cntrVO.setCntrNm(cntrNm);
-		if (cs.updateCntr(cntrVO)) {
+		if (cs.update(cntrVO)) {
 			System.out.println("국가 수정 성공");
 		} else {
 			System.out.println("국가 수정 실패");
@@ -33,11 +33,11 @@ public interface CntrController {
 	}
 
 	default public void readCntr(CntrService cs, int cntrId) {
-		System.out.println(cs.readCntr(cntrId));
+		System.out.println(cs.read(cntrId));
 	}
 
 	default public void deleteCntr(CntrService gs,int cntrId) {
-		if(gs.deleteCntr(cntrId)) {
+		if(gs.delete(cntrId)) {
 			System.out.println("국가 삭제 성공");
 		} else {
 			System.out.println("국가 삭제 실패");

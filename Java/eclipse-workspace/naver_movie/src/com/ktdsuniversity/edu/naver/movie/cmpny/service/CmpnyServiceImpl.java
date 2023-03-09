@@ -12,27 +12,27 @@ public class CmpnyServiceImpl implements CmpnyService {
 		cmpnyDAO = new CmpnyDAOImpl();
 	}
 	@Override
-	public boolean createCmpny(CmpnyVO cmpnyVO) {
+	public boolean create(CmpnyVO cmpnyVO) {
 		return cmpnyDAO.createCmpny(cmpnyVO) > 0;
 	}
 
 	@Override
-	public CmpnyVO readCmpny(String cmpnyID) {
+	public CmpnyVO read(String cmpnyID) {
 		return cmpnyDAO.readCmpny(cmpnyID);
 	}
 
 	@Override
-	public List<CmpnyVO> readAllCmpny() {
+	public List<CmpnyVO> readAll() {
 		return cmpnyDAO.readAllCmpny();
 	}
 
 	@Override
-	public boolean updateCmpny(CmpnyVO cmpnyVO) {
+	public boolean update(CmpnyVO cmpnyVO) {
 		return cmpnyDAO.updateCmpny(cmpnyVO) > 0;
 	}
 
 	@Override
-	public boolean deleteCmpny(String cmpnyID) {
+	public boolean delete(String cmpnyID) {
 		return cmpnyDAO.deleteCmpny(cmpnyID) > 0;
 	}
 

@@ -17,7 +17,7 @@ public interface PctrController {
 		pctrVO.setThmbnlPctr(thmbnlPctr);
 		pctrVO.setOrgnlPctr(orgnlPctr);
 		
-		if (ps.createPctr(pctrVO)) {
+		if (ps.create(pctrVO)) {
 			System.out.println("사진 등록 성공");
 		} else {
 			System.out.println("사진 등록 실패");
@@ -25,7 +25,7 @@ public interface PctrController {
 	}
 
 	default public void readAllPctr(PctrService ps) {
-		List<PctrVO> list = ps.readAllPctr();
+		List<PctrVO> list = ps.readAll();
 		list.forEach(System.out::println);
 	}
 
@@ -43,7 +43,7 @@ public interface PctrController {
 		pctrVO.setOrgnlPctr(orgnlPctr);
 		
 		System.out.print(pctrId + " - ");
-		if (ps.updatePctr(pctrVO)) {
+		if (ps.update(pctrVO)) {
 			System.out.println("사진 수정 성공");
 		} else {
 			System.out.println("사진 수정 실패");
@@ -51,12 +51,12 @@ public interface PctrController {
 	}
 
 	default public void readPctr(PctrService ps, String pctrId) {
-		System.out.println(ps.readPctr(pctrId));
+		System.out.println(ps.read(pctrId));
 	}
 	
 	default public void deletePctr(PctrService ps, String pctrId) {
 		System.out.print(pctrId + " - ");
-		if(ps.deletePctr(pctrId)) {
+		if(ps.delete(pctrId)) {
 			System.out.println("사진 삭제 성공");
 		} else {
 			System.out.println("사진 삭제 실패");

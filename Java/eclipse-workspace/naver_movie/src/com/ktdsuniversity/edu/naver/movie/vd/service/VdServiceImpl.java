@@ -12,27 +12,27 @@ public class VdServiceImpl implements VdService {
 		vdDAO = new VdDAOImpl();
 	}
 	@Override
-	public boolean createVd(VdVO vdVO) {
+	public boolean create(VdVO vdVO) {
 		return vdDAO.createVd(vdVO) > 0;
 	}
 
 	@Override
-	public VdVO readVd(String vdID) {
+	public VdVO read(String vdID) {
 		return vdDAO.readVd(vdID);
 	}
 
 	@Override
-	public List<VdVO> readAllVd() {
+	public List<VdVO> readAll() {
 		return vdDAO.readAllVd();
 	}
 
 	@Override
-	public boolean updateVd(VdVO vdVO) {
+	public boolean update(VdVO vdVO) {
 		return vdDAO.updateVd(vdVO) > 0;
 	}
 
 	@Override
-	public boolean deleteVd(String vdID) {
+	public boolean delete(String vdID) {
 		return vdDAO.deleteVd(vdID) > 0;
 	}
 

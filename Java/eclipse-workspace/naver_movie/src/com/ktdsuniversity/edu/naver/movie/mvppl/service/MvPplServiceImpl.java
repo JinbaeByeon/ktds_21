@@ -12,27 +12,27 @@ public class MvPplServiceImpl implements MvPplService {
 		mvPplDAO = new MvPplDAOImpl();
 	}
 	@Override
-	public boolean createMvPpl(MvPplVO mvPplVO) {
+	public boolean create(MvPplVO mvPplVO) {
 		return mvPplDAO.createMvPpl(mvPplVO) > 0;
 	}
 
 	@Override
-	public MvPplVO readMvPpl(String mvPplID) {
+	public MvPplVO read(String mvPplID) {
 		return mvPplDAO.readMvPpl(mvPplID);
 	}
 
 	@Override
-	public List<MvPplVO> readAllMvPpl() {
+	public List<MvPplVO> readAll() {
 		return mvPplDAO.readAllMvPpl();
 	}
 
 	@Override
-	public boolean updateMvPpl(MvPplVO mvPplVO) {
+	public boolean update(MvPplVO mvPplVO) {
 		return mvPplDAO.updateMvPpl(mvPplVO) > 0;
 	}
 
 	@Override
-	public boolean deleteMvPpl(String mvPplID) {
+	public boolean delete(String mvPplID) {
 		return mvPplDAO.deleteMvPpl(mvPplID) > 0;
 	}
 

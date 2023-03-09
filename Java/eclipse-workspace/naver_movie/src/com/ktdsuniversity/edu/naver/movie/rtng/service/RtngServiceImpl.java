@@ -14,27 +14,27 @@ public class RtngServiceImpl implements RtngService {
 	}
 	
 	@Override
-	public boolean createRtng(RtngVO rtngVO) {
+	public boolean create(RtngVO rtngVO) {
 		return rtngDAO.createRtng(rtngVO) > 0;
 	}
 
 	@Override
-	public RtngVO readRtng(String rtngId) {
+	public RtngVO read(String rtngId) {
 		return rtngDAO.readRtng(rtngId);
 	}
 
 	@Override
-	public List<RtngVO> readAllRtng() {
+	public List<RtngVO> readAll() {
 		return rtngDAO.readAllRtng();
 	}
 
 	@Override
-	public boolean updateRtng(RtngVO rtngVO) {
+	public boolean update(RtngVO rtngVO) {
 		return rtngDAO.updateRtng(rtngVO) > 0;
 	}
 
 	@Override
-	public boolean deleteRtng(String rtngId) {
+	public boolean delete(String rtngId) {
 		return rtngDAO.deleteRtng(rtngId) > 0;
 	}
 

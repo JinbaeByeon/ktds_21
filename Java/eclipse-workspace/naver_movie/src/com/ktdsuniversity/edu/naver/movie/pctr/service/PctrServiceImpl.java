@@ -12,27 +12,27 @@ public class PctrServiceImpl implements PctrService {
 		pctrDAO = new PctrDAOImpl();
 	}
 	@Override
-	public boolean createPctr(PctrVO pctrVO) {
+	public boolean create(PctrVO pctrVO) {
 		return pctrDAO.createPctr(pctrVO) > 0;
 	}
 
 	@Override
-	public PctrVO readPctr(String pctrID) {
+	public PctrVO read(String pctrID) {
 		return pctrDAO.readPctr(pctrID);
 	}
 
 	@Override
-	public List<PctrVO> readAllPctr() {
+	public List<PctrVO> readAll() {
 		return pctrDAO.readAllPctr();
 	}
 
 	@Override
-	public boolean updatePctr(PctrVO pctrVO) {
+	public boolean update(PctrVO pctrVO) {
 		return pctrDAO.updatePctr(pctrVO) > 0;
 	}
 
 	@Override
-	public boolean deletePctr(String pctrID) {
+	public boolean delete(String pctrID) {
 		return pctrDAO.deletePctr(pctrID) > 0;
 	}
 

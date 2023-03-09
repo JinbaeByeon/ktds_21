@@ -16,7 +16,7 @@ public interface MvPplController {
 		mvPplVO.setRlNm(realName);
 		
 		System.out.print(name + " - ");
-		if (mps.createMvPpl(mvPplVO)) {
+		if (mps.create(mvPplVO)) {
 			System.out.println("영화인 등록 성공");
 		} else {
 			System.out.println("영화인 등록 실패");
@@ -24,7 +24,7 @@ public interface MvPplController {
 	}
 
 	default public void readAllMvPpl(MvPplService mps) {
-		List<MvPplVO> list = mps.readAllMvPpl();
+		List<MvPplVO> list = mps.readAll();
 		list.forEach(System.out::println);
 	}
 
@@ -36,7 +36,7 @@ public interface MvPplController {
 		mvPplVO.setMvPplId(mvPplId);
 		mvPplVO.setNm(name);
 		System.out.print(mvPplId + " - ");
-		if (mps.updateMvPpl(mvPplVO)) {
+		if (mps.update(mvPplVO)) {
 			System.out.println("영화인 수정 성공");
 		} else {
 			System.out.println("영화인 수정 실패");
@@ -44,12 +44,12 @@ public interface MvPplController {
 	}
 
 	default public void readMvPpl(MvPplService cs, String mvPplId) {
-		System.out.println(cs.readMvPpl(mvPplId));
+		System.out.println(cs.read(mvPplId));
 	}
 	
 	default public void deleteMvPpl(MvPplService cs, String mvPplId) {
 		System.out.print(mvPplId + " - ");
-		if(cs.deleteMvPpl(mvPplId)) {
+		if(cs.delete(mvPplId)) {
 			System.out.println("영화인 삭제 성공");
 		} else {
 			System.out.println("영화인 삭제 실패");

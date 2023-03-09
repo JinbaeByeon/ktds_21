@@ -30,7 +30,7 @@ public class MvServiceImpl implements MvService {
 	}
 
 	@Override
-	public boolean createMv(MvVO mvVO) {
+	public boolean create(MvVO mvVO) {
 		mvVO.setMvId(mvDAO.createNewMvId());
 		if(mvDAO.createMv(mvVO) == 0 ) {
 			return false;
@@ -51,22 +51,22 @@ public class MvServiceImpl implements MvService {
 	}
 
 	@Override
-	public MvVO readMv(String mvId) {
+	public MvVO read(String mvId) {
 		return mvDAO.readMv(mvId);
 	}
 
 	@Override
-	public List<MvVO> readAllMv() {
+	public List<MvVO> readAll() {
 		return mvDAO.readAllMv();
 	}
 
 	@Override
-	public boolean updateMv(MvVO mvVO) {
+	public boolean update(MvVO mvVO) {
 		return mvDAO.updateMv(mvVO) > 0;
 	}
 
 	@Override
-	public boolean deleteMv(String mvId) {
+	public boolean delete(String mvId) {
 		return mvDAO.deleteMv(mvId) > 0;
 	}
 

@@ -2,7 +2,6 @@ package com.ktdsuniversity.edu.naver.movie.mv.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.ktdsuniversity.edu.naver.movie.cntr.service.CntrService;
 import com.ktdsuniversity.edu.naver.movie.cntr.vo.CntrVO;
@@ -42,7 +41,7 @@ public interface MvController {
 		mvVO.setGnrList(gnrList);
 		List.of(gnrStr.replace(" ", "").split(","))
 		.forEach(gnrId -> {
-			GnrVO gnr = gs.readGnr(Integer.parseInt(gnrId));
+			GnrVO gnr = gs.read(Integer.parseInt(gnrId));
 			if(gnr != null) {
 				gnrList.add(gnr);
 			}
@@ -52,7 +51,7 @@ public interface MvController {
 		mvVO.setCntrList(cntrList);
 		List.of(cntrStr.replace(" ", "").split(","))
 			.forEach(cntrId -> {
-				CntrVO cntr = cs.readCntr(Integer.parseInt(cntrId));
+				CntrVO cntr = cs.read(Integer.parseInt(cntrId));
 				if(cntr != null) {
 					cntrList.add(cntr);
 				}
@@ -105,7 +104,7 @@ public interface MvController {
 		}
 		
 		System.out.print(mvTtl + " - ");
-		if (ms.createMv(mvVO)) {
+		if (ms.create(mvVO)) {
 			System.out.println("영화 등록 성공");
 			return mvVO;
 		} else {
@@ -115,7 +114,7 @@ public interface MvController {
 	}
 
 	default public void readAllMv(MvService ms) {
-		List<MvVO> list = ms.readAllMv();
+		List<MvVO> list = ms.readAll();
 		list.forEach(System.out::println);
 	}
 
@@ -141,7 +140,7 @@ public interface MvController {
 		mvVO.setSmr(smr);
 		
 		System.out.print(mvId + " - ");
-		if (ms.updateMv(mvVO)) {
+		if (ms.update(mvVO)) {
 			System.out.println("영화 수정 성공");
 		} else {
 			System.out.println("영화 수정 실패");
@@ -149,12 +148,12 @@ public interface MvController {
 	}
 
 	default public void readMv(MvService ms, String mvId) {
-		System.out.println(ms.readMv(mvId));
+		System.out.println(ms.read(mvId));
 	}
 	
 	default public void deleteMv(MvService ms, String mvId) {
 		System.out.print(mvId + " - ");
-		if(ms.deleteMv(mvId)) {
+		if(ms.delete(mvId)) {
 			System.out.println("영화 삭제 성공");
 		} else {
 			System.out.println("영화 삭제 실패");

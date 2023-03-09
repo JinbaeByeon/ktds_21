@@ -12,27 +12,27 @@ public class CntrServiceImpl implements CntrService {
 		cntrDAO = new CntrDAOImpl();
 	}
 	@Override
-	public boolean createCntr(CntrVO cntrVO) {
+	public boolean create(CntrVO cntrVO) {
 		return cntrDAO.createCntr(cntrVO) > 0;
 	}
 
 	@Override
-	public CntrVO readCntr(int cntrID) {
+	public CntrVO read(Integer cntrID) {
 		return cntrDAO.readCntr(cntrID);
 	}
 
 	@Override
-	public List<CntrVO> readAllCntr() {
+	public List<CntrVO> readAll() {
 		return cntrDAO.readAllCntr();
 	}
 
 	@Override
-	public boolean updateCntr(CntrVO cntrVO) {
+	public boolean update(CntrVO cntrVO) {
 		return cntrDAO.updateCntr(cntrVO) > 0;
 	}
 
 	@Override
-	public boolean deleteCntr(int cntrID) {
+	public boolean delete(Integer cntrID) {
 		return cntrDAO.deleteCntr(cntrID) > 0;
 	}
 
