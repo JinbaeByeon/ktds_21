@@ -7,7 +7,7 @@ import com.ktdsuniversity.edu.naver.movie.pctr.dao.PctrDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.pctr.vo.PctrVO;
 
 public class PctrServiceImpl implements PctrService {
-	PctrDAO pctrDAO;
+	private PctrDAO pctrDAO;
 	public PctrServiceImpl() {
 		pctrDAO = new PctrDAOImpl();
 	}

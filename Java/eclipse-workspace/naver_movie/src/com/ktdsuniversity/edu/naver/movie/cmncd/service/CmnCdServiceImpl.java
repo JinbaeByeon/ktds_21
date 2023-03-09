@@ -6,10 +6,10 @@ import com.ktdsuniversity.edu.naver.movie.cmncd.dao.CmnCdDAO;
 import com.ktdsuniversity.edu.naver.movie.cmncd.dao.CmnCdDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.cmncd.vo.CmnCdVO;
 
-public class CmnCdServieImpl implements CmnCdService {
-	CmnCdDAO cmnCdDAO;
+public class CmnCdServiceImpl implements CmnCdService {
+	private CmnCdDAO cmnCdDAO;
 	
-	public CmnCdServieImpl() {
+	public CmnCdServiceImpl() {
 		cmnCdDAO = new CmnCdDAOImpl();
 	}
 	

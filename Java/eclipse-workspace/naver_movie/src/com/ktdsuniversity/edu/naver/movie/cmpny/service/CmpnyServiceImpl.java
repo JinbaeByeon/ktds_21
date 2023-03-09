@@ -7,7 +7,7 @@ import com.ktdsuniversity.edu.naver.movie.cmpny.dao.CmpnyDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.cmpny.vo.CmpnyVO;
 
 public class CmpnyServiceImpl implements CmpnyService {
-	CmpnyDAO cmpnyDAO;
+	private CmpnyDAO cmpnyDAO;
 	public CmpnyServiceImpl() {
 		cmpnyDAO = new CmpnyDAOImpl();
 	}

@@ -41,6 +41,23 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 	}
 
 	@Override
+	public GnrVO readGnrByName(String gnrName) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT GNR_ID    ");
+		sql.append(" 	  , GNR_NM    ");
+		sql.append("   FROM GNR       ");
+		sql.append("  WHERE GNR_NM = ?");
+		
+		return selectOne(sql.toString(),(pstmt)->{
+			pstmt.setString(1, gnrName);
+		},(rs) -> {
+			GnrVO gnrVO = new GnrVO();
+			gnrVO.setGnrId(rs.getInt("GNR_ID"));
+			gnrVO.setGnrNm(rs.getString("GNR_NM"));
+			return gnrVO;
+		});
+	}
+	@Override
 	public List<GnrVO> readAllGnr() {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT GNR_ID ");
@@ -79,4 +96,5 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 			pstmt.setInt(1, gnrId);
 		});
 	}
+
 }

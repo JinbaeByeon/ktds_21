@@ -20,8 +20,8 @@ public class MvVO {
 
 	private List<GnrVO> gnrList;
 	private List<CntrVO> cntrList;
-	private List<CmpnyVO> cmpnyList;
-	private List<MvPplVO> prdcMvPplList;
+	private List<PrdcPrtcptnCmpnyVO> cmpnyList;
+	private List<PrdcPrtcptnPplVO> prdcMvPplList;
 	private List<MvPplVO> fmsLnMvPplList;
 	
 	public String getMvId() {
@@ -112,19 +112,19 @@ public class MvVO {
 		this.cntrList = cntrList;
 	}
 
-	public List<CmpnyVO> getCmpnyList() {
+	public List<PrdcPrtcptnCmpnyVO> getCmpnyList() {
 		return cmpnyList;
 	}
 
-	public void setCmpnyList(List<CmpnyVO> cmpnyList) {
+	public void setCmpnyList(List<PrdcPrtcptnCmpnyVO> cmpnyList) {
 		this.cmpnyList = cmpnyList;
 	}
 
-	public List<MvPplVO> getPrdcMvPplList() {
+	public List<PrdcPrtcptnPplVO> getPrdcMvPplList() {
 		return prdcMvPplList;
 	}
 
-	public void setPrdcMvPplList(List<MvPplVO> prdcMvPplList) {
+	public void setPrdcMvPplList(List<PrdcPrtcptnPplVO> prdcMvPplList) {
 		this.prdcMvPplList = prdcMvPplList;
 	}
 
@@ -134,5 +134,49 @@ public class MvVO {
 
 	public void setFmsLnMvPplList(List<MvPplVO> fmsLnMvPplList) {
 		this.fmsLnMvPplList = fmsLnMvPplList;
+	}
+	@Override
+	public String toString() {
+
+		String res = "mvId : " + mvId
+			+ "\t" + "mvTtl : " + mvTtl
+			+ "\t" + "engTtl : " + engTtl
+			+ "\t" + "scrnStt : " + scrnStt
+			+ "\t" + "scrnTm : " + scrnTm
+			+ "\t" + "opngDt : " + opngDt
+			+ "\t" + "wtcGrd : " + wtcGrd
+			+ "\t" + "pstr : " + pstr
+			+ "\t" + "smr : " + smr;
+		if(gnrList != null) {
+			res += "\n장르\n";
+			for(GnrVO gnr : gnrList) {
+				res += "\t" + gnr + "\n";
+			}
+		}
+		if(cntrList != null) {
+			res += "\n제작지\n";
+			for(CntrVO cntr : cntrList) {
+				res += "\t" + cntr + "\n";
+			}
+		}
+		if(cmpnyList != null) {
+			res += "\n제작참여사\n";
+			for(CmpnyVO cmpny : cmpnyList) {
+				res += "\t" + cmpny + "\n";
+			}
+		}
+		if(prdcMvPplList != null) {
+			res += "\n제작참여인\n";
+			for(PrdcPrtcptnPplVO prdcMvPpl : prdcMvPplList) {
+				res += "\t" + prdcMvPpl + "\n";
+			}
+		}
+		if(fmsLnMvPplList != null) {
+			res += "\n명대사\n";
+			for(MvPplVO fmsLnMvPpl : fmsLnMvPplList) {
+				res += "\t" + fmsLnMvPpl + "\n";
+			}
+		}
+		return res;
 	}
 }

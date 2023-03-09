@@ -24,8 +24,8 @@ public interface PctrController {
 		}
 	}
 
-	default public void readAllPctr(PctrService mps) {
-		List<PctrVO> list = mps.readAllPctr();
+	default public void readAllPctr(PctrService ps) {
+		List<PctrVO> list = ps.readAllPctr();
 		list.forEach(System.out::println);
 	}
 

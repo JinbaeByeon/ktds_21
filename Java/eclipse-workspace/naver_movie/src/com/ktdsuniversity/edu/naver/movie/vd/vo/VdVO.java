@@ -1,14 +1,14 @@
 package com.ktdsuniversity.edu.naver.movie.vd.vo;
 
 public class VdVO {
-	String vdId;
-	String mvId;
-	String vdTp;
-	String ttl;
-	String thmbnl;
-	int plCnt;
-	String vdUrl;
-	String rgstDt;
+	private String vdId;
+	private String mvId;
+	private String vdTp;
+	private String ttl;
+	private String thmbnl;
+	private int plCnt;
+	private String vdUrl;
+	private String rgstDt;
 
 	public String getVdId() {
 		return vdId;

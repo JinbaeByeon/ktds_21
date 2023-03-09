@@ -11,17 +11,13 @@ public interface VdController {
 								,String vdTp
 								,String ttl
 								,String thmbnl
-								,int plCnt
-								,String vdUrl
-								,String rgstDt) {
+								,String vdUrl) {
 		VdVO vdVO = new VdVO();
 		vdVO.setMvId(mvId);
 		vdVO.setVdTp(vdTp);
 		vdVO.setTtl(ttl);
 		vdVO.setThmbnl(thmbnl);
-		vdVO.setPlCnt(plCnt);
 		vdVO.setVdUrl(vdUrl);
-		vdVO.setRgstDt(rgstDt);
 		
 		System.out.print(ttl + " - ");
 		if (vs.createVd(vdVO)) {
@@ -42,18 +38,14 @@ public interface VdController {
 								,String vdTp
 								,String ttl
 								,String thmbnl
-								,int plCnt
-								,String vdUrl
-								,String rgstDt) {
+								,String vdUrl) {
 		VdVO vdVO = new VdVO();
 		vdVO.setVdId(vdId);
 		vdVO.setMvId(mvId);
 		vdVO.setVdTp(vdTp);
 		vdVO.setTtl(ttl);
 		vdVO.setThmbnl(thmbnl);
-		vdVO.setPlCnt(plCnt);
 		vdVO.setVdUrl(vdUrl);
-		vdVO.setRgstDt(rgstDt);
 		
 		
 		System.out.print(vdId + " - ");

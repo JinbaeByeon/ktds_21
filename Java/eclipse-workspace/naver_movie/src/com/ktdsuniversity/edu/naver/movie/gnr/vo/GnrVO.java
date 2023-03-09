@@ -1,8 +1,8 @@
 package com.ktdsuniversity.edu.naver.movie.gnr.vo;
 
 public class GnrVO {
-	int gnrId;
-	String gnrNm;
+	private int gnrId;
+	private String gnrNm;
 	
 	public int getGnrId() {
 		return gnrId;

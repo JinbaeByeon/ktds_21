@@ -7,7 +7,7 @@ import com.ktdsuniversity.edu.naver.movie.cntr.dao.CntrDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.cntr.vo.CntrVO;
 
 public class CntrServiceImpl implements CntrService {
-	CntrDAO cntrDAO;
+	private CntrDAO cntrDAO;
 	public CntrServiceImpl() {
 		cntrDAO = new CntrDAOImpl();
 	}

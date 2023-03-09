@@ -13,8 +13,22 @@ public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO>
 	public int createMvGnr(MvVO mvVO) {
 		String mvId = mvVO.getMvId();
 		List<GnrVO> gnrList = mvVO.getGnrList();
+		StringBuffer sql = new StringBuffer();
+		sql.append(" INSERT INTO MV_GNR");
+		sql.append("  (MV_ID         ");
+		sql.append(" , GNR_ID)       ");
+		sql.append(" VALUES          ");
+		sql.append("  (?             ");
+		sql.append(" , ?)            ");
 		
-		return 0;
+		int resCnt = 0;
+		for(GnrVO gnr : gnrList) {
+			resCnt += insert(sql.toString(), (pstmt)->{
+				pstmt.setString(1, mvId);
+				pstmt.setInt(2, gnr.getGnrId());
+			});
+		}
+		return resCnt;
 	}
 
 	@Override
@@ -23,7 +37,7 @@ public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO>
 	}
 
 	@Override
-	public int deleteMvGnr(String mvId) {
+	public int deleteMvGnr(MvVO mvVO) {
 		return 0;
 	}
 

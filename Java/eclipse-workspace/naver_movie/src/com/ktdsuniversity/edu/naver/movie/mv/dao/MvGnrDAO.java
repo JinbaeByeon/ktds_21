@@ -2,6 +2,7 @@ package com.ktdsuniversity.edu.naver.movie.mv.dao;
 
 import java.util.List;
 
+import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
 
 public interface MvGnrDAO {
@@ -21,10 +22,9 @@ public interface MvGnrDAO {
 
 	/**
 	 * 영화_장르 데이터 삭제
-	 * @param mvId (삭제대상 pk)
+	 * @param mvVO (삭제 정보가 포함된 VO)
 	 * @return 삭제된 영화의 수
 	 */
-	public int deleteMvGnr(String mvId);
-
+	public int deleteMvGnr(MvVO mvVO);
 
 }

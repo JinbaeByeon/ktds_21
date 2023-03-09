@@ -7,7 +7,7 @@ import com.ktdsuniversity.edu.naver.movie.mvppl.dao.MvPplDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.mvppl.vo.MvPplVO;
 
 public class MvPplServiceImpl implements MvPplService {
-	MvPplDAO mvPplDAO;
+	private MvPplDAO mvPplDAO;
 	public MvPplServiceImpl() {
 		mvPplDAO = new MvPplDAOImpl();
 	}

@@ -25,19 +25,16 @@ public class VdDAOImpl extends AbstractDaoPoolSupport<VdVO> implements VdDAO {
 		sql.append("  ?,       ");
 		sql.append("  ?,       ");
 		sql.append("  ?,       ");
-		sql.append("  ?,       ");
+		sql.append("  0,       ");
 		sql.append("  ?,       ");
 		sql.append("  SYSDATE) ");
 		
 		return insert(sql.toString(), (pstmt)->{
-			pstmt.setString(1, vdVO.getVdId());
-			pstmt.setString(2, vdVO.getMvId());
-			pstmt.setString(3, vdVO.getVdTp());
-			pstmt.setString(4, vdVO.getTtl());
-			pstmt.setString(5, vdVO.getThmbnl());
-			pstmt.setInt(6, vdVO.getPlCnt());
-			pstmt.setString(7, vdVO.getVdUrl());
-			pstmt.setString(8, vdVO.getRgstDt());
+			pstmt.setString(1, vdVO.getMvId());
+			pstmt.setString(2, vdVO.getVdTp());
+			pstmt.setString(3, vdVO.getTtl());
+			pstmt.setString(4, vdVO.getThmbnl());
+			pstmt.setString(5, vdVO.getVdUrl());
 		});
 	}
 
@@ -103,12 +100,10 @@ public class VdDAOImpl extends AbstractDaoPoolSupport<VdVO> implements VdDAO {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" UPDATE VD    ");
 		sql.append("    SET MV_ID = ?, ");
-		sql.append(" 	   VD_TP = ?,    ");
-		sql.append(" 	   TTL = ?,      ");
-		sql.append(" 	   THMBNL = ?,   ");
-		sql.append(" 	   PL_CNT = ?,    ");
-		sql.append(" 	   VD_URL = ?,   ");
-		sql.append(" 	   RGST_DT = ?   ");
+		sql.append(" 	    VD_TP = ?,    ");
+		sql.append(" 	    TTL = ?,      ");
+		sql.append(" 	    THMBNL = ?,   ");
+		sql.append(" 	    VD_URL = ?  ");
 		sql.append("  WHERE VD_ID = ?  ");
 		
 		return update(sql.toString(), (pstmt)->{
@@ -116,10 +111,8 @@ public class VdDAOImpl extends AbstractDaoPoolSupport<VdVO> implements VdDAO {
 			pstmt.setString(2, vdVO.getVdTp());
 			pstmt.setString(3, vdVO.getTtl());
 			pstmt.setString(4, vdVO.getThmbnl());
-			pstmt.setInt(5, vdVO.getPlCnt());
-			pstmt.setString(6, vdVO.getVdUrl());
-			pstmt.setString(7, vdVO.getRgstDt());
-			pstmt.setString(8, vdVO.getVdId());
+			pstmt.setString(5, vdVO.getVdUrl());
+			pstmt.setString(6, vdVO.getVdId());
 		});
 	}
 

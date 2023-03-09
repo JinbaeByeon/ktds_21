@@ -7,7 +7,7 @@ import com.ktdsuniversity.edu.naver.movie.vd.dao.VdDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.vd.vo.VdVO;
 
 public class VdServiceImpl implements VdService {
-	VdDAO vdDAO;
+	private VdDAO vdDAO;
 	public VdServiceImpl() {
 		vdDAO = new VdDAOImpl();
 	}

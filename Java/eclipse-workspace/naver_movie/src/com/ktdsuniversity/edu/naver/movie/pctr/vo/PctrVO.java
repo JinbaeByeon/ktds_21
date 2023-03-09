@@ -1,11 +1,11 @@
 package com.ktdsuniversity.edu.naver.movie.pctr.vo;
 
 public class PctrVO {
-	String pctrId;
-	String mvId;
-	String pctrTp;
-	String thmbnlPctr;
-	String orgnlPctr;
+	private String pctrId;
+	private String mvId;
+	private String pctrTp;
+	private String thmbnlPctr;
+	private String orgnlPctr;
 	
 	public String getPctrId() {
 		return pctrId;

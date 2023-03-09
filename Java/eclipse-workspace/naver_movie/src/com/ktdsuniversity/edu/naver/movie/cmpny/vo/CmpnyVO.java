@@ -1,8 +1,8 @@
 package com.ktdsuniversity.edu.naver.movie.cmpny.vo;
 
 public class CmpnyVO {
-	String cmpnyId;
-	String cmpnyNm;
+	private String cmpnyId;
+	private String cmpnyNm;
 	
 	public String getCmpnyId() {
 		return cmpnyId;

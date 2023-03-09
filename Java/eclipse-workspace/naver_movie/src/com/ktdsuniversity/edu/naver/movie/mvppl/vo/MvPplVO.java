@@ -1,10 +1,10 @@
 package com.ktdsuniversity.edu.naver.movie.mvppl.vo;
 
 public class MvPplVO {
-	String mvPplId;
-	String prflPctr;
-	String nm;
-	String rlNm;
+	private String mvPplId;
+	private String prflPctr;
+	private String nm;
+	private String rlNm;
 
 	public String getMvPplId() {
 		return mvPplId;

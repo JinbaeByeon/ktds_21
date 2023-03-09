@@ -7,7 +7,7 @@ import com.ktdsuniversity.edu.naver.movie.gnr.dao.GnrDAOImpl;
 import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
 
 public class GnrServiceImpl implements GnrService {
-	GnrDAO gnrDAO;
+	private GnrDAO gnrDAO;
 	public GnrServiceImpl() {
 		gnrDAO = new GnrDAOImpl();
 	}
@@ -21,6 +21,11 @@ public class GnrServiceImpl implements GnrService {
 		return gnrDAO.readGnr(gnrID);
 	}
 
+	@Override
+	public GnrVO readGnrByName(String gnrName) {
+		return gnrDAO.readGnrByName(gnrName);
+	}
+	
 	@Override
 	public List<GnrVO> readAllGnr() {
 		return gnrDAO.readAllGnr();

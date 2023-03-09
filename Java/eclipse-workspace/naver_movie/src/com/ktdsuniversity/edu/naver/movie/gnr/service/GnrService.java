@@ -22,6 +22,12 @@ public interface GnrService {
 	public GnrVO readGnr(int gnrId);
 
 	/**
+	 * 장르 이름을 통한 장르 조회
+	 * @param gnrName (장르 이름)
+	 * @return
+	 */
+	public GnrVO readGnrByName(String gnrName);
+	/**
 	 * 모든 장르 조회
 	 * 
 	 * @return 모든 장르의 목록
@@ -43,4 +49,5 @@ public interface GnrService {
 	 * @return 삭제 여부
 	 */
 	public boolean deleteGnr(int gnrId);
+
 }

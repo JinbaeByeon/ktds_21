@@ -38,5 +38,6 @@ public interface MvDAO {
 	 * @return 삭제된 영화의 수
 	 */
 	public int deleteMv(String mvId);
-
+	
+	public String createNewMvId();
 }

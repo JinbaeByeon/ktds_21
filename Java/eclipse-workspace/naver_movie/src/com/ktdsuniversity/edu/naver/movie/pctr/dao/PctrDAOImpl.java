@@ -16,19 +16,17 @@ public class PctrDAOImpl extends AbstractDaoPoolSupport<PctrVO> implements PctrD
 		sql.append("  THMBNL_PCTR,    ");
 		sql.append("  ORGNL_PCTR)     ");
 		sql.append(" VALUES           ");
-		sql.append(" ('PT-' || TO_CHAR(SYSDATE,'YYYYMMDD') || '-' || , LPAD(SEQ_PCTR_PK.NEXTVAL,5,0) ");
-		sql.append("  ?, ");
-		sql.append("  ?, ");
-		sql.append("  ?, ");
-		sql.append("  ?) ");
+		sql.append(" ('PT-' || TO_CHAR(SYSDATE,'YYYYMMDD') || '-' || LPAD(SEQ_PCTR_PK.NEXTVAL,5,0) ");
+		sql.append("  ,? ");
+		sql.append("  ,? ");
+		sql.append("  ,? ");
+		sql.append("  ,?) ");
 		
 		return insert(sql.toString(), (pstmt)->{
-			pstmt.setString(1, pctrVO.getPctrId());
-			pstmt.setString(2, pctrVO.getMvId());
-			pstmt.setString(3, pctrVO.getPctrTp());
-			pstmt.setString(4, pctrVO.getThmbnlPctr());
-			pstmt.setString(5, pctrVO.getThmbnlPctr());
-			pstmt.setString(6, pctrVO.getOrgnlPctr());
+			pstmt.setString(1, pctrVO.getMvId());
+			pstmt.setString(2, pctrVO.getPctrTp());
+			pstmt.setString(3, pctrVO.getThmbnlPctr());
+			pstmt.setString(4, pctrVO.getOrgnlPctr());
 		});
 	}
 
@@ -47,9 +45,9 @@ public class PctrDAOImpl extends AbstractDaoPoolSupport<PctrVO> implements PctrD
 			pstmt.setString(1, pctrId);
 		}, (rs) -> {
 			PctrVO pctrVO = new PctrVO();
-			pctrVO.setPctrId(rs.getString("VD_ID"));
+			pctrVO.setPctrId(rs.getString("PCTR_ID"));
 			pctrVO.setMvId(rs.getString("MV_ID"));
-			pctrVO.setPctrTp(rs.getString("VD_TP"));
+			pctrVO.setPctrTp(rs.getString("PCTR_TP"));
 			pctrVO.setThmbnlPctr(rs.getString("THMBNL_PCTR"));
 			pctrVO.setOrgnlPctr(rs.getString("ORGNL_PCTR"));
 			return pctrVO;
@@ -68,9 +66,9 @@ public class PctrDAOImpl extends AbstractDaoPoolSupport<PctrVO> implements PctrD
 		
 		return select(sql.toString(), null, (rs) -> {
 			PctrVO pctrVO = new PctrVO();
-			pctrVO.setPctrId(rs.getString("VD_ID"));
+			pctrVO.setPctrId(rs.getString("PCTR_ID"));
 			pctrVO.setMvId(rs.getString("MV_ID"));
-			pctrVO.setPctrTp(rs.getString("VD_TP"));
+			pctrVO.setPctrTp(rs.getString("PCTR_TP"));
 			pctrVO.setThmbnlPctr(rs.getString("THMBNL_PCTR"));
 			pctrVO.setOrgnlPctr(rs.getString("ORGNL_PCTR"));
 			return pctrVO;
@@ -88,12 +86,11 @@ public class PctrDAOImpl extends AbstractDaoPoolSupport<PctrVO> implements PctrD
 		sql.append(" WHERE PCTR_ID = ? ");
 		
 		return update(sql.toString(), (pstmt)->{
-			pstmt.setString(1, pctrVO.getPctrId());
-			pstmt.setString(2, pctrVO.getMvId());
-			pstmt.setString(3, pctrVO.getPctrTp());
-			pstmt.setString(4, pctrVO.getThmbnlPctr());
-			pstmt.setString(5, pctrVO.getThmbnlPctr());
-			pstmt.setString(6, pctrVO.getOrgnlPctr());
+			pstmt.setString(1, pctrVO.getMvId());
+			pstmt.setString(2, pctrVO.getPctrTp());
+			pstmt.setString(3, pctrVO.getThmbnlPctr());
+			pstmt.setString(4, pctrVO.getOrgnlPctr());
+			pstmt.setString(5, pctrVO.getPctrId());
 		});
 	}
 
@@ -101,10 +98,11 @@ public class PctrDAOImpl extends AbstractDaoPoolSupport<PctrVO> implements PctrD
 	public int deletePctr(String pctrId) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" DELETE           ");
-		sql.append("   FROM VD        ");
-		sql.append("  WHERE VD_ID = ? ");
+		sql.append("   FROM PCTR        ");
+		sql.append("  WHERE PCTR_ID = ? ");
 		
 		return delete(sql.toString(), (pstmt)->{
 			pstmt.setString(1, pctrId);
 		});
-	}}
+	}
+}

@@ -1,9 +1,9 @@
 package com.ktdsuniversity.edu.naver.movie.cmncd.vo;
 
 public class CmnCdVO {
-	String cmnCdId;
-	String cdNm;
-	String prcdncCdId;
+	private String cmnCdId;
+	private String cdNm;
+	private String prcdncCdId;
 
 	public String getCmnCdId() {
 		return cmnCdId;

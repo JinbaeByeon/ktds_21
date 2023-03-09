@@ -1,8 +1,8 @@
 package com.ktdsuniversity.edu.naver.movie.cntr.vo;
 
 public class CntrVO {
-	int cntrId;
-	String cntrNm;
+	private int cntrId;
+	private String cntrNm;
 
 	public int getCntrId() {
 		return cntrId;
