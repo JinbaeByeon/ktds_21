@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.naver.movie.service;
+package com.ktdsuniversity.edu.naver.movie.Inf;
 
 import java.util.List;
 

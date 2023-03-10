@@ -62,12 +62,45 @@ public class MvServiceImpl implements MvService {
 
 	@Override
 	public boolean update(MvVO mvVO) {
-		return mvDAO.updateMv(mvVO) > 0;
+		if(mvDAO.updateMv(mvVO) == 0) {
+			return false;
+		}
+		if(mvGnrDAO.deleteMvGnr(mvVO.getMvId()) == 0) {
+			return false;
+		}
+		if(mvGnrDAO.createMvGnr(mvVO) == 0) {
+			return false;
+		}
+		if(prdcLocDAO.deletePrdcLoc(mvVO.getMvId()) == 0) {
+			return false;
+		}
+		if(prdcLocDAO.createPrdcLoc(mvVO) == 0) {
+			return false;
+		}
+		if(prdcPrtcptnCmpnyDAO.deletePrdcPrtcptnCmpny(mvVO.getMvId()) == 0) {
+			return false;
+		}
+		if(prdcPrtcptnCmpnyDAO.createPrdcPrtcptnCmpny(mvVO) == 0) {
+			return false;
+		}
+		if(prdcPrtcptnPplDAO.deletePrdcPrtcptnPpl(mvVO.getMvId()) == 0) {
+			return false;
+		}
+		if(prdcPrtcptnPplDAO.createPrdcPrtcptnPpl(mvVO) == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean delete(String mvId) {
-		return mvDAO.deleteMv(mvId) > 0;
+		int resCnt = mvDAO.deleteMv(mvId);
+		resCnt += mvGnrDAO.deleteMvGnr(mvId);
+		resCnt += prdcLocDAO.deletePrdcLoc(mvId);
+		resCnt += prdcPrtcptnCmpnyDAO.deletePrdcPrtcptnCmpny(mvId);
+		resCnt += prdcPrtcptnPplDAO.deletePrdcPrtcptnPpl(mvId);
+		
+		return resCnt > 0;
 	}
 
 }

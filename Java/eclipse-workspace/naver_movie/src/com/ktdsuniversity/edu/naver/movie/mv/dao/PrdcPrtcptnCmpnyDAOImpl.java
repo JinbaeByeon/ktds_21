@@ -2,6 +2,7 @@ package com.ktdsuniversity.edu.naver.movie.mv.dao;
 
 import java.util.List;
 
+import com.ktdsuniversity.edu.naver.movie.cmpny.vo.CmpnyVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.PrdcPrtcptnCmpnyVO;
 import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
@@ -41,8 +42,16 @@ public class PrdcPrtcptnCmpnyDAOImpl extends AbstractDaoPoolSupport<MvVO>
 	}
 
 	@Override
-	public int deletePrdcPrtcptnCmpny(MvVO mvVO) {
-		return 0;
+	public int deletePrdcPrtcptnCmpny(String mvId) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" DELETE ");
+		sql.append("   FROM PRDC_PRTCPTN_CMPNY ");
+		sql.append("  WHERE MV_ID = ? ");
+
+		return delete(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, mvId);
+		});
+	
 	}
 	
 

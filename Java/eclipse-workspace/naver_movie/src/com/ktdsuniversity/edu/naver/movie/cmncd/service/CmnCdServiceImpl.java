@@ -14,27 +14,27 @@ public class CmnCdServiceImpl implements CmnCdService {
 	}
 	
 	@Override
-	public boolean createCmnCd(CmnCdVO cmnCdVO) {
+	public boolean create(CmnCdVO cmnCdVO) {
 		return cmnCdDAO.createCmnCd(cmnCdVO) > 0;
 	}
 
 	@Override
-	public CmnCdVO readCmnCd(String cmnCdId) {
+	public CmnCdVO read(String cmnCdId) {
 		return cmnCdDAO.readCmnCd(cmnCdId);
 	}
 
 	@Override
-	public List<CmnCdVO> readAllCmnCd() {
+	public List<CmnCdVO> readAll() {
 		return cmnCdDAO.readAllCmnCd();
 	}
 
 	@Override
-	public boolean updateCmnCd(CmnCdVO cmnCdVO) {
+	public boolean update(CmnCdVO cmnCdVO) {
 		return cmnCdDAO.updateCmnCd(cmnCdVO) > 0;
 	}
 
 	@Override
-	public boolean deleteCmnCd(String cmnCdId) {
+	public boolean delete(String cmnCdId) {
 		return cmnCdDAO.deleteCmnCd(cmnCdId) > 0;
 	}
 

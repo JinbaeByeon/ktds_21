@@ -75,7 +75,8 @@ public class RtngVO {
 	}
 	@Override
 	public String toString() {
-		String res = "mvId : " + mvId + "\t"
+		String res = "rtngId : " + rtngId + "\t"
+				   + "mvId : " + mvId + "\t"
 				   + "rtng : " + rtng + "\t"
 				   + "dtl : " + dtl + "\t"
 				   + "wrtr : " + wrtr + "\t"

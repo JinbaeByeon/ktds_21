@@ -10,22 +10,22 @@ public class FmsLnDAOImpl extends AbstractDaoPoolSupport<FmsLnVO> implements Fms
 	@Override
 	public int createFmsLn(FmsLnVO fmsLnVO) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" INSERT INTO FMS_LN                                                    ");
-		sql.append("  (FMS_LN_ID                                                         ");
-		sql.append(" , FMS_LN                                                            ");
-		sql.append(" , EXPL                                                              ");
-		sql.append(" , RGST_DT                                                           ");
-		sql.append(" , RGST_PPL_NM                                                       ");
-		sql.append(" , RCMD_CNT                                                          ");
-		sql.append(" , PRDC_PRTCPTN_ID)                                                  ");
+		sql.append(" INSERT INTO FMS_LN   ");
+		sql.append("  (FMS_LN_ID        ");
+		sql.append(" , FMS_LN           ");
+		sql.append(" , EXPL             ");
+		sql.append(" , RGST_DT          ");
+		sql.append(" , RGST_PPL_NM      ");
+		sql.append(" , RCMD_CNT         ");
+		sql.append(" , PRDC_PRTCPTN_ID) ");
 		sql.append(" VALUES                                                              ");
-		sql.append("  ('MV-' || TO_CHAR(SYSDATE,'YYYYMMDD') || '-' || LPAD(RGST_DT,5,'0')");
-		sql.append(" , ?                                                                ");
-		sql.append(" , ?                                                                ");
-		sql.append(" , SYSDATE                                                           ");
-		sql.append(" , ?                                                                ");
-		sql.append(" , 0                                                                 ");
-		sql.append(" , ?)                                                               ");
+		sql.append("  ('FL-' || TO_CHAR(SYSDATE,'YYYYMMDD') || '-' || LPAD(SEQ_FMS_LN_PK.NEXTVAL ,5,'0')");
+		sql.append(" , ?        ");
+		sql.append(" , ?        ");
+		sql.append(" , SYSDATE   ");
+		sql.append(" , ?        ");
+		sql.append(" , 0         ");
+		sql.append(" , ?)       ");
 
 		return insert(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, fmsLnVO.getFmsLn());
@@ -53,13 +53,13 @@ public class FmsLnDAOImpl extends AbstractDaoPoolSupport<FmsLnVO> implements Fms
 			pstmt.setString(1, fmsLnId);
 		}, (rs) -> {
 			FmsLnVO fmsLnVO = new FmsLnVO();
-			fmsLnVO.setExpl(rs.getString("FMS_LN_ID"));
+			fmsLnVO.setFmsLnId(rs.getString("FMS_LN_ID"));
 			fmsLnVO.setFmsLn(rs.getString("FMS_LN"));
-			fmsLnVO.setFmsLnId(rs.getString("EXPL"));
-			fmsLnVO.setPrdcPrtcptnId(rs.getString("RGST_DT"));
-			fmsLnVO.setRcmdCnt(rs.getInt("RGST_PPL_NM"));
-			fmsLnVO.setRgstDt(rs.getString("RCMD_CNT"));
-			fmsLnVO.setRgstPplNm(rs.getString("PRDC_PRTCPTN_ID"));
+			fmsLnVO.setExpl(rs.getString("EXPL"));
+			fmsLnVO.setRgstDt(rs.getString("RGST_DT"));
+			fmsLnVO.setRgstPplNm(rs.getString("RGST_PPL_NM"));
+			fmsLnVO.setRcmdCnt(rs.getInt("RCMD_CNT"));
+			fmsLnVO.setPrdcPrtcptnId(rs.getString("PRDC_PRTCPTN_ID"));
 			return fmsLnVO;
 		});
 	}
@@ -78,13 +78,13 @@ public class FmsLnDAOImpl extends AbstractDaoPoolSupport<FmsLnVO> implements Fms
 		
 		return select(sql.toString(), null, (rs) -> {
 			FmsLnVO fmsLnVO = new FmsLnVO();
-			fmsLnVO.setExpl(rs.getString("FMS_LN_ID"));
+			fmsLnVO.setFmsLnId(rs.getString("FMS_LN_ID"));
 			fmsLnVO.setFmsLn(rs.getString("FMS_LN"));
-			fmsLnVO.setFmsLnId(rs.getString("EXPL"));
-			fmsLnVO.setPrdcPrtcptnId(rs.getString("RGST_DT"));
-			fmsLnVO.setRcmdCnt(rs.getInt("RGST_PPL_NM"));
-			fmsLnVO.setRgstDt(rs.getString("RCMD_CNT"));
-			fmsLnVO.setRgstPplNm(rs.getString("PRDC_PRTCPTN_ID"));
+			fmsLnVO.setExpl(rs.getString("EXPL"));
+			fmsLnVO.setRgstDt(rs.getString("RGST_DT"));
+			fmsLnVO.setRgstPplNm(rs.getString("RGST_PPL_NM"));
+			fmsLnVO.setRcmdCnt(rs.getInt("RCMD_CNT"));
+			fmsLnVO.setPrdcPrtcptnId(rs.getString("PRDC_PRTCPTN_ID"));
 			return fmsLnVO;
 		});
 	}

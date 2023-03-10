@@ -36,7 +36,7 @@ public class PrdcLocDAOImpl extends AbstractDaoPoolSupport<MvVO>
 	}
 
 	@Override
-	public int deletePrdcLoc(MvVO mvVO) {
+	public int deletePrdcLoc(String mvId) {
 		return 0;
 	}
 

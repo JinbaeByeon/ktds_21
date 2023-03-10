@@ -22,5 +22,5 @@ public interface PrdcPrtcptnCmpnyDAO {
 	 * @param mvVO (mvVO : 삭제할 제작참여사 데이터가 들어있는 VO)
 	 * @return 삭제된 제작참여사의 수
 	 */
-	public int deletePrdcPrtcptnCmpny(MvVO mvVO);
+	public int deletePrdcPrtcptnCmpny(String mvId);
 }

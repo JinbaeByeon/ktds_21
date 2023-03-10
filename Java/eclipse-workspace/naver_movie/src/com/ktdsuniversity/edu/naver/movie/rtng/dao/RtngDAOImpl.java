@@ -28,15 +28,14 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 		sql.append(", SYSDATE ");
 		sql.append(", 0           ");
 		sql.append(", 0)           ");
-		
 
-		return insert(sql.toString(), (pstmt)->{
+		return insert(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, rtngVO.getMvId());
 			pstmt.setInt(2, rtngVO.getRtng());
 			pstmt.setString(3, rtngVO.getDtl());
 			pstmt.setString(4, rtngVO.getWrtr());
 		});
-	
+
 	}
 
 	@Override
@@ -52,11 +51,12 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 		sql.append("      , DSLK_CNT    ");
 		sql.append(" FROM RTNG        ");
 		sql.append("  WHERE RTNG_ID = ?  ");
-		
+
 		return selectOne(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, rtngId);
 		}, (rs) -> {
 			RtngVO rtngVO = new RtngVO();
+			rtngVO.setRtngId(rs.getString("RTNG_ID"));
 			rtngVO.setMvId(rs.getString("MV_ID"));
 			rtngVO.setRtng(rs.getInt("RTNG"));
 			rtngVO.setDtl(rs.getString("DTL"));
@@ -80,9 +80,10 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 		sql.append("      , LK_CNT       ");
 		sql.append("      , DSLK_CNT    ");
 		sql.append(" FROM RTNG        ");
-		
+
 		return select(sql.toString(), null, (rs) -> {
 			RtngVO rtngVO = new RtngVO();
+			rtngVO.setRtngId(rs.getString("RTNG_ID"));
 			rtngVO.setMvId(rs.getString("MV_ID"));
 			rtngVO.setRtng(rs.getInt("RTNG"));
 			rtngVO.setDtl(rs.getString("DTL"));
@@ -105,6 +106,7 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 		return update(sql.toString(), (pstmt) -> {
 			pstmt.setInt(1, rtngVO.getRtng());
 			pstmt.setString(2, rtngVO.getDtl());
+			pstmt.setString(3, rtngVO.getRtngId());
 		});
 	}
 
@@ -114,8 +116,8 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 		sql.append(" DELETE           ");
 		sql.append("   FROM RTNG        ");
 		sql.append("  WHERE RTNG_ID = ? ");
-		
-		return delete(sql.toString(), (pstmt)->{
+
+		return delete(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, rtngId);
 		});
 	}

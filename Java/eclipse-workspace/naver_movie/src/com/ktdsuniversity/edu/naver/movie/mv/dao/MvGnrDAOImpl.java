@@ -6,8 +6,7 @@ import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
 import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
 
-public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO>
-						  implements MvGnrDAO {
+public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO> implements MvGnrDAO {
 
 	@Override
 	public int createMvGnr(MvVO mvVO) {
@@ -20,10 +19,10 @@ public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO>
 		sql.append(" VALUES          ");
 		sql.append("  (?             ");
 		sql.append(" , ?)            ");
-		
+
 		int resCnt = 0;
-		for(GnrVO gnr : gnrList) {
-			resCnt += insert(sql.toString(), (pstmt)->{
+		for (GnrVO gnr : gnrList) {
+			resCnt += insert(sql.toString(), (pstmt) -> {
 				pstmt.setString(1, mvId);
 				pstmt.setInt(2, gnr.getGnrId());
 			});
@@ -37,8 +36,15 @@ public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO>
 	}
 
 	@Override
-	public int deleteMvGnr(MvVO mvVO) {
-		return 0;
+	public int deleteMvGnr(String mvId) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" DELETE ");
+		sql.append("   FROM MV_GNR ");
+		sql.append("  WHERE MV_ID = ? ");
+
+		return delete(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, mvId);
+		});
 	}
 
 }

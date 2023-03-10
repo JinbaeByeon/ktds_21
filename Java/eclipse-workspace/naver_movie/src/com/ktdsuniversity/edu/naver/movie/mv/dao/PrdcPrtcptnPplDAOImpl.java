@@ -43,8 +43,15 @@ public class PrdcPrtcptnPplDAOImpl extends AbstractDaoPoolSupport<MvVO> implemen
 	}
 
 	@Override
-	public int deletePrdcPrtcptnPpl(MvVO mvVO) {
-		return 0;
+	public int deletePrdcPrtcptnPpl(String mvId) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" DELETE ");
+		sql.append("   FROM PRDC_PRTCPTN_PPL ");
+		sql.append("  WHERE MV_ID = ? ");
+
+		return delete(sql.toString(), (pstmt) -> {
+			pstmt.setString(1, mvId);
+		});
 	}
 
 }

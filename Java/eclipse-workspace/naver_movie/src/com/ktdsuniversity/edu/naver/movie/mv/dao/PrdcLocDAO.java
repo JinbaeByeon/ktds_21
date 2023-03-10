@@ -22,5 +22,5 @@ public interface PrdcLocDAO {
 	 * @param mvVO (mvVO : 삭제할 제작지 데이터가 들어있는 VO)
 	 * @return 삭제된 제작지의 수
 	 */
-	public int deletePrdcLoc(MvVO mvVO);
+	public int deletePrdcLoc(String mvId);
 }

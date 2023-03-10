@@ -3,30 +3,54 @@ package com.ktdsuniversity.edu.naver.movie.mv.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ktdsuniversity.edu.naver.movie.Inf.MyController;
 import com.ktdsuniversity.edu.naver.movie.cntr.service.CntrService;
+import com.ktdsuniversity.edu.naver.movie.cntr.service.CntrServiceImpl;
 import com.ktdsuniversity.edu.naver.movie.cntr.vo.CntrVO;
 import com.ktdsuniversity.edu.naver.movie.gnr.service.GnrService;
+import com.ktdsuniversity.edu.naver.movie.gnr.service.GnrServiceImpl;
 import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
 import com.ktdsuniversity.edu.naver.movie.mv.service.MvService;
+import com.ktdsuniversity.edu.naver.movie.mv.service.MvServiceImpl;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.PrdcPrtcptnCmpnyVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.PrdcPrtcptnPplVO;
 import com.ktdsuniversity.edu.naver.movie.utils.Utils;
 
-public interface MvController {
-	default public MvVO createMv(MvService ms
-							   , GnrService gs
-							   , CntrService cs
-								  , String mvTtl
-								  , String engTtl
-								  , String scrnStt
-								  , int scrnTm
-								  , String opngDt
-								  , String wtcGrd
-								  , String pstr 
-								  , String smr
-								  , String gnrStr
-								  , String cntrStr) {
+public class MvController implements MyController {
+	MvService ms;
+	GnrService gs;
+	CntrService cs;
+	
+	public MvController() {
+		ms = new MvServiceImpl();
+		gs = new GnrServiceImpl();
+		cs = new CntrServiceImpl();
+	}
+	
+	@Override
+	public void create() {
+		createMv(Utils.getNextLine("생성할 영화의 제목 입력")
+		       , Utils.getNextLine("생성할 영화의 영어제목 입력")
+			   , Utils.getNextLine("생성할 영화의 상영상태 입력")
+			   , Utils.getNextInt("생성할 영화의 상영시간 입력")
+			   , Utils.getNextLine("생성할 영화의 개봉일 입력")
+			   , Utils.getNextLine("생성할 영화의 관람등급 입력")
+			   , Utils.getNextLine("생성할 영화의 포스터 입력")
+			   , Utils.getNextLine("생성할 영화의 줄거리 입력")
+			   , Utils.getNextLine("생성할 영화의 장르 입력")
+			   , Utils.getNextLine("생성할 영화의 제작지 입력"));
+	}
+	private MvVO createMv(String mvTtl
+					   , String engTtl
+					   , String scrnStt
+					   , int scrnTm
+					   , String opngDt
+					   , String wtcGrd
+					   , String pstr 
+					   , String smr
+					   , String gnrStr
+					   , String cntrStr) {
 		MvVO mvVO = new MvVO();
 		mvVO.setMvTtl(mvTtl);
 		mvVO.setEngTtl(engTtl);
@@ -113,21 +137,45 @@ public interface MvController {
 		}
 	}
 
-	default public void readAllMv(MvService ms) {
+	@Override
+	public void readAll() {
+		readAllMv();
+	}
+	private void readAllMv() {
 		List<MvVO> list = ms.readAll();
 		list.forEach(System.out::println);
 	}
 
-	default public void updateMv(MvService ms
-								  , String mvId
-								  , String mvTtl
-								  , String engTtl
-								  , String scrnStt
-								  , int scrnTm
-								  , String opngDt
-								  , String wtcGrd
-								  , String pstr 
-								  , String smr) {
+	@Override
+	public void read() {
+		readMv(Utils.getNextLine("조회할 영화Id 입력"));
+	}
+	private void readMv(String mvId) {
+		System.out.println(ms.read(mvId));
+	}
+
+	@Override
+	public void update() {
+		updateMv(Utils.getNextLine("수정할 영화Id 입력")
+			   , Utils.getNextLine("수정할 영화의 제목 입력")
+			   , Utils.getNextLine("수정할 영화의 영어제목 입력")
+			   , Utils.getNextLine("수정할 영화의 상영상태 입력")
+			   , Utils.getNextInt("수정할 영화의 상영시간 입력")
+			   , Utils.getNextLine("수정할 영화의 개봉일 입력")
+			   , Utils.getNextLine("수정할 영화의 관람등급 입력")
+			   , Utils.getNextLine("수정할 영화의 포스터 입력")
+			   , Utils.getNextLine("수정할 영화의 줄거리 입력"));
+	}
+	
+	private void updateMv(String mvId
+					   , String mvTtl
+					   , String engTtl
+					   , String scrnStt
+					   , int scrnTm
+					   , String opngDt
+					   , String wtcGrd
+					   , String pstr 
+					   , String smr) {
 		MvVO mvVO = new MvVO();
 		mvVO.setMvId(mvId);
 		mvVO.setMvTtl(mvTtl);
@@ -147,11 +195,11 @@ public interface MvController {
 		}
 	}
 
-	default public void readMv(MvService ms, String mvId) {
-		System.out.println(ms.read(mvId));
+	@Override
+	public void delete() {
+		deleteMv(Utils.getNextLine("삭제할 Id 입력"));
 	}
-	
-	default public void deleteMv(MvService ms, String mvId) {
+	private void deleteMv(String mvId) {
 		System.out.print(mvId + " - ");
 		if(ms.delete(mvId)) {
 			System.out.println("영화 삭제 성공");
@@ -159,6 +207,4 @@ public interface MvController {
 			System.out.println("영화 삭제 실패");
 		}
 	}
-
-	
 }
