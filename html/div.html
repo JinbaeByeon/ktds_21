@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Naver 따라하기</title>
+        <style type="text/css">
+            body{
+                margin: 0px
+            }
+            #header_tip{
+                background-color: #fff7e1;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: center;
+            }
+            .box{
+                display: inline-block
+            }
+            .width-70{
+                width: 70%;
+            }
+            .width-30{
+                width: 29%;
+            }
+
+            ul {
+                margin-top: 0px;
+                margin-bottom: 0px;
+                display:inline-block;
+                padding: 5px;
+            }
+            ul > li {
+                display:inline;
+                padding: 1px;
+            }
+            .nav{
+
+            }
+            .list_nav{
+                margin-top: 0px;
+                margin-bottom: 0px;
+                padding-left:0px;
+
+            }
+            #gnb .list_nav.type_fix .nav{
+                color:#03c75a;
+                text-decoration:solid;
+                font-weight: bold;
+            }
+            #gnb .list_nav .nav{
+                color:black;
+                text-decoration:none;
+                font-weight: bold;
+            }
+            #search{
+                padding-top: 50px;
+                padding-bottom: 50px;                
+            }
+            .search_keyword{
+                font-weight: bold;
+                font-size: 15px;
+                padding:10px;
+                width: 400px;
+                border: 2px solid #03c75a;
+            }
+            .green_window{
+                display: inline-block;
+            }
+            #search_button{
+                padding:10px;
+                background-color: #03c75a;
+                width: 50px;
+                height: 50px;
+                border:none;
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+            <div id = "header_tip" >매일 쓰는 브라우저 보안이 걱정된다면...........</div>
+            <!-- 전체 레이아웃을 감싸는 div-->
+            <div>
+                <!-- 로고 및 검색어 div-->
+                <div id = "search">
+                    <img src="./naver_logo.png"/>
+                    <div class="green_window">
+                        <input type="text" class="search_keyword"> 
+                    </div>
+                    <button id="search_button"></button>
+                </div>
+                <!-- 메인 메뉴 -->
+                <div id="gnb">
+                    <ul class="list_nav type_fix">
+                        <li class="nav_item">
+                            <a href = "https://mail.naver.com/" class="nav">
+                                메일
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cafe.naver.com/" class="nav">
+                                카페
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://blog.naver.com/" class="nav">
+                                블로그
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://kin.naver.com/" class="nav">
+                                지식iN
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://shopping.naver.com/" class="nav">
+                                쇼핑
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://shoppinglive.naver.com/home" class="nav">
+                                쇼핑라이브
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://order.pay.naver.com/home" class="nav">
+                                Pay
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://tv.naver.com/" class="nav">
+                                TV
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="list_nav NM_FAVORITE_LIST">
+                        <li>
+                            <a href = "https://dict.naver.com/" class="nav">
+                                <i></i>
+                                사전
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://news.naver.com/" class="nav">
+                                <i></i>
+                                뉴스
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://finance.naver.com/" class="nav">
+                                <i></i>
+                                증권
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://land.naver.com/" class="nav">
+                                <i></i>
+                                부동산
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://map.naver.com/" class="nav">
+                                <i></i>
+                                지도
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://vibe.naver.com/?from=naver_main&utm_source=naver_main&utm_medium=naver_main_pcweb&utm_campaign=naver_main_redirect" class="nav">
+                                <i></i>
+                                VIBE
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://search.shopping.naver.com/book/home" class="nav">
+                                <i></i>
+                                도서
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "https://comic.naver.com" class="nav">
+                                <i></i>
+                                웹툰
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 메인 컨텐츠 영역 -->
+                <div>
+                    <!-- 왼쪽 컨텐츠 영역-->
+                    <!-- inline style -->
+                    <div class="box width-70">왼쪽</div>
+                    <!-- 오른쪽 컨텐츠 영역-->
+                    <div class="box width-30">오른쪽</div>
+                </div>
+            </div>
+        </div>        
+    </body>
+</html>

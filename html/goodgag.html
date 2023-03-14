@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <header>
+        <title> 고오급 유머</title>
+        <style type="text/css">
+            html {
+                background: #555;
+            }
+
+            * {
+                padding: 0;
+                margin: 0;
+                font-family: "Nanum Gothic","Apple SD Neo Gothic",Tahoma,helvetica;
+            }
+            a {
+                text-decoration: none;
+                color: #262626;
+            }
+
+            #screen{
+                width: 700px;
+                margin-left: 100px;
+            }
+
+            #head{
+                background-color: #fed50a;
+                height: 40px;
+                border-bottom: 1px solid #e3a20e;
+            }
+            #head div:nth-child(1){
+                float:left;
+                margin: 2px 0 0 10px
+            }
+
+            #head div:nth-child(2){
+                float:right;
+                margin: 5px 10px 0 0
+            }            
+            #head div:nth-child(2) a{
+                display: inline-block;
+                margin-left: 5px;
+            }
+            
+            .sp{
+                display: inline-block;
+            }
+            .sp.logo{
+                background-image: url(https://www.goodgag.net/_tpl/v3/_css/common.1px.png);
+                background-position: 0px 0px;
+                width: 82px;
+                height: 35px;
+            }
+            .sp.my{
+                background-image: url(https://www.goodgag.net/_tpl/v3/_css/common.1px.png);
+                background-position: 0px -38px;
+                width: 38px;
+                height: 29px;
+            }
+            .sp.write{
+                background-image: url(https://www.goodgag.net/_tpl/v3/_css/common.1px.png);
+                background-position: -41px -38px;
+                width: 33px;
+                height: 29px;
+            }
+
+            #subHead {
+                background: #f5f5f5;
+                border-bottom: 1px solid #afafaf;
+                height: 40px;
+                position: relative;
+            }
+            #subHead ul {
+                list-style: none;
+                display: table;
+                width: 100%;
+            }
+            #subHead ul li {
+                display: table-cell;
+                width: 25%;
+                text-align: center;
+                line-height: 40px;
+            }
+            #subHead ul li a {
+                display: inline-block;
+                height: 37px;
+                width: 80%;
+            }
+            #subHead ul li a.on {
+                border-bottom: 3px solid #f94064;
+                color: #f94064;
+                font-weight: bold;
+            }
+
+            .inventory_ad{
+                font-size: 0;
+                padding: 5px;
+                background: #f7f7f7;
+                border-bottom: 1px solid #ddd;
+                height: 50px;
+            }
+
+            .boards li .info .subject span.reply{
+                font-size: .8em;
+                color: #ff5722;
+                font-family: Tahoma;
+            }
+            .boards li .info .subject span.reply:before{
+                content:"[";
+            }
+            .boards li .info .subject span.reply:after{
+                content:"]";
+            }
+            .boards li .info .detail span:after {
+                content: " | ";
+                margin: 0 5px;
+                font-size: 12px;
+                color: #f1f1f1;
+            }
+            .boards li .info .detail span:last-child:after {
+                content: "";
+                margin: 0;
+            }
+            .boards li.notice .info .subject span:nth-child(1) {
+                font-weight: bold;
+                color: #e00;
+            }
+            .boards li.notice .info .subject span:nth-child(1) b {
+                background: red;
+                color: #fff;
+                font-size: .8em;
+                border-radius: 3px;
+                padding: 1px 5px;
+                vertical-align: 1px;
+                margin-right: 5px;
+                font-weight: normal;
+                border: 1px solid #c00;
+            }
+
+            .detail span.writer{
+                color:#c46a33;
+            }
+            .detail span.no{
+                color: #999;
+                font-family: Tahoma;
+            }
+            .detail span.dateTime{
+                color: #999;
+                font-family: Tahoma;
+            }
+            .boards{
+                background-color: #fff; 
+            }
+            
+            .boards li{
+                list-style: none;
+                padding: 1px 0;
+            }
+
+            .boards li div{
+                margin: 5px;
+                padding: 0 3%;
+            }
+
+            .boards li hr{
+                border: 0;
+                height: 1px;
+                background: #eee;
+                width: 97%;
+                float:right;
+            }
+
+            .page{
+                padding: 20px;
+                text-align: center;
+                background: #f1f1f1;
+            }
+
+            .page a {                
+                display: inline-block;
+                border: 1px solid #ccc;
+                padding: 4px 8px;
+                margin: 0 3px;
+                color: #888;
+                background: #fff;
+                line-height: 20px;
+                font-size: .8em;
+                border-radius: 4px;
+            }
+            .page a.on {
+                color: #f94064;
+                border-color: #f94064;
+                border-right: 1px solid #f94064 !important;
+                font-weight: bold;
+            }
+            
+            #foot{
+                background: #262626;
+                color: #5f5f5f;
+                padding: 0px 0px 30px 0px;                
+                text-align: center;
+            }
+            #foot .btn{
+                margin-bottom:30px;
+                padding-top: 10px;
+
+            }
+            #foot .btn a{
+                padding: 5px 10px;
+                color: #aaa;
+                border-radius: 5px;
+                border: 1px solid #333;
+                background: linear-gradient(to bottom, #404040 0%, #373737 100%);
+            }
+
+            
+        </style>
+    </header>
+    <body>
+        <div id = "screen">
+            <div id = "head">
+                <div>
+                    <a href="/" class="sp logo"></a>
+                </div>
+                <div>
+                    <a href="https://www.goodgag.net/my" class="sp my"></a>
+                    <a href="https://www.goodgag.net/story/write" class="sp write"></a>
+                </div>
+            </div>
+            <div id = "subHead">
+                <ul>
+                    <li>
+                        <a href="https://www.goodgag.net/issue" class="on">잇슈</a>
+                    </li>
+                    <li>
+                        <a href="https://www.goodgag.net/ik">익게</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="inventory_ad">                
+            </div>
+            <div class="boards">
+                <ul class="board_list">
+                    <li class="notice">
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="https://www.goodgag.net/281871">
+                                        <span class="title">
+                                            <b>공지</b>
+                                            정치댓글 제한 안내입니다!
+                                        </span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210111
+                                    </span>
+                                    <span class="dateTime">
+                                        17:22
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">전설의 이재용 다이어트</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210111
+                                    </span>
+                                    <span class="dateTime">
+                                        17:22
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">지금 사진 찍을때냥?</span>
+                                        <span class="reply">
+                                            2
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210110
+                                    </span>
+                                    <span class="dateTime">
+                                        17:20
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">점심시간 싸움난 중소기업.jpg</span>
+                                        <span class="reply">
+                                            3
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210109
+                                    </span>
+                                    <span class="dateTime">
+                                        17:19
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 4</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210108
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 5</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210107
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 6</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210106
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 7</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210105
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 8</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210104
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 9</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210103
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                    <li>
+                        <div>
+                            <div class="info">
+                                <p class="subject">
+                                    <a href="">
+                                        <span class="title">글 10</span>
+                                        <span class="reply">
+                                            1
+                                        </span>
+                                    </a>
+                                </p>
+                                <p class="detail">
+                                    <span class="writer">
+                                        개드립
+                                    </span>
+                                    <span class="no">
+                                        No.210102
+                                    </span>
+                                    <span class="dateTime">
+                                        17:17
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+            <div class="page">
+                <a href="https://www.goodgag.net/issue?page=1" class="on">1</a>
+                <a href="https://www.goodgag.net/issue?page=2">2</a>
+                <a href="https://www.goodgag.net/issue?page=3">3</a>
+                <a href="https://www.goodgag.net/issue?page=4">4</a>
+                <a href="https://www.goodgag.net/issue?page=5">5</a>
+                <a href="https://www.goodgag.net/issue?page=6" class="btn">다음</a>
+            </div>
+            <div id="foot">
+                <div class="btn">
+                    <a href="https://www.goodgag.net/login/main">로그인</a>
+                </div>
+                Sample
+            </div>
+        </div>
+        
+    </body>
+</html>

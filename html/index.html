@@ -1,0 +1,98 @@
+<!-- HTML Element는 여는 태그와 닫는 태그가 반드시 필요하다. -->
+<!DOCTYPE html> <!-- HTML5 문서로 정의하는 Element (닫는 태그가 생략된 inline tag)-->
+<html>
+    <!-- HTML문서의 정보를 작성 -->
+    <head>
+        <title>첫번째 문서입니다.</title>
+    </head>
+
+    <!-- HTML문서의 내용을 작성 -->
+    <body>
+        <!-- HTML문서에서 앞쪽 띄어쓰기는 무시된다. -->
+        HTML 문서 입니다.<br/>
+        HTML 문서 입니다.<br/>
+        HTML 문서 입니다.<br/>
+        HTML 문서 입니다.<br/>
+        
+        <a href="https://www.naver.com">naver.com으로 이동하기</a>
+
+        <ul>
+            <li>
+                <a href="google.com">구글로 이동</a>
+            </li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+            <li>메뉴4</li>
+            <ol>
+                <li>메뉴1</li><ol>
+                    <li>메뉴1</li>
+                    <li>메뉴2</li>
+                    <li>메뉴3</li>
+                    <li>메뉴4</li>
+                </ol>
+                <li>메뉴2</li><ol>
+                    <li>메뉴1</li>
+                    <li>메뉴2</li>
+                    <li>메뉴3</li>
+                    <li>메뉴4</li>
+                </ol>
+                <li>메뉴3</li>
+                <li>메뉴4</li>
+            </ol>
+        </ul>
+        <dl>
+            <dt>아이템1</dt>
+            <dl>
+                <dt>아이템1</dt>
+                <dt>아이템2</dt>
+                <dt>아이템3</dt>
+            </dl>
+            <dt>아이템2</dt>
+            <dt>아이템3</dt>
+        </dl>
+
+        <label>ID</label>
+        <input />
+        <label>PW</label>
+        <input />
+        <button>로그인</button>
+        
+        <table>
+            <!--최상단 엘리먼트-->
+            <thead>
+                <tr>
+                    <th>테이블헤더1</th>
+                    <th>테이블헤더2</th>
+                    <th>헤더3</th>
+                    <th>헤더4</th>
+                </tr>
+            </thead> 
+            <!-- 테이블 본문-->
+            <tbody>
+                <tr>
+                    <td>테이블본문</td>
+                    <td>?</td>
+                    <td>테이블본문</td>
+                    <td>테이블본문</td>
+                </tr>
+                <tr>
+                    <td>테이블본문</td>
+                    <td>테이블본문</td>
+                    <td>테이블본문</td>
+                    <td>테이블본문</td>
+                </tr>
+                <td>테이블본문</td>
+                <td>테이블본문</td>
+                <td>테이블본문</td>
+            </tbody> 
+            <!-- 최하단 엘리먼트-->
+            <tfoot>
+                <td>테이블풋</td>
+                <td>?</td>
+                <td>?</td>
+                <td>?</td>
+            </tfoot> 
+        </table>
+    </body>
+</html>
+
