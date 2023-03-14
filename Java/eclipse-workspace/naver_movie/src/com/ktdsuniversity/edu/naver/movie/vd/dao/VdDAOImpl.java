@@ -2,10 +2,10 @@ package com.ktdsuniversity.edu.naver.movie.vd.dao;
 
 import java.util.List;
 
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 import com.ktdsuniversity.edu.naver.movie.vd.vo.VdVO;
 
-public class VdDAOImpl extends AbstractDaoPoolSupport<VdVO> implements VdDAO {
+public class VdDAOImpl extends AbstractAutoDaoPoolSupport<VdVO> implements VdDAO {
 
 	@Override
 	public int createVd(VdVO vdVO) {
@@ -54,18 +54,7 @@ public class VdDAOImpl extends AbstractDaoPoolSupport<VdVO> implements VdDAO {
 		
 		return selectOne(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, vdId);			
-		}, (rs) -> {
-			VdVO vdVO = new VdVO();
-			vdVO.setVdId(rs.getString("VD_ID"));
-			vdVO.setMvId(rs.getString("MV_ID"));
-			vdVO.setVdTp(rs.getString("VD_TP"));
-			vdVO.setTtl(rs.getString("TTL"));
-			vdVO.setThmbnl(rs.getString("THMBNL"));
-			vdVO.setPlCnt(rs.getInt("PL_CNT"));
-			vdVO.setVdUrl(rs.getString("VD_URL"));
-			vdVO.setRgstDt(rs.getString("RGST_DT"));
-			return vdVO;
-		});
+		}, VdVO.class);
 	}
 
 	@Override
@@ -81,18 +70,7 @@ public class VdDAOImpl extends AbstractDaoPoolSupport<VdVO> implements VdDAO {
 		sql.append(" 	    RGST_DT ");
 		sql.append("   FROM VD      ");
 		
-		return select(sql.toString(), null, (rs) -> {
-			VdVO vdVO = new VdVO();
-			vdVO.setVdId(rs.getString("VD_ID"));
-			vdVO.setMvId(rs.getString("MV_ID"));
-			vdVO.setVdTp(rs.getString("VD_TP"));
-			vdVO.setTtl(rs.getString("TTL"));
-			vdVO.setThmbnl(rs.getString("THMBNL"));
-			vdVO.setPlCnt(rs.getInt("PL_CNT"));
-			vdVO.setVdUrl(rs.getString("VD_URL"));
-			vdVO.setRgstDt(rs.getString("RGST_DT"));
-			return vdVO;
-		});
+		return select(sql.toString(), null, VdVO.class);
 	}
 
 	@Override

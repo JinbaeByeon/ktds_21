@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.cmpny.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.cmpny.vo.CmpnyVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class CmpnyDAOImpl extends AbstractDaoPoolSupport<CmpnyVO> implements CmpnyDAO {
+public class CmpnyDAOImpl extends AbstractAutoDaoPoolSupport<CmpnyVO> implements CmpnyDAO {
 
 	@Override
 	public int createCmpny(CmpnyVO cmpnyVO) {
@@ -32,12 +32,7 @@ public class CmpnyDAOImpl extends AbstractDaoPoolSupport<CmpnyVO> implements Cmp
 		
 		return selectOne(sql.toString(),(pstmt)->{
 			pstmt.setString(1, cmpnyId);
-		},(rs) -> {
-			CmpnyVO cmpnyVO = new CmpnyVO();
-			cmpnyVO.setCmpnyId(rs.getString("CMPNY_ID"));
-			cmpnyVO.setCmpnyNm(rs.getString("CMPNY_NM"));
-			return cmpnyVO;
-		});
+		}, CmpnyVO.class);
 	}
 
 	@Override
@@ -47,12 +42,7 @@ public class CmpnyDAOImpl extends AbstractDaoPoolSupport<CmpnyVO> implements Cmp
 		sql.append(" 	  , CMPNY_NM ");
 		sql.append("   FROM CMPNY    ");
 		
-		return select(sql.toString(), null, (rs) -> {
-			CmpnyVO cmpnyVO = new CmpnyVO();
-			cmpnyVO.setCmpnyId(rs.getString("CMPNY_ID"));
-			cmpnyVO.setCmpnyNm(rs.getString("CMPNY_NM"));
-			return cmpnyVO;
-		});
+		return select(sql.toString(), null, CmpnyVO.class);
 	}
 
 	@Override

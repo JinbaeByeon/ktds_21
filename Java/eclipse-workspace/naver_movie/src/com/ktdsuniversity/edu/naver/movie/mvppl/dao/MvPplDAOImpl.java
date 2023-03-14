@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.mvppl.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.mvppl.vo.MvPplVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class MvPplDAOImpl extends AbstractDaoPoolSupport<MvPplVO> implements MvPplDAO {
+public class MvPplDAOImpl extends AbstractAutoDaoPoolSupport<MvPplVO> implements MvPplDAO {
 
 	@Override
 	public int createMvPpl(MvPplVO mvPplVO) {
@@ -40,14 +40,7 @@ public class MvPplDAOImpl extends AbstractDaoPoolSupport<MvPplVO> implements MvP
 		
 		return selectOne(sql.toString(),(pstmt)->{
 			pstmt.setString(1, mvPplId);
-		},(rs) -> {
-			MvPplVO mvPplVO = new MvPplVO();
-			mvPplVO.setMvPplId(rs.getString("MV_PPL_ID"));
-			mvPplVO.setPrflPctr(rs.getString("PRFL_PCTR"));
-			mvPplVO.setNm(rs.getString("NM"));
-			mvPplVO.setRlNm(rs.getString("RL_NM"));
-			return mvPplVO;
-		});
+		}, MvPplVO.class);
 	}
 
 	@Override
@@ -59,14 +52,7 @@ public class MvPplDAOImpl extends AbstractDaoPoolSupport<MvPplVO> implements MvP
 		sql.append(" 	 , RL_NM        ");
 		sql.append("   FROM MV_PPL    ");
 		
-		return select(sql.toString(), null, (rs) -> {
-			MvPplVO mvPplVO = new MvPplVO();
-			mvPplVO.setMvPplId(rs.getString("MV_PPL_ID"));
-			mvPplVO.setPrflPctr(rs.getString("PRFL_PCTR"));
-			mvPplVO.setNm(rs.getString("NM"));
-			mvPplVO.setRlNm(rs.getString("RL_NM"));
-			return mvPplVO;
-		});
+		return select(sql.toString(), null, MvPplVO.class);
 	}
 
 	@Override

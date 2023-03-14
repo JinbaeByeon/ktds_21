@@ -35,5 +35,5 @@ public class VdServiceImpl implements VdService {
 	public boolean delete(String vdID) {
 		return vdDAO.deleteVd(vdID) > 0;
 	}
-
+	
 }

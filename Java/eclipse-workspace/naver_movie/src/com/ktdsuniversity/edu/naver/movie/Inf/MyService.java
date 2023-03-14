@@ -13,5 +13,4 @@ public interface MyService<T, K> {
 	public boolean update(T vo);
 
 	public boolean delete(K key);
-	
 }

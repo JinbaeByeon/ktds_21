@@ -186,6 +186,81 @@ public class MvController implements MyController {
 		mvVO.setWtcGrd(wtcGrd);
 		mvVO.setPstr(pstr);
 		mvVO.setSmr(smr);
+		int menu;
+		
+		System.out.println("영화의 장르를 입력하세요");
+		List<GnrVO> gnrList = new ArrayList<>();
+		mvVO.setGnrList(gnrList);
+
+		while(true) {
+			menu = Utils.getNextInt("장르Id를 입력하세요 (0 : 입력종료)");
+			if(menu == 0) {
+				break;
+			}
+			GnrVO gnrVO = new GnrVO();
+			gnrVO.setGnrId(menu);
+			gnrList.add(gnrVO);
+		}
+
+		System.out.println("영화의 제작지를 입력하세요");
+		List<CntrVO> cntrList = new ArrayList<>();
+		mvVO.setCntrList(cntrList);
+
+		while(true) {
+			menu = Utils.getNextInt("국가Id를 입력하세요 (0 : 입력종료)");
+			if(menu == 0) {
+				break;
+			}
+			CntrVO cntrVO = new CntrVO();
+			cntrVO.setCntrId(menu);
+			cntrList.add(cntrVO);
+		}
+		
+		List<PrdcPrtcptnCmpnyVO> cmpnyList = new ArrayList<>();
+		mvVO.setCmpnyList(cmpnyList);		
+		System.out.println("제작참여사를 입력하세요");
+		while(true) {
+			menu = Utils.getNextInt("유통종류를 입력하세요 <1. 수입, 2. 배급, 3. 제작 (0 : 입력종료)>");
+			if(menu == 0) {
+				break;
+			}
+			PrdcPrtcptnCmpnyVO cmpny = new PrdcPrtcptnCmpnyVO();
+			if(menu == 1) {
+				cmpny.setCrcltnCd("006_01");
+			} else if(menu == 2) {
+				cmpny.setCrcltnCd("006_02");
+			} else if(menu == 3) {
+				cmpny.setCrcltnCd("006_03");
+			}
+			cmpny.setCmpnyId(Utils.getNextLine("회사id를 입력하세요"));
+			cmpnyList.add(cmpny);
+		}
+		
+		List<PrdcPrtcptnPplVO> mvPplList = new ArrayList<>();
+		mvVO.setPrdcMvPplList(mvPplList);		
+		System.out.println("제작참여인을 입력하세요");
+		while(true) {
+			menu = Utils.getNextInt("역할종류를 입력하세요 <1. 감독, 2. 프로듀서, 3. 제작, 4. 주연, 5. 조연 (0 : 입력종료)>");
+			if(menu == 0) {
+				break;
+			}
+			PrdcPrtcptnPplVO mvPpl = new PrdcPrtcptnPplVO();
+			if(menu == 1) {
+				mvPpl.setRolTp("005_01");
+			} else if(menu == 2) {
+				mvPpl.setRolTp("005_02");
+			} else if(menu == 3) {
+				mvPpl.setRolTp("005_03");
+			} else if(menu == 4) {
+				mvPpl.setRolTp("005_04");
+			} else if(menu == 5) {
+				mvPpl.setRolTp("005_05");
+			}
+			mvPpl.setMvPplId(Utils.getNextLine("영화인id를 입력하세요"));
+			mvPpl.setRspnsbltRolNm(Utils.getNextLine("역할명을 입력하세요"));
+			mvPplList.add(mvPpl);
+		}
+		
 		
 		System.out.print(mvId + " - ");
 		if (ms.update(mvVO)) {

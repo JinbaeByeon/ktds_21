@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.cntr.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.cntr.vo.CntrVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class CntrDAOImpl extends AbstractDaoPoolSupport<CntrVO> implements CntrDAO {
+public class CntrDAOImpl extends AbstractAutoDaoPoolSupport<CntrVO> implements CntrDAO {
 
 	@Override
 	public int createCntr(CntrVO cntrVO) {
@@ -32,12 +32,7 @@ public class CntrDAOImpl extends AbstractDaoPoolSupport<CntrVO> implements CntrD
 		
 		return selectOne(sql.toString(),(pstmt)->{
 			pstmt.setInt(1, cntrId);
-		},(rs) -> {
-			CntrVO cntrVO = new CntrVO();
-			cntrVO.setCntrId(rs.getInt("CNTR_ID"));
-			cntrVO.setCntrNm(rs.getString("CNTR_NM"));
-			return cntrVO;
-		});
+		}, CntrVO.class);
 	}
 
 	@Override
@@ -47,12 +42,7 @@ public class CntrDAOImpl extends AbstractDaoPoolSupport<CntrVO> implements CntrD
 		sql.append(" 	  , CNTR_NM ");
 		sql.append("   FROM CNTR    ");
 		
-		return select(sql.toString(), null, (rs) -> {
-			CntrVO cntrVO = new CntrVO();
-			cntrVO.setCntrId(rs.getInt("CNTR_ID"));
-			cntrVO.setCntrNm(rs.getString("CNTR_NM"));
-			return cntrVO;
-		});
+		return select(sql.toString(), null, CntrVO.class);
 	}
 
 	@Override

@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.rtng.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.rtng.vo.RtngVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngDAO {
+public class RtngDAOImpl extends AbstractAutoDaoPoolSupport<RtngVO> implements RtngDAO {
 
 	@Override
 	public int createRtng(RtngVO rtngVO) {
@@ -54,18 +54,7 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 
 		return selectOne(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, rtngId);
-		}, (rs) -> {
-			RtngVO rtngVO = new RtngVO();
-			rtngVO.setRtngId(rs.getString("RTNG_ID"));
-			rtngVO.setMvId(rs.getString("MV_ID"));
-			rtngVO.setRtng(rs.getInt("RTNG"));
-			rtngVO.setDtl(rs.getString("DTL"));
-			rtngVO.setWrtr(rs.getString("WRTR"));
-			rtngVO.setRgstDt(rs.getString("RGST_DT"));
-			rtngVO.setLkCnt(rs.getInt("LK_CNT"));
-			rtngVO.setDslkCnt(rs.getInt("DSLK_CNT"));
-			return rtngVO;
-		});
+		}, RtngVO.class);
 	}
 
 	@Override
@@ -81,18 +70,7 @@ public class RtngDAOImpl extends AbstractDaoPoolSupport<RtngVO> implements RtngD
 		sql.append("      , DSLK_CNT    ");
 		sql.append(" FROM RTNG        ");
 
-		return select(sql.toString(), null, (rs) -> {
-			RtngVO rtngVO = new RtngVO();
-			rtngVO.setRtngId(rs.getString("RTNG_ID"));
-			rtngVO.setMvId(rs.getString("MV_ID"));
-			rtngVO.setRtng(rs.getInt("RTNG"));
-			rtngVO.setDtl(rs.getString("DTL"));
-			rtngVO.setWrtr(rs.getString("WRTR"));
-			rtngVO.setRgstDt(rs.getString("RGST_DT"));
-			rtngVO.setLkCnt(rs.getInt("LK_CNT"));
-			rtngVO.setDslkCnt(rs.getInt("DSLK_CNT"));
-			return rtngVO;
-		});
+		return select(sql.toString(), null, RtngVO.class);
 	}
 
 	@Override

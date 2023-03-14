@@ -2,12 +2,11 @@ package com.ktdsuniversity.edu.naver.movie.mv.dao;
 
 import java.util.List;
 
-import com.ktdsuniversity.edu.naver.movie.cmpny.vo.CmpnyVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.PrdcPrtcptnCmpnyVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class PrdcPrtcptnCmpnyDAOImpl extends AbstractDaoPoolSupport<MvVO>
+public class PrdcPrtcptnCmpnyDAOImpl extends AbstractAutoDaoPoolSupport<MvVO>
 									 implements PrdcPrtcptnCmpnyDAO {
 
 	@Override

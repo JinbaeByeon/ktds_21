@@ -1,9 +1,17 @@
 package com.ktdsuniversity.edu.naver.movie.mvppl.vo;
 
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
+
+@UseColumn(keyColum = "MV_PPL_ID", keyVarName = "mvPplId", keyType = int.class)
 public class MvPplVO {
+	@Column(value = "MV_PPL_ID", isRequire = true)
 	private String mvPplId;
+	@Column("PRFL_PCTR")
 	private String prflPctr;
+	@Column("NM")
 	private String nm;
+	@Column("RL_NM")
 	private String rlNm;
 
 	public String getMvPplId() {

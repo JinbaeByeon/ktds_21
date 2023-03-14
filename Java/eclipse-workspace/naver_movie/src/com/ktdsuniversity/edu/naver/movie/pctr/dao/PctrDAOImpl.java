@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.pctr.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.pctr.vo.PctrVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class PctrDAOImpl extends AbstractDaoPoolSupport<PctrVO> implements PctrDAO {
+public class PctrDAOImpl extends AbstractAutoDaoPoolSupport<PctrVO> implements PctrDAO {
 	@Override
 	public int createPctr(PctrVO pctrVO) {
 		StringBuffer sql = new StringBuffer();

@@ -1,13 +1,25 @@
 package com.ktdsuniversity.edu.naver.movie.vd.vo;
 
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
+
+@UseColumn
 public class VdVO {
+	@Column("VD_ID")
 	private String vdId;
+	@Column("MV_ID")
 	private String mvId;
+	@Column("VD_TP")
 	private String vdTp;
+	@Column("TTL")
 	private String ttl;
+	@Column("THMBNL")
 	private String thmbnl;
+	@Column("PL_CNT")
 	private int plCnt;
+	@Column("VD_URL")
 	private String vdUrl;
+	@Column("RGST_DT")
 	private String rgstDt;
 
 	public String getVdId() {

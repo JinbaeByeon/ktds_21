@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.fmsln.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.fmsln.vo.FmsLnVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class FmsLnDAOImpl extends AbstractDaoPoolSupport<FmsLnVO> implements FmsLnDAO {
+public class FmsLnDAOImpl extends AbstractAutoDaoPoolSupport<FmsLnVO> implements FmsLnDAO {
 
 	@Override
 	public int createFmsLn(FmsLnVO fmsLnVO) {
@@ -51,17 +51,7 @@ public class FmsLnDAOImpl extends AbstractDaoPoolSupport<FmsLnVO> implements Fms
 
 		return selectOne(sql.toString(), (pstmt)->{
 			pstmt.setString(1, fmsLnId);
-		}, (rs) -> {
-			FmsLnVO fmsLnVO = new FmsLnVO();
-			fmsLnVO.setFmsLnId(rs.getString("FMS_LN_ID"));
-			fmsLnVO.setFmsLn(rs.getString("FMS_LN"));
-			fmsLnVO.setExpl(rs.getString("EXPL"));
-			fmsLnVO.setRgstDt(rs.getString("RGST_DT"));
-			fmsLnVO.setRgstPplNm(rs.getString("RGST_PPL_NM"));
-			fmsLnVO.setRcmdCnt(rs.getInt("RCMD_CNT"));
-			fmsLnVO.setPrdcPrtcptnId(rs.getString("PRDC_PRTCPTN_ID"));
-			return fmsLnVO;
-		});
+		}, FmsLnVO.class);
 	}
 
 	@Override
@@ -76,17 +66,7 @@ public class FmsLnDAOImpl extends AbstractDaoPoolSupport<FmsLnVO> implements Fms
 		sql.append(" 	  , PRDC_PRTCPTN_ID ");
 		sql.append("   FROM FMS_LN       ");
 		
-		return select(sql.toString(), null, (rs) -> {
-			FmsLnVO fmsLnVO = new FmsLnVO();
-			fmsLnVO.setFmsLnId(rs.getString("FMS_LN_ID"));
-			fmsLnVO.setFmsLn(rs.getString("FMS_LN"));
-			fmsLnVO.setExpl(rs.getString("EXPL"));
-			fmsLnVO.setRgstDt(rs.getString("RGST_DT"));
-			fmsLnVO.setRgstPplNm(rs.getString("RGST_PPL_NM"));
-			fmsLnVO.setRcmdCnt(rs.getInt("RCMD_CNT"));
-			fmsLnVO.setPrdcPrtcptnId(rs.getString("PRDC_PRTCPTN_ID"));
-			return fmsLnVO;
-		});
+		return select(sql.toString(), null, FmsLnVO.class);
 	}
 
 	@Override

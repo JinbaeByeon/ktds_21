@@ -1,7 +1,13 @@
 package com.ktdsuniversity.edu.naver.movie.cntr.vo;
 
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
+
+@UseColumn(keyColum = "CNTR_ID", keyVarName = "cntrId", keyType = int.class)
 public class CntrVO {
+	@Column(value = "CNTR_ID", isRequire = true)
 	private int cntrId;
+	@Column("CNTR_NM")
 	private String cntrNm;
 
 	public int getCntrId() {

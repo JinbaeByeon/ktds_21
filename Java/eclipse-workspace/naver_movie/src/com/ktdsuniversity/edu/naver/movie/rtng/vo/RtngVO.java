@@ -1,13 +1,25 @@
 package com.ktdsuniversity.edu.naver.movie.rtng.vo;
 
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
+
+@UseColumn
 public class RtngVO {
+	@Column("RTNG_ID")
 	private String rtngId;
+	@Column("MV_ID")
 	private String mvId;
+	@Column("RTNG")
 	private int rtng;
+	@Column("DTL")
 	private String dtl;
+	@Column("WRTR")
 	private String wrtr;
+	@Column("RGST_DT")
 	private String rgstDt;
+	@Column("LK_CNT")
 	private int lkCnt;
+	@Column("DSLK_CNT")
 	private int dslkCnt;
 
 	public String getRtngId() {

@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.mv.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class MvDAOImpl extends AbstractDaoPoolSupport<MvVO> implements MvDAO {
+public class MvDAOImpl extends AbstractAutoDaoPoolSupport<MvVO> implements MvDAO {
 
 	@Override
 	public int createMv(MvVO mvVO) {
@@ -47,64 +47,70 @@ public class MvDAOImpl extends AbstractDaoPoolSupport<MvVO> implements MvDAO {
 	@Override
 	public MvVO readMv(String mvId) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT MV_ID  ");
-		sql.append(" 	  , MV_TTL  ");
-		sql.append(" 	  , ENG_TTL ");
-		sql.append(" 	  , SCRN_STT");
-		sql.append(" 	  , SCRN_TM ");
-		sql.append(" 	  , OPNG_DT ");
-		sql.append(" 	  , WTC_GRD ");
-		sql.append(" 	  , PSTR    ");
-		sql.append(" 	  , SMR     ");
-		sql.append("   FROM MV   ");
-		sql.append("  WHERE MV_ID = ?");
+		sql.append(" SELECT MV.MV_ID,                           ");
+		sql.append(" 	   MV.MV_TTL,                             ");
+		sql.append(" 	   MV.ENG_TTL,                            ");
+		sql.append(" 	   MV.SCRN_STT,                           ");
+		sql.append(" 	   MV.SCRN_TM,                            ");
+		sql.append(" 	   MV.OPNG_DT,                            ");
+		sql.append(" 	   MV.WTC_GRD,                            ");
+		sql.append(" 	   MV.PSTR,                               ");
+		sql.append(" 	   MV.SMR,                                ");
+		sql.append(" 	   GNR.GNR_ID,                            ");
+		sql.append(" 	   GNR.GNR_NM,                            ");
+		sql.append(" 	   PL.CNTR_ID,                            ");
+		sql.append(" 	   PL.CNTR_NM                             ");
+		sql.append("   FROM (SELECT *                           ");
+		sql.append("   		  FROM MV                              ");
+		sql.append("   		 WHERE MV_ID = ?) MV ");
+		sql.append("   JOIN (SELECT MG.MV_ID                    ");
+		sql.append("   			 , G.GNR_ID                           ");
+		sql.append("   			 , G.GNR_NM                           ");
+		sql.append("   		  FROM MV_GNR MG                       ");
+		sql.append("   		  JOIN GNR G                           ");
+		sql.append("   		  	ON G.GNR_ID = MG.GNR_ID) GNR        ");
+		sql.append("   	ON GNR.MV_ID = MV.MV_ID                 ");
+		sql.append("   JOIN (SELECT PL.MV_ID                    ");
+		sql.append("   			 , C.CNTR_ID                          ");
+		sql.append("   			 , C.CNTR_NM                          ");
+		sql.append("   		  FROM PRDC_LOC PL                     ");
+		sql.append("   		  JOIN CNTR C                          ");
+		sql.append("   		  	ON C.CNTR_ID = PL.CNTR_ID) PL       ");
+		sql.append("   	ON PL.MV_ID = MV.MV_ID                  ");
 
-		return selectOne(sql.toString(), (pstmt) -> {
-			pstmt.setString(1, mvId);
-		}, (rs) -> {
-			MvVO mvVO = new MvVO();
-			mvVO.setMvId(rs.getString("MV_ID"));
-			mvVO.setMvTtl(rs.getString("MV_TTL"));
-			mvVO.setEngTtl(rs.getString("ENG_TTL"));
-			mvVO.setScrnStt(rs.getString("SCRN_STT"));
-			mvVO.setScrnTm(rs.getInt("SCRN_TM"));
-			mvVO.setOpngDt(rs.getString("OPNG_DT"));
-			mvVO.setWtcGrd(rs.getString("WTC_GRD"));
-			mvVO.setPstr(rs.getString("PSTR"));
-			mvVO.setSmr(rs.getString("SMR"));
-
-			return mvVO;
-		});
+		return selectOneByKey(sql.toString(), (pstmt) -> pstmt.setString(1, mvId) , MvVO.class);
 	}
 
 	@Override
 	public List<MvVO> readAllMv() {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" SELECT MV_ID  ");
-		sql.append(" 	  , MV_TTL  ");
-		sql.append(" 	  , ENG_TTL ");
-		sql.append(" 	  , SCRN_STT");
-		sql.append(" 	  , SCRN_TM ");
-		sql.append(" 	  , OPNG_DT ");
-		sql.append(" 	  , WTC_GRD ");
-		sql.append(" 	  , PSTR    ");
-		sql.append(" 	  , SMR     ");
-		sql.append("   FROM MV   ");
+		sql.append(" SELECT MV.MV_ID,                     ");
+		sql.append(" 	   MV.MV_TTL,                       ");
+		sql.append(" 	   MV.MV_TTL,                       ");
+		sql.append(" 	   MV.ENG_TTL,                      ");
+		sql.append(" 	   MV.SCRN_STT,                     ");
+		sql.append(" 	   MV.SCRN_TM,                      ");
+		sql.append(" 	   MV.OPNG_DT,                      ");
+		sql.append(" 	   MV.WTC_GRD,                      ");
+		sql.append(" 	   MV.PSTR,                         ");
+		sql.append(" 	   MV.SMR,                          ");
+		sql.append(" 	   GNR.GNR_NM,                      ");
+		sql.append(" 	   PL.CNTR_NM                       ");
+		sql.append("   FROM MV                            ");
+		sql.append("   JOIN (SELECT MG.MV_ID              ");
+		sql.append("   			 , G.GNR_NM                     ");
+		sql.append("   		  FROM MV_GNR MG                 ");
+		sql.append("   		  JOIN GNR G                     ");
+		sql.append("   		  	ON G.GNR_ID = MG.GNR_ID) GNR  ");
+		sql.append("   	ON GNR.MV_ID = MV.MV_ID           ");
+		sql.append("   JOIN (SELECT PL.MV_ID              ");
+		sql.append("   			 , C.CNTR_NM                    ");
+		sql.append("   		  FROM PRDC_LOC PL               ");
+		sql.append("   		  JOIN CNTR C                    ");
+		sql.append("   		  	ON C.CNTR_ID = PL.CNTR_ID) PL ");
+		sql.append("   	ON PL.MV_ID = MV.MV_ID            ");
 
-		return select(sql.toString(), null, (rs) -> {
-			MvVO mvVO = new MvVO();
-			mvVO.setMvId(rs.getString("MV_ID"));
-			mvVO.setMvTtl(rs.getString("MV_TTL"));
-			mvVO.setEngTtl(rs.getString("ENG_TTL"));
-			mvVO.setScrnStt(rs.getString("SCRN_STT"));
-			mvVO.setScrnTm(rs.getInt("SCRN_TM"));
-			mvVO.setOpngDt(rs.getString("OPNG_DT"));
-			mvVO.setWtcGrd(rs.getString("WTC_GRD"));
-			mvVO.setPstr(rs.getString("PSTR"));
-			mvVO.setSmr(rs.getString("SMR"));
-			
-			return mvVO;
-		});
+		return selectByKey(sql.toString(), null, MvVO.class);
 	}
 
 	@Override
@@ -151,9 +157,7 @@ public class MvDAOImpl extends AbstractDaoPoolSupport<MvVO> implements MvDAO {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT 'MV-' || TO_CHAR(SYSDATE,'YYYYMMDD')||'-' ||LPAD(SEQ_MV_PK.NEXTVAL,5,'0') NEW_SEQ");
 		sql.append(" FROM DUAL");
-		return selectOneString(sql.toString(), null, (rs) -> {
-			return rs.getString("NEW_SEQ");
-		});
+		return selectOneString(sql.toString(), null);
 	}
 
 }

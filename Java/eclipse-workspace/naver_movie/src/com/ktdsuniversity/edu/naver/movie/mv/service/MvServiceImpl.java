@@ -94,11 +94,17 @@ public class MvServiceImpl implements MvService {
 
 	@Override
 	public boolean delete(String mvId) {
+		System.out.println("0");
 		int resCnt = mvDAO.deleteMv(mvId);
+		System.out.println("1");
 		resCnt += mvGnrDAO.deleteMvGnr(mvId);
+		System.out.println("2");
 		resCnt += prdcLocDAO.deletePrdcLoc(mvId);
+		System.out.println("3");
 		resCnt += prdcPrtcptnCmpnyDAO.deletePrdcPrtcptnCmpny(mvId);
+		System.out.println("4");
 		resCnt += prdcPrtcptnPplDAO.deletePrdcPrtcptnPpl(mvId);
+		System.out.println("5");
 		
 		return resCnt > 0;
 	}

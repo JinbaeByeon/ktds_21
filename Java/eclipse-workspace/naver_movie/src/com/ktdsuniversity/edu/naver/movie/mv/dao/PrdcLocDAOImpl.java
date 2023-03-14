@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.cntr.vo.CntrVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class PrdcLocDAOImpl extends AbstractDaoPoolSupport<MvVO>
+public class PrdcLocDAOImpl extends AbstractAutoDaoPoolSupport<MvVO>
 							implements PrdcLocDAO {
 
 	@Override

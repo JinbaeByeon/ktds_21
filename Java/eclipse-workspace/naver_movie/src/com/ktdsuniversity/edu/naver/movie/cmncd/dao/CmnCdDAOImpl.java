@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.cmncd.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.cmncd.vo.CmnCdVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class CmnCdDAOImpl extends AbstractDaoPoolSupport<CmnCdVO> implements CmnCdDAO {
+public class CmnCdDAOImpl extends AbstractAutoDaoPoolSupport<CmnCdVO> implements CmnCdDAO {
 
 	@Override
 	public int createCmnCd(CmnCdVO cmnCdVO) {
@@ -34,16 +34,10 @@ public class CmnCdDAOImpl extends AbstractDaoPoolSupport<CmnCdVO> implements Cmn
 		sql.append(" 	  , PRCDNC_CD_ID ");
 		sql.append("   FROM CMN_CD    ");
 		sql.append("  WHERE CMN_CD_ID = ?");
-		
-		return selectOne(sql.toString(),(pstmt)->{
+
+		return selectOne(sql.toString(),(pstmt) ->{
 			pstmt.setString(1, cmnCdId);
-		},(rs) -> {
-			CmnCdVO cmnCdVO = new CmnCdVO();
-			cmnCdVO.setCmnCdId(rs.getString("CMN_CD_ID"));
-			cmnCdVO.setCdNm(rs.getString("CD_NM"));
-			cmnCdVO.setPrcdncCdId(rs.getString("PRCDNC_CD_ID"));
-			return cmnCdVO;
-		});
+		}, CmnCdVO.class);
 	}
 
 	@Override
@@ -53,14 +47,8 @@ public class CmnCdDAOImpl extends AbstractDaoPoolSupport<CmnCdVO> implements Cmn
 		sql.append(" 	  , CD_NM        ");
 		sql.append(" 	  , PRCDNC_CD_ID ");
 		sql.append("   FROM CMN_CD    ");
-		
-		return select(sql.toString(), null, (rs) -> {
-			CmnCdVO cmnCdVO = new CmnCdVO();
-			cmnCdVO.setCmnCdId(rs.getString("CMN_CD_ID"));
-			cmnCdVO.setCdNm(rs.getString("CD_NM"));
-			cmnCdVO.setPrcdncCdId(rs.getString("PRCDNC_CD_ID"));
-			return cmnCdVO;
-		});
+
+		return select(sql.toString(), null, CmnCdVO.class);
 	}
 
 	@Override

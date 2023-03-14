@@ -1,7 +1,13 @@
 package com.ktdsuniversity.edu.naver.movie.gnr.vo;
 
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
+
+@UseColumn(keyColum = "GNR_ID", keyVarName = "gnrId", keyType = int.class)
 public class GnrVO {
+	@Column(value = "GNR_ID", isRequire = true)
 	private int gnrId;
+	@Column("GNR_NM")
 	private String gnrNm;
 	
 	public int getGnrId() {

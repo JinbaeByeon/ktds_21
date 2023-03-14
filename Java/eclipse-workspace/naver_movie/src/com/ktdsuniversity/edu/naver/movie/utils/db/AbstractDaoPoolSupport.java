@@ -70,15 +70,15 @@ public abstract class AbstractDaoPoolSupport<T> {
 		}
 	}
 	
-	public int selectOneInt(String query, ParamMapper pm, ResultMapper<String> rm) {
-		String result = selectOneString(query, pm, rm);
+	public int selectOneInt(String query, ParamMapper pm) {
+		String result = selectOneString(query, pm);
 		if (result == null) {
 			return 0;
 		}
 		return Integer.parseInt(result);
 	}
 	
-	public String selectOneString(String query, ParamMapper pm, ResultMapper<String> rm) {
+	public String selectOneString(String query, ParamMapper pm) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -89,11 +89,10 @@ public abstract class AbstractDaoPoolSupport<T> {
 			if (pm != null) {
 				pm.map(pstmt);
 			}
-			
 			rs = pstmt.executeQuery();
 			String result = null;
 			if (rs.next()) {
-				result = rm.map(rs);
+				result = rs.getString(1);
 			}
 			return result;
 		}
@@ -151,7 +150,7 @@ public abstract class AbstractDaoPoolSupport<T> {
 		
 		return null;
 	}
-
+	
 	public List<T> select(String query, ParamMapper pm, ResultMapper<T> rm) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -165,9 +164,8 @@ public abstract class AbstractDaoPoolSupport<T> {
 			}
 			rs = pstmt.executeQuery();
 			List<T> t = new ArrayList<>();
-			
 			while (rs.next()) {
-				t.add(rm.map(rs));
+				t.add((T) rm.map(rs));
 			}
 			return t;
 		}
@@ -295,6 +293,4 @@ public abstract class AbstractDaoPoolSupport<T> {
 	public static interface ResultKeyMapper<T> {
 		public T map(ResultSet rs, T t, String keyValue) throws SQLException;
 	}
-	
-	
 }

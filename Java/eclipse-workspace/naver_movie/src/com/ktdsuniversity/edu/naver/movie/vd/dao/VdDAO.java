@@ -43,4 +43,5 @@ public interface VdDAO {
 	 * @return 삭제된 동영상의 수
 	 */
 	public int deleteVd(String vdId);
+
 }

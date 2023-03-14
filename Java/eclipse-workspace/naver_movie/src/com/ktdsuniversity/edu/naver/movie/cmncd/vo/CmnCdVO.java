@@ -1,8 +1,15 @@
 package com.ktdsuniversity.edu.naver.movie.cmncd.vo;
 
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
+
+@UseColumn
 public class CmnCdVO {
+	@Column("CMN_CD_ID")
 	private String cmnCdId;
+	@Column("CD_NM")
 	private String cdNm;
+	@Column("PRCDNC_CD_ID")
 	private String prcdncCdId;
 
 	public String getCmnCdId() {

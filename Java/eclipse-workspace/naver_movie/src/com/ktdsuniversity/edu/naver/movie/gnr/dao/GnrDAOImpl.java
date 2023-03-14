@@ -3,9 +3,9 @@ package com.ktdsuniversity.edu.naver.movie.gnr.dao;
 import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO {
+public class GnrDAOImpl extends AbstractAutoDaoPoolSupport<GnrVO> implements GnrDAO {
 
 	@Override
 	public int createGnr(GnrVO gnrVO) {
@@ -16,8 +16,8 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 		sql.append(" VALUES         ");
 		sql.append(" ( SEQ_GNR_PK.NEXTVAL ");
 		sql.append(" , ?)           ");
-		
-		return insert(sql.toString(), (pstmt)->{
+
+		return insert(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, gnrVO.getGnrNm());
 		});
 	}
@@ -29,15 +29,10 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 		sql.append(" 	  , GNR_NM    ");
 		sql.append("   FROM GNR       ");
 		sql.append("  WHERE GNR_ID = ?");
-		
-		return selectOne(sql.toString(),(pstmt)->{
+
+		return selectOne(sql.toString(), (pstmt) -> {
 			pstmt.setInt(1, gnrId);
-		},(rs) -> {
-			GnrVO gnrVO = new GnrVO();
-			gnrVO.setGnrId(rs.getInt("GNR_ID"));
-			gnrVO.setGnrNm(rs.getString("GNR_NM"));
-			return gnrVO;
-		});
+		}, GnrVO.class);
 	}
 
 	@Override
@@ -47,29 +42,20 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 		sql.append(" 	  , GNR_NM    ");
 		sql.append("   FROM GNR       ");
 		sql.append("  WHERE GNR_NM = ?");
-		
-		return selectOne(sql.toString(),(pstmt)->{
+
+		return selectOne(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, gnrName);
-		},(rs) -> {
-			GnrVO gnrVO = new GnrVO();
-			gnrVO.setGnrId(rs.getInt("GNR_ID"));
-			gnrVO.setGnrNm(rs.getString("GNR_NM"));
-			return gnrVO;
-		});
+		}, GnrVO.class);
 	}
+
 	@Override
 	public List<GnrVO> readAllGnr() {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" SELECT GNR_ID ");
 		sql.append(" 	  , GNR_NM ");
 		sql.append("   FROM GNR    ");
-		
-		return select(sql.toString(), null, (rs) -> {
-			GnrVO gnrVO = new GnrVO();
-			gnrVO.setGnrId(rs.getInt("GNR_ID"));
-			gnrVO.setGnrNm(rs.getString("GNR_NM"));
-			return gnrVO;
-		});
+
+		return select(sql.toString(), null, GnrVO.class);
 	}
 
 	@Override
@@ -78,8 +64,8 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 		sql.append(" UPDATE GNR       ");
 		sql.append("    SET GNR_NM = ?");
 		sql.append("  WHERE GNR_ID = ?");
-		
-		return update(sql.toString(), (pstmt)->{
+
+		return update(sql.toString(), (pstmt) -> {
 			pstmt.setString(1, gnrVO.getGnrNm());
 			pstmt.setInt(2, gnrVO.getGnrId());
 		});
@@ -91,8 +77,8 @@ public class GnrDAOImpl extends AbstractDaoPoolSupport<GnrVO> implements GnrDAO 
 		sql.append(" DELETE           ");
 		sql.append("   FROM GNR       ");
 		sql.append("  WHERE GNR_ID = ?");
-		
-		return delete(sql.toString(), (pstmt)->{
+
+		return delete(sql.toString(), (pstmt) -> {
 			pstmt.setInt(1, gnrId);
 		});
 	}

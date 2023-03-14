@@ -25,7 +25,7 @@ public abstract class AbstractAutoDaoPoolSupport<T> extends AbstractDaoPoolSuppo
 			while (rs.next()) {
 				AutoMapper.makeAllRowDatas(rs, t, cls);
 			}
-			return (List<T>) t;
+			return t;
 		}
 		catch (SQLException sqle) {
 			sqle.printStackTrace();

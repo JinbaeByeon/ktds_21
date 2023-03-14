@@ -6,22 +6,39 @@ import com.ktdsuniversity.edu.naver.movie.cmpny.vo.CmpnyVO;
 import com.ktdsuniversity.edu.naver.movie.cntr.vo.CntrVO;
 import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
 import com.ktdsuniversity.edu.naver.movie.mvppl.vo.MvPplVO;
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
 
+@UseColumn(keyColum = "MV_ID", keyVarName = "mvId", keyType = String.class)
 public class MvVO {
+	@Column(value ="MV_ID", isRequire = true)
 	private String mvId;
+	@Column("MV_TTL")
 	private String mvTtl;
+	@Column("ENG_TTL")
 	private String engTtl;
+	@Column("SCRN_STT")
 	private String scrnStt;
+	@Column("SCRN_TM")
 	private int scrnTm;
+	@Column("OPNG_DT")
 	private String opngDt;
+	@Column("WTC_GRD")
 	private String wtcGrd;
+	@Column("PSTR")
 	private String pstr;
+	@Column("SMR")
 	private String smr;
 
+	@Column(cls = GnrVO.class)
 	private List<GnrVO> gnrList;
+	@Column(cls = CntrVO.class)
 	private List<CntrVO> cntrList;
+	@Column(cls = PrdcPrtcptnCmpnyVO.class)
 	private List<PrdcPrtcptnCmpnyVO> cmpnyList;
+	@Column(cls = PrdcPrtcptnPplVO.class)
 	private List<PrdcPrtcptnPplVO> prdcMvPplList;
+	@Column(cls = MvPplVO.class)
 	private List<MvPplVO> fmsLnMvPplList;
 	
 	public String getMvId() {

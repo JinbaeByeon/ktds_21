@@ -1,14 +1,24 @@
 package com.ktdsuniversity.edu.naver.movie.fmsln.vo;
 
 import com.ktdsuniversity.edu.naver.movie.mv.vo.PrdcPrtcptnPplVO;
+import com.ktdsuniversity.edu.naver.movie.utils.db.Column;
+import com.ktdsuniversity.edu.naver.movie.utils.db.UseColumn;
 
+@UseColumn
 public class FmsLnVO {
+	@Column("FMS_LN_ID")
 	private String fmsLnId;
+	@Column("FMS_LN")
 	private String fmsLn;
+	@Column("EXPL")
 	private String expl;
+	@Column("RGST_DT")
 	private String rgstDt;
+	@Column("RGST_PPL_NM")
 	private String rgstPplNm;
+	@Column("RCMD_CNT")
 	private int rcmdCnt;
+	@Column("PRDC_PRTCPTN_ID")
 	private String prdcPrtcptnId;
 	
 	private PrdcPrtcptnPplVO mvPplVO;

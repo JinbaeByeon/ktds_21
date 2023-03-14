@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.ktdsuniversity.edu.naver.movie.gnr.vo.GnrVO;
 import com.ktdsuniversity.edu.naver.movie.mv.vo.MvVO;
-import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractDaoPoolSupport;
+import com.ktdsuniversity.edu.naver.movie.utils.db.AbstractAutoDaoPoolSupport;
 
-public class MvGnrDAOImpl extends AbstractDaoPoolSupport<MvVO> implements MvGnrDAO {
+public class MvGnrDAOImpl extends AbstractAutoDaoPoolSupport<MvVO> implements MvGnrDAO {
 
 	@Override
 	public int createMvGnr(MvVO mvVO) {

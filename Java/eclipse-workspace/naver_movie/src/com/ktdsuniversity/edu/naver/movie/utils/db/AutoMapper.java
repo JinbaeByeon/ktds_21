@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public final class AutoMapper {
 
@@ -48,7 +49,7 @@ public final class AutoMapper {
 					e.printStackTrace();
 				}
 			}
-			else if (keyFieldType == Integer.class) {
+			else if (keyFieldType == int.class) {
 				int keyData = getIntColumnValue(rs, keyColumnName);
 				
 				Field keyField = null;
@@ -115,7 +116,7 @@ public final class AutoMapper {
 					}
 				}
 			}
-			else if (keyFieldType == Integer.class) {
+			else if (keyFieldType == int.class) {
 				int keyData = getIntColumnValue(rs, keyColumnName);
 				
 				for (T t : valueObject) {
@@ -144,7 +145,7 @@ public final class AutoMapper {
 		return valueObject;
 	}
 	
-	public static Object makeOneRowDatas(ResultSet rs, Object valueObject, Class<? extends Object> cls) {
+	private static Object makeOneRowDatas(ResultSet rs, Object valueObject, Class<? extends Object> cls, Class<? extends Object> superCls) {
 		if (cls == null) {
 			return null;
 		}
@@ -154,20 +155,36 @@ public final class AutoMapper {
 		}
 		
 		Field[] fields = cls.getDeclaredFields();
-			for (Field field : fields) {
-				if (isRequire(field)) {
-					String columnName = getColumnName(field);
-					String value = getStringColumnValue(rs, columnName);
-					if (value == null) {
-						return null;
-					}
+		for (Field field : fields) {
+			if (isRequire(field)) {
+				String columnName = getColumnName(field);
+				String value = getStringColumnValue(rs, columnName);
+				if (value == null) {
+					return null;
 				}
 			}
+		}
 		
 		if (valueObject == null) {
 			valueObject = createNewObject(cls);
 		}
 		
+		if (superCls != Object.class) {
+			setFieldValueFromResultSet(rs, valueObject, superCls.getDeclaredFields());
+		}
+		setFieldValueFromResultSet(rs, valueObject, fields);
+		
+		return valueObject;
+	}
+	
+	public static Object makeOneRowDatas(ResultSet rs, Object valueObject, Class<? extends Object> cls) {
+		if (cls == null) {
+			return null;
+		}
+		return makeOneRowDatas(rs, valueObject, cls, cls.getSuperclass());
+	}
+	
+	private static void setFieldValueFromResultSet(ResultSet rs, Object valueObject, Field[] fields) {
 		for (Field field : fields) {
 			field.setAccessible(true);
 			Class<?> fieldClass = field.getDeclaringClass();
@@ -179,7 +196,7 @@ public final class AutoMapper {
 			if (field.getType() == String.class) {
 				setValue(field, valueObject, getStringColumnValue(rs, columnName));
 			}
-			else if (field.getType() == Integer.class) {
+			else if (field.getType() == int.class) {
 				setValue(field, valueObject, getIntColumnValue(rs, columnName));
 			}
 			else if (field.getType() == List.class) {
@@ -190,8 +207,40 @@ public final class AutoMapper {
 				}
 				Object itemInList = makeOneRowDatas(rs, null, getClass(field));
 				if (itemInList != null) {
-					list.add(itemInList);
-					setValue(field, valueObject, list);
+					
+					UseColumn useColumn = itemInList.getClass().getDeclaredAnnotation(UseColumn.class);
+					String keyFieldName = useColumn.keyVarName();
+					Class<?> keyFieldType = useColumn.keyType();
+					
+					boolean isDuplicate = false;
+					if (keyFieldName != null) {
+						if (keyFieldType == int.class) {
+							int keyValue = getIntKeyValue(itemInList, keyFieldName);
+							for (Object objInList : list) {
+								int itemKeyValue = getIntKeyValue(objInList, keyFieldName);
+								if (keyValue == itemKeyValue) {
+									isDuplicate = true;
+									break;
+								}
+							}
+						}
+						else if (keyFieldType == String.class) {
+							String keyValue = getStringKeyValue(itemInList, keyFieldName);
+							for (Object objInList : list) {
+								String itemKeyValue = getStringKeyValue(objInList, keyFieldName);
+								if (keyValue.equals(itemKeyValue)) {
+									isDuplicate = true;
+									break;
+								}
+							}
+						}
+						
+					}
+					
+					if (!isDuplicate) {
+						list.add(itemInList);
+						setValue(field, valueObject, list);
+					}
 				}
 			}
 			else {
@@ -201,8 +250,24 @@ public final class AutoMapper {
 				}
 			}
 		}
-		
-		return valueObject;
+	}
+	
+	private static int getIntKeyValue(Object obj, String keyFieldName) {
+		try {
+			Field keyField = obj.getClass().getDeclaredField(keyFieldName);
+			return (int) getFieldValue(keyField, obj);
+		} catch (NoSuchFieldException | SecurityException e) {
+			return new Random().nextInt();
+		}
+	}
+	
+	private static String getStringKeyValue(Object obj, String keyFieldName) {
+		try {
+			Field keyField = obj.getClass().getDeclaredField(keyFieldName);
+			return (String) getFieldValue(keyField, obj);
+		} catch (NoSuchFieldException | SecurityException e) {
+			return new Random().nextInt() + "";
+		}
 	}
 	
 	private static String getStringColumnValue(ResultSet rs, String columnName) {
