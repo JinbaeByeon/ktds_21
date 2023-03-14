@@ -1,0 +1,121 @@
+*{
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+li{
+    display: inline;
+    list-style-type: none;
+}
+
+th{
+    padding: 15px 5px;
+    border-top: 2px solid #333;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ccc;
+}
+
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+td{
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+#content{
+    position: relative;
+    margin: auto;
+    margin-top:100px;
+    width: 100%;
+}
+
+#list_info{
+    position: relative;
+    padding-bottom: 30px;
+}
+
+#list_info > #total_cnt{
+    position: absolute;
+    left:0;
+}
+
+#list_info > #total_cnt > span.cnt{
+    color:#2775c4;
+    font-weight: bold;
+}
+
+#list_info > #order_type{
+    position: absolute;
+    right:0;
+}
+
+#list_info > #order_type li.active{
+    font-weight: bold;
+}
+
+#list_info > #order_type li{
+    display: inline;
+}
+
+#list_info > #order_type li::after{
+    content: " | ";
+    color:#ccc;
+}
+#list_info > #order_type li:last-child::after{
+    content:"";
+}
+
+.labelset{
+    padding: 0 5px;
+    overflow: hidden;
+    display: inline-block;
+    min-width: 68px;
+    font-size: 0.786em;
+    height: 24px    ;
+    line-height: 23px;
+    vertical-align: middle;
+    border: 1px solid #000;
+}
+
+.labelset.brown{
+    color:#835d22;
+    border-color: #d1b783;
+}
+
+
+
+#paging{
+    padding : 20px;
+}
+
+#paging > ul {
+    text-align: center;
+}
+
+#paging li{
+    padding: 5px 10px;
+}
+#paging li.on{
+    border: 1px solid #2775c4;
+}
+
+#buttons{
+    position: absolute;
+    right:0;
+}
+#buttons > .new_btn{
+    padding: 10px;
+    background-color: #2775c4;
+    color:#f1f1f1;
+    font-weight: bold;
+    border: 0;
+}

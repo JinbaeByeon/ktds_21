@@ -1,0 +1,188 @@
+body{
+    background-color: #4b4b4b;
+}
+*{
+    padding:0;
+    margin:0;
+}
+li{
+    list-style: none;
+}
+#good_gag{
+    width: 680px;
+    background-color: #FFF;
+    margin: auto;
+}
+
+/* logo */
+#logo_btn{
+    background-color: #fed50a;
+    position: relative;
+}
+#logo_btn div{
+    margin-top: 3px;
+    margin-left: 3px;
+}
+#logo{
+    background-image: url(https://www.goodgag.net/_tpl/v3/_css/common.1px.png);
+    background-position: 0px 0px;
+    width: 82px;
+    height: 35px;
+    display: inline-block;
+}
+#btn{
+    display: inline-block;
+    position:absolute;
+    right:0;
+
+}
+#btn div{
+    display: inline-block;
+}
+#btn #my{                
+    background-image: url(https://www.goodgag.net/_tpl/v3/_css/common.1px.png);
+    background-position: 0px -38px;
+    width: 38px;
+    height: 29px;
+}
+#btn #write{
+    background-image: url(https://www.goodgag.net/_tpl/v3/_css/common.1px.png);
+    background-position: -41px -38px;
+    width: 33px;
+    height: 29px;
+    margin-right: 5px;
+}
+/* menu */
+#menu{
+    background-color: #f5f5f5;
+    text-align: center;
+}
+#menu ul {
+    width: 100%;
+    display: table;
+}
+#menu li {
+    display: table-cell;
+    text-align: center;
+}
+#menu li > div{
+    display: inline-block;
+    padding: 8px 0;
+    margin-bottom: 1px;
+    width: 80%;
+}
+#menu li:first-child > div{
+    color:#f00;
+    border-bottom: 3px solid #f00;
+}
+
+/*contents*/
+#contents .notice p{
+    padding:2px 7px;
+    color: #fff;
+    display: inline;
+    font-size: 13px;
+    background-color: #f00;
+    border-radius: 3px;
+}
+#contents .notice .article_title{
+    font-weight: bold;
+    color:#f00;
+}
+#contents .article{
+    padding: 5px 0;
+    margin-left: 20px;
+    border-bottom: 1px solid #e5e5e5;        
+}
+#contents .article_title{
+    padding-bottom: 5px;
+}
+#contents .article_title .reply_cnt{
+    font-weight: normal;                
+    color:#f00;
+}
+#contents .article_title .reply_cnt::before{
+    content: "[";
+}
+#contents .article_title .reply_cnt::after{
+    content: "]";
+}
+#contents .article_meta {
+    display: table;
+    padding-bottom:5px;
+}
+#contents .article_meta > li{
+    display: table-cell;
+    color: #4b4b4b;
+    font-size: 12px;
+    padding-right: 8px;
+}
+#contents .article_meta > li::after{
+    content: " | ";
+    margin: 0 5px;
+    color:#f1f1f1;
+}
+#contents .article_meta > li:last-child::after{
+    content:"";
+    margin: 0;
+}
+#contents .article_meta .writer{
+    color:#c46a33;
+}
+#contents .article_meta .no, #contents .article_meta .dateTime{                
+    color: #999;
+    font-family: Tahoma;
+}
+
+/*page*/
+#page{
+    background-color: #f1f1f1;
+    padding: 20px 0;
+    text-align: center;
+}
+#page li > button{
+    padding: 6px 9px;
+    margin: 0 2px;
+    border-radius: 3px;
+    line-height: 18px;
+    border: 1px solid #ccc;
+    color: #888;
+    background:#fff;               
+}
+#page ul{
+    display: inline-block;
+}
+#page li{
+    display: inline-block;
+}
+
+/*footer*/
+#footer{
+    background-color: #262626;
+    color:#5f5f5f;
+    text-align: center;
+    padding: 10px 0;
+}
+#footer #log_in button{
+    padding: 5px;
+    margin-bottom: 5px;
+    color: #aaa;
+    background-color: #333;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+#footer #smaple{
+    margin: 20px 0;
+}
+
+/*ad_sticky*/
+#ad_sticky{
+    display: none;
+    text-align: center;
+    position: fixed;
+    background-color: #f1f1f1;
+    height:80%;
+    width:15%;
+    top:5%;
+    left: 8%;
+}
