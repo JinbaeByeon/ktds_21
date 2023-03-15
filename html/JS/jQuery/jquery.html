@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery 실습</title>
+        <!-- jQuery Import -->
+        <script type="text/javascript" src="../../jquery-3.6.4.min.js"></script>
+        <script type="text/javascript">
+            $().ready(function() {
+                $("#destinations")
+                .children()
+                .parent()
+                .css("backgroundColor","#f00");
+
+                $('.rotate-image').hover(function() {
+                    $(this).animate({deg: 359}, {
+                        duration: 2000,
+                        step: function(now) {
+                            $(this).css({transform: 'rotate(' + now + 'deg)'});
+                        },
+                        complete: function() {
+                            $(this).css({transform: 'rotate(0deg)'});
+                        }
+                    });
+                }, function() {
+                    $(this).stop(true, false).css({transform: 'rotate(0deg)'});
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Where do you want to go?</h1>
+        <h2>Trable destinations</h2>
+        <p>Plan your next adventures.</p>
+        <ul id="destinations">
+            <li>Rome</li>
+            <ul>
+                <li class="france" id="paris">
+                    Paris
+                </li>
+            </ul>
+            <li class="promo">Rio</li>
+        </ul>
+    </body>
+</html>

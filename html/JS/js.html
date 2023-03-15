@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type ="text/css">
+            *{
+                padding:0;
+                margin:0;
+            }
+            .list{
+                width:50%;
+                margin: auto;
+                text-align: center;
+            }
+            .rotate-image {
+                width: 50%;
+                height: auto;
+            }
+            .rotate-image.ever{
+                animation: rotation 500ms infinite linear;                
+
+            }
+            .rotate-image:hover{
+                animation: rotation 2s infinite linear;
+            }
+            
+            @keyframes rotation {
+                from {
+                    transform: rotate(359deg);
+                }
+                to {
+                    transform: rotate(0deg);
+                }
+            }
+        </style>
+        <title> Java Script 실습 </title>
+            <script type="text/javascript" src="../jquery-3.6.4.min.js"></script>
+            <script type="text/javascript">
+                $().ready(function() {
+                    var animation = {
+                        duration: 2000,
+                        deg: 359,
+                        complete: function() {
+                        $(this).css({transform: 'rotate(0deg)'});
+                        },
+                        step: function(now) {
+                        $(this).css({transform: 'rotate(' + now + 'deg)'});
+                        }
+                    };
+                    $('.rotate-image').css({
+                        width: "50%",
+                        height: "auto"
+                        
+                    })
+                    $('.rotate-image').hover(function() {
+                        $(this).animate(animation);
+                    }, function() {
+                        $(this).stop(false, false).css({transform: 'rotate(0deg)'});
+                    });
+                    animation.duration=500;
+                    $(".rotate-image.ever").animate(animation);
+                });
+            </script>
+            <script type="text/javascript" src="./MyClass.js"></script>
+            <script type="text/javascript">
+                
+                // 리터럴
+                var obj = {
+                    "smart-phone": "Galaxy S10",
+                    name: "aaa",
+                    id: 555,
+                    job: "System Developer",
+                    cls: new MyClass("이름",123)
+                }
+                obj.func = obj.cls.func;
+                obj.print = obj.cls.print;
+                obj.age=39;
+                console.log(obj);
+                console.log(obj.name);
+                console.log(obj.job);
+                console.log(obj.age);
+                console.log(obj["smart-phone"]);
+                console.log(obj.cls);
+                // obj.func();
+                obj.print();
+                obj.cls.print();
+
+                function sequence(){
+                    this.cnt = 0;
+                    this.nextval = function(){
+                        return this.cnt++;
+                    }
+                    this.currval = function(){
+                        return this.cnt;
+                    }
+                }
+                var seq = new sequence();
+                console.log(seq.nextval());
+                console.log(seq.nextval());
+                console.log(seq.nextval());
+                console.log(seq.nextval());
+                console.log(seq.currval());
+                console.log(seq.currval());
+                console.log(seq.currval());
+                console.log(seq.currval());
+                console.log(seq.nextval());
+                console.log(seq.nextval());
+                console.log(seq.nextval());
+                
+                (function(name){
+                    console.log(name + "안녕ㅎㅅㅇ");
+                })("aaa");
+
+            </script>
+    </head>
+    <body>
+        <div class="list">
+            <img class="rotate-image ever" src="https://t1.daumcdn.net/cfile/tistory/223D77445877BD9D04">
+            <img class="rotate-image" src="./cat (1).jpg">
+            <img class="rotate-image" src="./cat (2).jpg">
+            <img class="rotate-image" src="./cat (3).jpg">
+            <img class="rotate-image" src="./cat (4).jpg">
+            <img class="rotate-image" src="./cat (6).jpg">
+            <img class="rotate-image" src="./cat (5).jpg">
+            <img class="rotate-image" src="./cat (7).jpg">
+            <img class="rotate-image" src="./cat (8).jpg">
+            <img class="rotate-image" src="./cat (9).jpg">
+            <img class="rotate-image" src="./cat (10).jpg">
+            <img class="rotate-image" src="./cat (11).jpg">
+            <img class="rotate-image" src="./cat (12).jpg">
+            <img class="rotate-image" src="./cat (13).jpg">
+            <img class="rotate-image" src="./cat (14).jpg">
+            <img class="rotate-image" src="./cat (15).jpg">
+            <img class="rotate-image" src="./cat (16).jpg">
+        </div>
+        
+    </body>
+</html>
