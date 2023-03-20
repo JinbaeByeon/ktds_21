@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>키 이벤트</title>
+        <script type="text/javascript" src="../../jquery-3.6.4.min.js"></script>
+        <script type="text/javascript">
+            $().ready(function(){
+                // $(".count").keypress(function(event){
+                //     console.log("keypress",$(this).val());
+                // });
+                // $(".count").keydown(function(event){
+                //     console.log("keydown",$(this).val());
+                // });
+                $(".count").keyup(function(event){
+                    var ticketVal = $(this).val();
+                    var price = $(this).closest(".vacation").data("price");
+                    ticketVal = parseInt(ticketVal);
+                    if(isNaN(ticketVal)){
+                        ticketVal = 0;
+                    }
+                    console.log(ticketVal,price);
+                    var totalPrice = ticketVal * price;
+                    $("#totalPrice").text(totalPrice);
+                });
+            })
+        </script>
+        <style type = "text/css">
+            *{
+                margin:0 5px;
+                padding:0;
+            }
+            body{
+                background-color: #444;
+            }
+            h1, h2, p, div{
+                margin: 20px 0px;
+                color:#fff;
+            }
+            h3{
+                color: #aaa;
+            }
+            .vacation{
+                display: inline-block;
+                background-color: #0003;
+                padding:20px;
+                margin :10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Travles - Trip Planner</h1>
+        <h2>Packages</h2>
+        <div class="vacation" data-price="399.99">
+            <h3>Hawaiian Vacation</h3>
+            <p>$399.99 per ticket</p>
+            <div>
+                <p>Tickets:</p>
+                <input type ="number" class="count" value = "1" />
+            </div>            
+        </div>
+        <p>
+            Tatal Price: $<span id="totalPrice">399.99</span>
+        </p>
+    </body>
+</html>

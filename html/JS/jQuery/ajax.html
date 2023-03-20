@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AJAX 실습</title>
+        <script type="text/javascript" src="../../jquery-3.6.4.min.js"></script>
+        <script type="text/javascript">
+            $().ready(function(){
+                $("#btn_github").click(function(event){
+                    $.get("https://api.github.com/users",function(response){
+                        $("#github_data").text("");
+                        var ol = $("<ol></ol>");
+                        
+                        for(i in response){
+                            var item = response[i];
+                            var li = $("<li></li>");
+                            var div = $("<div></div>");
+                            div.append("<img src='" + item.avatar_url + "' />");
+                            div.append("<p> <a href='"+ item.html_url+"'>"+ item.login+"</a></p>");
+                            li.append(div);
+                            ol.append(li);
+                        }
+                        $("#github_data").append(ol);
+                    })
+                })
+            })
+        </script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            a{
+                text-decoration: none;
+                color:#333;
+            }
+            a:hover{
+                color:cornflowerblue;
+            }
+            ol li{
+                display: inline-block;
+            }
+            ol div{
+                margin: 5px;
+                text-align: center;
+                background-color: #c1c1c1;
+                border-radius: 10px;
+            }
+            img{
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="btn_github">Github Request</button>
+        <div id="github_data">
+            Github 데이터가 여기에 표시됩니다.
+        </div>
+
+    </body>
+</html>

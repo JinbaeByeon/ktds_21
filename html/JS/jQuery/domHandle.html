@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dom Handling 실습</title>
+        <script type="text/javascript" src="../../jquery-3.6.4.min.js"></script>
+        <script type="text/javascript">
+            $().ready(function(){
+                // 정규 표현식
+                // $("button").on("click",function(event){
+                //     console.log(event);
+                //     alert("click");
+                //     var price = $("<p>From $399.99</p>");
+                //     $(this).closest(".vacation").append(price);
+                //     $(this).remove()
+                // });
+                
+                // 짧은 표현식
+                $("button").click(function(event){
+                    var vacation = $(this).closest(".vacation");
+                    var amount = vacation.data("price");
+                    var price = $("<p>From $" + amount + "</p>");
+                    $(this).after(price);
+                    $(this).remove();
+                    $(".vacation").children("div.price").on("click","p",function(event){
+                        $(this)
+                    })
+                });
+            })
+        </script>
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding-left: 30px;
+                background-color: #444;
+            }
+            h1{
+                margin: 0;
+                color: #eee;
+            }
+            .title{
+                margin-bottom: 15px;
+            }
+            h2{
+                color: #aaa;
+            }
+            p{
+                margin: 0;
+                font-weight: bold;
+                color: #999;
+            }
+            .comments{
+                color: #c2c2c2;
+            }
+            ul{       
+                padding:0;     
+                list-style: none;
+            }
+            li{
+                padding: 0px 20px 20px 20px;  
+                display: inline-block;
+                background-color: #0003;  
+                vertical-align: top;
+                position: relative;
+                overflow: auto;
+                height: 300px;
+            }
+            
+            .price{                
+                width:100%;
+                margin: 0 auto;
+                margin-top: 30px;
+            }
+
+            button{
+                width: 100%;
+                display: block;
+                background-color:#282;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="title">
+            <h1>Vacation Packages</h1>
+            <p>jQuery travels</p>
+        </div>
+        <ul>
+            <li class="vacation" data-price="399.99">
+                <h2>Hawaiian Vacation</h2>
+                <p class="comments">Comment on this deal:</p>
+                <p class="comment">"Amazing Deal!"</p>
+                <p class="comment">"Can't wait to take this trip"</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <p class="comment">크기 늘려버리기</p>
+                <div class="price">
+                    <button>GET PRICE</button>
+                </div>
+            </li>
+            <li class="vacation" data-price="599.99">
+                <h2>Orlando</h2>
+                <p class="comments">Comment on this deal:</p>
+                <p class="comment">"There aren't any comments on"</p>
+                <p class="comment">"this deal yet."</p>
+                <div class="price">
+                    <button>GET PRICE</button>
+                </div>
+            </li>
+            <li class="vacation" data-price="99.99">
+                <h2>Visit Japan</h2>
+                <p class="comments">Comment on this deal:</p>
+                <p class="comment">"Never been, but can't wait!"</p>
+                <div class="price">
+                    <button>GET PRICE</button>
+                </div>
+            </li>
+        </ul>
+    </body>
+</html>
