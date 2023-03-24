@@ -3,10 +3,12 @@ package com.hello.topic.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hello.topic.dao.TopicDAO;
 import com.hello.topic.vo.TopicVO;
 
+@Service
 public class TopicServiceImpl implements TopicService{
 
 	@Autowired

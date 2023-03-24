@@ -78,8 +78,8 @@
 			, #{email}
 			, SYSDATE
 			, SYSDATE
-			, #{fileName}
-			, #{originFileName})
+			, #{fileName, jdbcType=VARCHAR}
+			, #{originFileName, jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="updateOneTopic"

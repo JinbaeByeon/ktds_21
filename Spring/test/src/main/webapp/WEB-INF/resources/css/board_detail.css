@@ -1,0 +1,42 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+}
+ul{
+	list-style: none;
+}
+#info {
+	border-bottom: 2px solid #ccc;
+}
+#info > p > span:before{
+	content: " | ";
+}
+#content {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+#replies > *{
+	border: 1px solid #ccc;
+}
+.reply {
+	border-bottom: 1px solid #eee;
+	border-left: 2px solid #ccc;
+	background-color: #fafafa;
+}
+.reply .writer{
+	color: #c46a33;
+}
+
+.reply .date{
+	color: #ccc;
+	font-size: .8em;
+}
+.reply .btn{
+	display: inline-block;
+	color: #ccc;
+	font-size: .9em
+}
