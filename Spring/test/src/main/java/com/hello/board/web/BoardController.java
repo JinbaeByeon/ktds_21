@@ -19,8 +19,6 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	@Autowired
-	private UploadHandler uploadHandler;
 	
 	@GetMapping("/boards")
 	public String viewBoardListPage(Model model) {
@@ -54,14 +52,10 @@ public class BoardController {
 	
 	@PostMapping("/board/write")
 	public String doWriteBoard(BoardVO	 boardVO, List<MultipartFile> uploadFile) {
-		System.out.println("1");
-		boardService.createBoard(boardVO);
-		System.out.println("2");
-		int boardId = boardVO.getId();
-		System.out.println("3");
-		uploadHandler.upload(uploadFile, boardId);
-		
-		return "redirect:/board/" + boardId;
+		if(boardService.createBoard(boardVO,uploadFile)) {
+			return "redirect:/board/" + boardVO.getId();
+		}
+		return "redirect:/boards";
 	}
 	
 	@GetMapping("/board/update/{id}")

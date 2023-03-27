@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hello.file.service.FileService;
+import com.hello.file.dao.FileDAO;
 import com.hello.file.vo.FileVO;
 
 @Component
 public class UploadHandler {
 	@Autowired
-	private FileService fileService;
+	private FileDAO fileDAO;
 	
 	@Value("${uploadpath:D:/uploadFiles}")
 	private String uploadPath;
@@ -54,7 +54,7 @@ public class UploadHandler {
 			String ext = originFileName.substring(originFileName.lastIndexOf(".") + 1);
 			fileVO.setFileExt(ext);
 			
-			fileService.createFile(fileVO);
+			fileDAO.createFile(fileVO);
 		}
 	}
 }

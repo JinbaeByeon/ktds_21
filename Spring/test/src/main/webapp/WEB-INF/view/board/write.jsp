@@ -12,13 +12,19 @@
 			var cnt = 0;
 			$('#btn_add_files').click(function(e){
 				e.preventDefault();
-				var div = $("<div></div>");
+				var div = $("<div class='input_file'></div>");
 				var inputFile = "<input type='file'"
 					   + "name='uploadFile'"
 					   + "placeholder='파일을 선택하세요'/>";
+				var btnDelete = "<button class = 'btn_delete'>삭제</button>"
 				div.append(inputFile);
+				div.append(btnDelete);
 				$('#btn_add_files').before(div);
-			})
+			});
+			$(document).on("click",".btn_delete",function(e){
+				e.preventDefault();
+				$(this).closest("#files > .input_file").remove();
+			});
 		});
 	</script>
 	<style type="text/css">
@@ -56,7 +62,7 @@
 					   placeholder="example@gmail.com"/>
 			</div>
 		</c:if>
-		<div>
+		<div id="files">
 			<button id="btn_add_files">파일 추가</button>
 		</div>
 		<div>

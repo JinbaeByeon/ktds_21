@@ -2,6 +2,8 @@ package com.hello.member.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.hello.member.vo.MemberVO;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired
 	private MemberDAO memberDAO;
 	@Autowired
@@ -21,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean registMember(MemberVO memberVO) {
 		if(memberDAO.readCountByEmail(memberVO.getEmail()) > 0) {
-			System.out.println("해당 이메일이 이미 존재합니다");
+			logger.debug("해당 이메일이 이미 존재합니다 : {}", memberVO.getEmail());
 			return false;
 		}
 		return memberDAO.registMember(memberVO) > 0;
