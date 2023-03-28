@@ -9,9 +9,25 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.4.min.js"></script>
 	<script type="text/javascript">
 		$().ready(function(){
+			$("#email").keyup(function(){
+				var email = $(this).val();
+				console.log(email);
+				var url = "${pageContext.request.contextPath}/api/member/check/"+email + "/";
+				$.get(url,function(response){
+					if(response.isDuplicate){
+						$("#notice_email").text("중복된 이메일이 존재합니다")
+						$("#notice_email").css({color: "#c22"});
+					} else{
+						$("#notice_email").text("사용 가능한 이메일입니다")
+						$("#notice_email").css({color: "#ccc"});
+					}
+				});
+			})
+			
 			$("#btn_submit").click(function(e){	
 				e.preventDefault();
-				<c:if test="${empty member}">
+
+				/* <c:if test="${empty member}">
 					if($.trim($("#email").val())==""){
 						alert("이메일을 입력하세요");
 						$("#email").focus();
@@ -34,16 +50,37 @@
 					return;
 				}
 				$("#regist_form").attr({
-					"action" :"${pageContext.request.contextPath}/member/regist",
+					"action" :"${pageContext.request.contextPath}/api/member/regist",
 					"method": "post"
-				}).submit();
+				}).submit(); */
+				var notice_email = $("#notice_email").text() ;
+				if(notice_email== "중복된 이메일이 존재합니다"){
+					alert(notice_email);
+				} else {
+					var url = "${pageContext.request.contextPath}/api/member/regist";
+					$.post(url,$("#regist_form").serialize(),function(response){
+						console.log(response);
+						if(response.registResult){
+							location.href = "${pageContext.request.contextPath}/member/login";
+						} else if(response.status=="fail"){
+							alert(response.message);
+						} else{
+							alert("시스템 오류입니다. 관리자에게 문의하세요");
+						}
+					})
+				}
+				
 			});
 		});
 	</script>
 	<style type="text/css">
 		#regist_form{
 			display: inline-block;
-			text-align: right;
+			/* text-align: right; */
+		}
+		#notice_email{
+			color: #ccc;
+			font-size: .8em;
 		}
 	</style>
 </head>
@@ -58,6 +95,7 @@
 						   name="email"
 						   maxlength="100"
 						   placeholder="EMAIL"/>
+					<span id="notice_email">사용 가능한 이메일입니다</span>
 				</div>
 		</c:when>
 		<c:otherwise>

@@ -34,6 +34,17 @@
 		 WHERE EMAIL = #{_parameter}
 	</select>
 	
+	<select id="readOneMemberByEmailAndPassword"
+			parameterType="string"
+			resultType="com.hello.member.vo.MemberVO">
+		SELECT EMAIL
+			 , NAME
+			 , PASSWORD
+		  FROM MEMBERS
+		 WHERE EMAIL = #{email}
+		   AND PASSWORD = #{password}
+	</select>
+	
 	<select id="readAllMembers"
 			resultType="com.hello.member.vo.MemberVO">
 		SELECT EMAIL

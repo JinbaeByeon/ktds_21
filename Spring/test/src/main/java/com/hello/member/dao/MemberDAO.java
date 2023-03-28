@@ -11,6 +11,8 @@ public interface MemberDAO {
 	
 	public MemberVO readOneMemberByEmail(String email);
 	
+	public MemberVO readOneMemberByEmailAndPassword(MemberVO memberVO);
+	
 	public List<MemberVO> readAllMembers();
 	
 	public int updateMember(MemberVO memberVO);

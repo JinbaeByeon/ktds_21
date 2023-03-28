@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hello.board.dao.BoardDAO;
 import com.hello.board.vo.BoardVO;
+import com.hello.common.exception.AjaxResponseException;
 import com.hello.member.dao.MemberDAO;
 import com.hello.member.vo.MemberVO;
 
@@ -24,8 +25,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean registMember(MemberVO memberVO) {
 		if(memberDAO.readCountByEmail(memberVO.getEmail()) > 0) {
-			logger.debug("해당 이메일이 이미 존재합니다 : {}", memberVO.getEmail());
-			return false;
+			throw new AjaxResponseException("이미 존재하는 이메일입니다.");
 		}
 		return memberDAO.registMember(memberVO) > 0;
 	}
@@ -35,6 +35,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.readOneMemberByEmail(email);
 	}
 
+	@Override
+	public MemberVO readOneMemberByEmailAndPassword(MemberVO memberVO) {
+		return memberDAO.readOneMemberByEmailAndPassword(memberVO);
+	}
+	
 	@Override
 	public List<MemberVO> readAllMembers() {
 		return memberDAO.readAllMembers();
@@ -54,5 +59,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<BoardVO> readAllBoardsByEmail(String email) {
 		return boardDAO.readAllBoardsByEmail(email);
 	}
+
+	@Override
+	public int readCountByEmail(String email) {
+		return memberDAO.readCountByEmail(email);
+	}
+
 
 }

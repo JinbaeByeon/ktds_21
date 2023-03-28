@@ -72,6 +72,6 @@
 		</table>
 	</div>
 	<a href = "${pageContext.request.contextPath}/boards">홈으로</a>
-	<a href = "${pageContext.request.contextPath}/member/update/${member.email}">회원정보 수정</a>
+	<a href = "${pageContext.request.contextPath}/member/update/${member.email}/">회원정보 수정</a>
 </body>
 </html>

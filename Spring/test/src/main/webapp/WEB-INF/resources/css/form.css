@@ -1,0 +1,11 @@
+@charset "UTF-8";
+form {
+	display : inline-block;
+	text-align: right;
+}
+#regist_form {
+	display: inline-block;
+}
+.input_file > input {
+	width: 180px;
+}

@@ -11,12 +11,28 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.4.min.js"></script>
 	<script type="text/javascript">
 		$().ready(function(){
-			
+			$('.btn.reply').click(function(){
+				alert('답글을 달고싶다');
+
+				<form action='${pageContext.request.contextPath}/board/reply/create' method='post'>
+					<input type='hidden' name='boardId' value='${board.id}''/>
+					<input type='hidden' name='prntReplyId' value = '0'/>
+				
+				var attachedReplyForm = $("<form action='${pageContext.request.contextPath}/board/reply/create' method='post'>
+										+ "<input type='hidden' name='boardId' value='${board.id}''/>"
+										+ "<input type='hidden' name='prntReplyId' value = '0'/>");
+				var input = "<textarea rows='4' cols='40'"
+				  +"id='reply' name='reply' placeholder='comment'></textarea>"
+				  +"<input type='submit' value='등록'/>";
+
+					
+				$(".reply").append(attachedReply);
+			})
 		});
 	</script>
 </head>
 <body>
-	<p>
+	<p style="margin-bottom: 10px">
 		<img src="${pageContext.request.contextPath}/img/스프링진스_누끼.png" style="width: 80px; height: auto"/>디테일 페이집니다
 	</p>
 	<div>
@@ -25,7 +41,7 @@
 				<h1>${board.subject}</h1>
 				<p>
 					<span>
-						<a href = "${pageContext.request.contextPath}/member/${board.email}">${board.memberVO.name}</a>
+						<a href = "${pageContext.request.contextPath}/member/${board.email}/">${board.memberVO.name}</a>
 					</span> 
 					<span> 작성일 : ${board.crtDt} / 수정일 : ${board.mdfyDt}</span>
 				</p>
@@ -38,11 +54,12 @@
 			</li>
 			<li>
 				<c:forEach items="${board.fileList}" var="file">
-					<p>${file.originalFileName}</p>
-					<p>
-						<a class="btn" href="${pageContext.request.contextPath}/board/download/${file.fileId}">다운로드</a>
-					</p>
-				
+					<div>
+						<p>${file.originalFileName}</p>
+						<p>
+							<a class="btn" href="${pageContext.request.contextPath}/board/download/${file.fileId}">다운로드</a>
+						</p>
+					</div>
 				</c:forEach>
 			</li>
 			<li>
@@ -51,7 +68,7 @@
 						<ul>
 							<c:forEach items="${board.replyList}" var="reply">
 								<li>
-									<div class="reply" style="margin-left : ${30* reply.depth}px">
+									<div class="reply" style="margin-left : ${30 * reply.depth}px">
 										<p>
 											<span class="writer">${reply.memberVO.name}</span>
 											<span class="date">${reply.crtDt} / ${reply.mdfyDt}</span>
@@ -61,9 +78,9 @@
 										<div>
 											${reply.reply}
 										</div>
-										<a class="btn">답글달기</a>
+										<a class="btn reply ${reply.replyId}">답글달기</a>
 										<a class="btn">수정</a>
-										<a class="btn" href="${pageContext.request.contextPath}/board/${board.id}/reply/delete/${reply.replyId}">삭제</a>
+										<a class="btn" <%-- href="${pageContext.request.contextPath}/board/${board.id}/reply/delete/${reply.replyId} --%>">삭제</a>
 									</div>
 								</li>
 							</c:forEach>
@@ -71,24 +88,14 @@
 					</c:if>
 					<div id="submit">
 						<form action="${pageContext.request.contextPath}/board/reply/create" method="post">
-							<input type="text" name="boardId" value="${board.id}" hidden="true"/>
-							<input type="text" name="prntReplyId"/>
-							
+							<input type="hidden" name="boardId" value="${board.id}"/>
+							<input type="hidden" name="prntReplyId" value = "0"/>
+							<p>댓글</p>
 							<div>
-								<label for="email">작성자 이메일</label>
-								<input type="email"
-									   id="email"
-									   name="email"
-									   placeholder="example@naver.com"/>
-							</div>
-							<div>
-								<label for="reply">댓글 내용</label>
 								<textarea rows="4" cols="40"
 										  id="reply"
 										  name="reply"
 										  placeholder="comment"></textarea>
-							</div>
-							<div>
 								<input type="submit" value="등록"/>
 							</div>
 						</form>

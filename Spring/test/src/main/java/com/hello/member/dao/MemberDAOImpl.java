@@ -29,6 +29,11 @@ public class MemberDAOImpl extends SqlSessionDaoSupport implements MemberDAO {
 	}
 
 	@Override
+	public MemberVO readOneMemberByEmailAndPassword(MemberVO memberVO) {
+		return getSqlSession().selectOne("Member.readOneMemberByEmailAndPassword",memberVO);
+	}
+	
+	@Override
 	public List<MemberVO> readAllMembers() {
 		return getSqlSession().selectList("Member.readAllMembers");
 	}
@@ -47,6 +52,7 @@ public class MemberDAOImpl extends SqlSessionDaoSupport implements MemberDAO {
 	public int readCountByEmail(String email) {
 		return getSqlSession().selectOne("Member.readCountByEmail",email);
 	}
+
 
 
 }

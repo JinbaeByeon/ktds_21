@@ -26,6 +26,11 @@
 				<result property="name" column="R_NAME" />
 			</association>
 		</collection>
+		<collection property="fileList"
+					ofType="com.hello.file.vo.FileVO"
+					autoMapping="true">
+			<id property="fileId" column="FILE_ID" />
+		</collection>
 	</resultMap>
 
 	<insert id="createBoard"
@@ -68,6 +73,11 @@
 			 , TO_CHAR(R.MDFY_DT,'YYYY-MM-DD HH24:MI') RPL_MDFY_DT
 			 , RM.NAME R_NAME
 			 , RM.EMAIL R_EMAIL
+			 , AF.FILE_ID 
+			 , AF.BOARD_ID
+			 , AF.ORIGINAL_FILE_NAME
+			 , AF.FILE_SIZE
+			 , AF.FILE_EXT
 		  FROM (SELECT *
 		  		  FROM BOARD
 		  		 WHERE ID = #{_parameter}) B
@@ -75,8 +85,10 @@
 		  	ON M.EMAIL = B.EMAIL
 		  LEFT JOIN REPLIES R
 		  	ON R.BOARD_ID = B.ID
-		  LEFT JOIN MEMBERS RM 
+		  LEFT JOIN MEMBERS RM
 		  	ON RM.EMAIL = R.EMAIL
+		  LEFT JOIN ATTACHED_FILES AF
+		  	ON AF.BOARD_ID = B.ID
 		 START WITH R.PRNT_REPLY_ID = 0
 		 	OR R.PRNT_REPLY_ID IS NULL
 		CONNECT BY PRIOR R.REPLY_ID = R.PRNT_REPLY_ID

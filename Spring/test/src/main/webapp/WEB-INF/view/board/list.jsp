@@ -20,12 +20,25 @@
 	<p>	
 		리스트 페이집니다
 	</p>
-	<div class="btn">
-		<a href="${pageContext.request.contextPath}/member/regist">회원가입</a>
-	</div>
-	<div class="btn">
-		<a href="${pageContext.request.contextPath}/board/write">글쓰기</a>
-	</div>
+	<c:if test="${empty user}">
+		<div class="btn">
+			<a href="${pageContext.request.contextPath}/member/regist">회원가입</a>
+		</div>
+		<div class="btn">
+			<a href="${pageContext.request.contextPath}/member/login">로그인</a>
+		</div>
+	</c:if>
+	<c:if test="${not empty user}">
+		<div class="btn">
+			<a href="${pageContext.request.contextPath}/board/write">글쓰기</a>
+		</div>
+		<div class="btn">
+			<a href="${pageContext.request.contextPath}/member/check/${user.email}/">회원정보</a>
+		</div>
+		<div class="btn">
+			<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+		</div>
+	</c:if>
 	
 	<div>총 ${boardList.size()}건</div>
 	<table>

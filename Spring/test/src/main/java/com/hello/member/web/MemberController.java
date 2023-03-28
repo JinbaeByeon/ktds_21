@@ -1,12 +1,14 @@
 package com.hello.member.web;
 
-import org.apache.tomcat.util.buf.StringUtils;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.hello.common.handler.StringUtil;
 import com.hello.member.service.MemberService;
@@ -17,6 +19,37 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@GetMapping("/member/login")
+	public String viewLoginPage() {
+		return "member/login";
+	}
+	
+	@GetMapping("/member/logout")
+	public String viewLogoutPage(HttpSession session) {
+		session.invalidate();
+		return "redirect:/boards";
+	}
+	
+	@PostMapping("/member/login")
+	public String doLogin(MemberVO memberVO, HttpSession session, Model model) {
+		if(StringUtil.isEmpty(memberVO.getEmail())) {
+			throw new RuntimeException("이메일은 필수 값입니다.");
+		}
+		if(StringUtil.isEmpty(memberVO.getPassword())) {
+			throw new RuntimeException("비밀번호는 필수 값입니다.");
+		}
+		
+		MemberVO memberData =memberService.readOneMemberByEmailAndPassword(memberVO);
+		
+		if(memberData == null) {
+			model.addAttribute("errorCode","NOT_FOUND_USER");
+			return "member/login";
+		}
+		session.setAttribute("__USER_SESSION_DATA__", memberData);
+		
+		return "redirect:/boards";
+	}
+	
 	@GetMapping("/member/regist")
 	public String viewRegistPage() {
 		return "member/regist";
@@ -56,34 +89,44 @@ public class MemberController {
 		return "redirect:/boards";
 	}
 
-	@GetMapping("/member/{email}{ext:\\.[a-z]+}")
+	@GetMapping("/member/check/{email}/")
+	public String viewCheckPasswordPage(@PathVariable String email) {
+		return "member/check";
+	}
+
+	@PostMapping("/member/check/{email}/")
+	public String doCheckPassword(@PathVariable String email
+			  					 , String password
+			  					 , @SessionAttribute("__USER_SESSION_DATA__") MemberVO user) {
+		if(user.getPassword().equals(password)) {
+			return "redirect:/member/" + email + "/";
+		}
+		
+		return "redirect:/boards";
+	}
+	
+	@GetMapping("/member/{email}/")
 	public String viewMemberDetailPage(@PathVariable String email
-									  , @PathVariable String ext
 									  , Model model) {
-		email += ext;
 		MemberVO member = memberService.readOneMemberByEmail(email);
 		model.addAttribute("member", member);
 		model.addAttribute("boardList",memberService.readAllBoardsByEmail(email));
 		return "member/detail";
 	}
 	
-	@GetMapping("member/update/{email}{ext:\\.[a-z]+}")
+	@GetMapping("member/update/{email}/")
 	public String viewMemberUpdatePage(@PathVariable String email
-									  , @PathVariable String ext
 									  , Model model) {
-		email += ext;		
 		model.addAttribute("member", memberService.readOneMemberByEmail(email));
 		
 		return "member/regist";
 	}
-	@PostMapping("member/update/{email}{ext:\\.[a-z]+}")
+	@PostMapping("member/update/{email}/")
 	public String doMemberUpdate(@PathVariable String email
-							    , @PathVariable String ext
 							    , MemberVO memberVO) {
-		email += ext;
 		memberVO.setEmail(email);
 		memberService.updateMember(memberVO);
-		return "redirect:/member/"+email;
+		return "redirect:/member/"+email + "/";
 	}
 	
 }
