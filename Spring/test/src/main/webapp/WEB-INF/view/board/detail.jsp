@@ -12,21 +12,21 @@
 	<script type="text/javascript">
 		$().ready(function(){
 			$('.btn.reply').click(function(){
-				alert('답글을 달고싶다');
-
-				<form action='${pageContext.request.contextPath}/board/reply/create' method='post'>
-					<input type='hidden' name='boardId' value='${board.id}''/>
-					<input type='hidden' name='prntReplyId' value = '0'/>
-				
-				var attachedReplyForm = $("<form action='${pageContext.request.contextPath}/board/reply/create' method='post'>
-										+ "<input type='hidden' name='boardId' value='${board.id}''/>"
-										+ "<input type='hidden' name='prntReplyId' value = '0'/>");
-				var input = "<textarea rows='4' cols='40'"
-				  +"id='reply' name='reply' placeholder='comment'></textarea>"
-				  +"<input type='submit' value='등록'/>";
-
-					
-				$(".reply").append(attachedReply);
+				var div =$(this).closest("div.reply");
+				if(div.children('form').length == 0){
+					console.log('폼 추가');
+					var attachedReplyForm = $("<form action='${pageContext.request.contextPath}/board/reply/create' method='post'>"
+											+ "<input type='hidden' name='boardId' value='${board.id}''/>"
+											+ "<input type='hidden' name='prntReplyId' value = '"+ $(this).attr('value')+"'/>");
+					var input = "<textarea rows='2' cols='40'"
+					+"id='reply' name='reply' placeholder='comment'></textarea>"
+					+"<input type='submit' value='등록'/>";
+					attachedReplyForm.append(input);					
+					div.append(attachedReplyForm);
+				} else {
+					console.log('폼 삭제');
+					div.children('form').remove();
+				}
 			})
 		});
 	</script>
@@ -78,9 +78,9 @@
 										<div>
 											${reply.reply}
 										</div>
-										<a class="btn reply ${reply.replyId}">답글달기</a>
+										<a class="btn reply" value="${reply.replyId}">답글달기</a>
 										<a class="btn">수정</a>
-										<a class="btn" <%-- href="${pageContext.request.contextPath}/board/${board.id}/reply/delete/${reply.replyId} --%>">삭제</a>
+										<a class="btn" <%-- href="${pageContext.request.contextPath}/board/${board.id}/reply/delete/${reply.replyId}" --%>>삭제</a>
 									</div>
 								</li>
 							</c:forEach>
