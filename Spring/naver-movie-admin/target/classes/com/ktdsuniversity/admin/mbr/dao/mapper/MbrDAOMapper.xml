@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+	
+	<insert id="createMember"
+			parameterType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+		INSERT INTO MBR
+		 (MBR_ID
+		 , MBR_NM
+		 , PWD
+		 , RGST_DT
+		 , USE_YN
+		 , LTST_LGN_DT
+		 , LTST_LGN_IP
+		 , LGN_TRY_CNT
+		 , LGN_BLOCK_YN
+		 , LTST_LGN_FAIL_DT
+		 , PWD_SALT
+		 , LTST_PWD_CHNG_DT
+		 , ADM_YN)
+		VALUES
+		 (#{mbrId}
+		, #{mbrNm}
+		, #{pwd}
+		, SYSDATE
+		, #{useYn}
+		, #{ltstLgnDt}
+		, #{ltstLgnIp}
+		, #{lgnTryCnt} 
+		, #{lgnBlockYn}
+		, #{ltstLgnFailDt}
+		, #{pwdSalt}
+		, #{ltstPwdChngDt}
+		, #{admYn})
+	</insert>
+	
+	<select id="readOneMemberById"
+			parameterType="string"
+			resultType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+		SELECT MBR_ID
+			 , MBR_NM
+			 , PWD
+			 , TO_CHAR(RGST_DT,'YYYY-MM-DD HH24:MI:SS') RGST_DT
+			 , USE_YN
+			 , TO_CHAR(LTST_LGN_DT,'YYYY-MM-DD HH24:MI:SS') LTST_LGN_DT
+			 , LTST_LGN_IP
+			 , LGN_TRY_CNT
+			 , LGN_BLOCK_YN
+			 , TO_CHAR(LTST_LGN_FAIL_DT,'YYYY-MM-DD HH24:MI:SS') LTST_LGN_FAIL_DT
+			 , PWD_SALT
+			 , TO_CHAR(LTST_PWD_CHNG_DT,'YYYY-MM-DD HH24:MI:SS') LTST_PWD_CHNG_DT
+			 , ADM_YN
+		  FROM MBR
+		 WHERE MBR_ID = #{_parameter}
+	</select>	
+	
+	<select id="readOneMemberByIdAndPwd"
+			parameterType="com.ktdsuniversity.admin.mbr.vo.MbrVO"
+			resultType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+		SELECT MBR_ID
+			 , MBR_NM
+			 , PWD
+			 , TO_CHAR(RGST_DT,'YYYY-MM-DD HH24:MI:SS') RGST_DT
+			 , USE_YN
+			 , TO_CHAR(LTST_LGN_DT,'YYYY-MM-DD HH24:MI:SS') LTST_LGN_DT
+			 , LTST_LGN_IP
+			 , LGN_TRY_CNT
+			 , LGN_BLOCK_YN
+			 , TO_CHAR(LTST_LGN_FAIL_DT,'YYYY-MM-DD HH24:MI:SS') LTST_LGN_FAIL_DT
+			 , PWD_SALT
+			 , TO_CHAR(LTST_PWD_CHNG_DT,'YYYY-MM-DD HH24:MI:SS') LTST_PWD_CHNG_DT
+			 , ADM_YN 
+		  FROM MBR
+		 WHERE MBR_ID = #{mbrId}
+		   AND PWD = #{pwd}
+	</select>
+	<select id="readAllMembers"
+			resultType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+		SELECT * 
+		  FROM MBR
+	</select>
+	
+	<update id="updateMember"
+			parameterType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+		UPDATE MOVIE.MBR
+		   SET MBR_NM= #{mbrNm}
+		   	 , PWD=#{pwd}
+		 WHERE MBR_ID=#{mbrId}
+		
+	</update>
+	
+	<delete id="deleteMember"
+			parameterType="string">
+		DELETE
+		  FROM table
+		 WHERE column = #{_parameter}
+	</delete>
+</mapper>
