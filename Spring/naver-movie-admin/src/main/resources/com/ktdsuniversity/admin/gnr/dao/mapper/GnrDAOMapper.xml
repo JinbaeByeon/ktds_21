@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Gnr">
+	<resultMap id="GnrMap"
+			   type="com.ktdsuniversity.admin.gnr.vo.GnrVO"
+			   autoMapping="true">
+		<id property="gnrId" column="GNR_ID" />
+		<association property="ctrMbr"
+					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+			<id property="mbrId" column="CRTR" />
+			<result property="mbrNm" column="CRTR_NM" />
+		</association>
+		<association property="mdfyMbr"
+					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+			<id property="mbrId" column="MDFYR" />
+			<result property="mbrNm" column="MDFYR_NM" />
+		</association>
+	</resultMap>
+	
+	
+	<insert id="createOneGnr"
+			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
+		INSERT INTO GNR
+		 (GNR_ID
+		, GNR_NM
+		, CRT_DT
+		, CRTR
+		, MDFY_DT
+		, MDFYR
+		, USE_YN
+		, DEL_YN)
+		VALUES
+		 (SEQ_GNR_PK.NEXTVAL
+		, #{gnrNm}
+		, SYSDATE
+		, #{crtr}
+		, SYSDATE
+		, #{mdfyr}
+		, NVL(#{useYn},'N')
+		, 'N' )
+		
+	</insert>
+	
+	<select id="readAllGnr"
+			parameterType="string"
+			resultType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
+		SELECT G.GNR_ID
+			 , G.GNR_NM
+			 , TO_CHAR(G.CRT_DT,'YYYY-MM-DD HH24:MI:SS') CRT_DT
+			 , G.CRTR
+			 , TO_CHAR(G.MDFY_DT,'YYYY-MM-DD HH24:MI:SS') MDFY_DT
+			 , G.MDFYR
+			 , G.USE_YN
+			 , G.DEL_YN
+			 , CM.MBR_NM CRTR_NM
+			 , MM.MBR_NM MDFYR_NM
+		  FROM GNR G
+		  JOIN MBR CM
+		  	ON CM.MBR_ID = G.CRTR
+		  JOIN MBR MM
+		  	ON MM.MBR_ID = G.MDFYR
+		 WHERE G.DEL_YN = 'N'
+		 <if test="_parameter != null and _parameter != ''">
+		 	AND GNR_NM = #{_parameter}
+		 </if>
+		  ORDER BY G.GNR_ID
+
+	</select>
+	
+	<update id="updateOneGnr"
+			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
+		UPDATE GNR
+		   SET GNR_NM=#{gnrNm}
+		   	 , MDFY_DT=SYSDATE
+		   	 , MDFYR=#{mdfyr}
+		   	 , USE_YN=NVL(#{useYn},'N')
+		 WHERE GNR_ID=#{gnrId}
+		
+	</update>
+	
+	<delete id="deleteOntGnrByGnrId"
+			parameterType="_int">
+		UPDATE GNR
+		   SET DEL_YN = 'Y'
+		 WHERE GNR_ID=#{_parameter}
+
+	</delete>
+</mapper>

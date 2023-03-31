@@ -1,50 +1,22 @@
 package com.ktdsuniversity.admin.gnr.vo;
 
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+
 /**
  * GNR
  */
 public class GnrVO {
-
-	/**
-	 * 
-	 */
 	private int gnrId;
-
-	/**
-	 * 
-	 */
 	private String gnrNm;
-
-	/**
-	 * 
-	 */
 	private String crtDt;
-
-	/**
-	 * 
-	 */
 	private String crtr;
-
-	/**
-	 * 
-	 */
 	private String mdfyDt;
-
-	/**
-	 * 
-	 */
 	private String mdfyr;
-
-	/**
-	 * 
-	 */
 	private String useYn;
-
-	/**
-	 * 
-	 */
 	private String delYn;
 
+	private MbrVO ctrMbr;
+	private MbrVO mdfyMbr;
 
 	public void setGnrId(int gnrId) {
 		this.gnrId = gnrId;
@@ -108,6 +80,22 @@ public class GnrVO {
 
 	public String getDelYn() {
 		return this.delYn;
+	}
+
+	public MbrVO getCtrMbr() {
+		return ctrMbr;
+	}
+
+	public void setCtrMbr(MbrVO ctrMbr) {
+		this.ctrMbr = ctrMbr;
+	}
+
+	public MbrVO getMdfyMbr() {
+		return mdfyMbr;
+	}
+
+	public void setMdfyMbr(MbrVO mdfyMbr) {
+		this.mdfyMbr = mdfyMbr;
 	}
 
 }

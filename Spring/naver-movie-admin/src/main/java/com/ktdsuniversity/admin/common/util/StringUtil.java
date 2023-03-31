@@ -1,4 +1,4 @@
-package com.ktdsuniversity.admin.common.handler;
+package com.ktdsuniversity.admin.common.util;
 
 public abstract class StringUtil {
 	private StringUtil() {}

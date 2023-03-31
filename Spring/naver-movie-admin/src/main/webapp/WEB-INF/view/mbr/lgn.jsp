@@ -37,23 +37,25 @@
 </head>
 <body>
 	<div class="fullscreen item-align-center bg-gray">
-		<div class="lgn-group align-right">
+		<div>
 			<h1>Ktds Movie System</h1>
-			<div class="input-group">
-				<label for="mbrId">ID</label>
-				<input id="mbrId"
-					   name="mbrId"
-					   type="text"
-					   placeholder="id"/>
+			<div class="lgn-group align-right">
+				<div class="input-group">
+					<label for="mbrId">ID</label>
+					<input id="mbrId"
+						   name="mbrId"
+						   type="text"
+						   placeholder="id"/>
+				</div>
+				<div class="input-group">
+					<label for="pwd">PWD</label>
+					<input id="pwd"
+						   name="pwd"
+						   type="password"
+						   placeholder="password"/>
+				</div>
+				<button class="btn-primary" id="btn-lgn">로그인</button>
 			</div>
-			<div class="input-group">
-				<label for="pwd">PWD</label>
-				<input id="pwd"
-					   name="pwd"
-					   type="password"
-					   placeholder="password"/>
-			</div>
-			<button class="btn-primary" id="btn-lgn">로그인</button>
 		</div>
 	</div>
 </body>

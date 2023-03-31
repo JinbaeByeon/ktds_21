@@ -1,34 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.Random"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
+<c:set var="date" value="<%= new Random().nextInt() %>"/>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="${context}/css/common.css" rel="stylesheet"/>
-<link href="${context}/css/index.css" rel="stylesheet"/>
-<script type="text/javascript" src="${context}/js/jquery-3.6.4.min.js"></script>
-	<script type="text/javascript">
-		$().ready(function(){
-			
-		});
-	</script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<jsp:include page="./include/stylescript.jsp"/>
 </head>
-<body>
-	<div class="fullscreen">
-		<div id="gnb-menu">
-			gnb메뉴
-		</div>
-		<div id="contents">
-			<div id="side-menu">
-				사이드 메뉴
-			</div>
-			<div id="content">
-				콘텐츠
+	<body>
+		<div class="main-layout">
+			<jsp:include page="./include/header.jsp"/>
+			<div>
+				<jsp:include page="./include/sidemenu.jsp"/>
+				<jsp:include page="./include/content.jsp"/>
+					안녕하세요! aaa  ${context} ${date} bbb
+				<jsp:include page="./include/footer.jsp"/>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

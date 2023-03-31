@@ -5,15 +5,20 @@ import java.util.List;
 import com.ktdsuniversity.admin.mbr.vo.MbrVO;
 
 public interface MbrDAO {
-	public int createMember(MbrVO mbrVO);
+	public int createNewAdminMbr(MbrVO mbrVO);
 	
-	public MbrVO readOneMemberById(String mbrId);
+	public int readCountMbrById(String mbrId);	
+	public String readSaltById(String mbrId);
+	public String readLgnBlockYnById(String mbrId);
 	
+	public MbrVO readOneMemberById(String mbrId);	
 	public MbrVO readOneMemberByIdAndPwd(MbrVO mbrVO);
-
 	public List<MbrVO> readAllMembers();
 	
-	public int updateMember(MbrVO mbrVO);
+	public int updateMbrLgnSucc(MbrVO mbrVO);
+	public int updateMbrLgnFail(String mbrId);
+	public int updateMbrLgnBlock(String mbrId);
+	public int updateOneNewAdminMbr(MbrVO mbrVO);
 	
-	public int deleteMember(String mbrId);
+	public int deleteOneNewAdminMbr(String mbrId);
 }
