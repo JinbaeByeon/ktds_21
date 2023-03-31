@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hello.common.exception.AjaxResponseException;
 
-@ControllerAdvice({"com.hello","org.springframework"})
+@ControllerAdvice({"com.hello"})
 public class ExceptionController {
 	
 	private Logger logger =LoggerFactory.getLogger(ExceptionController.class);
