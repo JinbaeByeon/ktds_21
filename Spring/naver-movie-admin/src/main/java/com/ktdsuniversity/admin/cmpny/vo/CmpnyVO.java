@@ -5,44 +5,20 @@ package com.ktdsuniversity.admin.cmpny.vo;
  */
 public class CmpnyVO {
 
-	/**
-	 * 
-	 */
 	private String cmpnyId;
 
-	/**
-	 * 
-	 */
 	private String cmpnyNm;
 
-	/**
-	 * 
-	 */
 	private String crtDt;
 
-	/**
-	 * 
-	 */
 	private String crtr;
 
-	/**
-	 * 
-	 */
 	private String mdfyDt;
 
-	/**
-	 * 
-	 */
 	private String mdfyr;
 
-	/**
-	 * 
-	 */
 	private String useYn;
 
-	/**
-	 * 
-	 */
 	private String delYn;
 
 

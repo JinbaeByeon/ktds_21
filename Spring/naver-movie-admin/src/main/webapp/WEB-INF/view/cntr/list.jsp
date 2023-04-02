@@ -132,7 +132,7 @@
 									<c:forEach items="${cntrList}"
 											   var="cntr">
 										<tr data-cntrid="${cntr.cntrId}"
-											data-nm="${cntr.cntrNm}"
+											data-cntrnm="${cntr.cntrNm}"
 											data-crtdt="${cntr.crtDt}"
 											data-crtr="${cntr.crtr}"
 											data-mdfydt="${cntr.mdfyDt}"
@@ -143,7 +143,7 @@
 											</td>
 											<td>순번</td>
 											<td>${cntr.cntrId}</td>
-											<td>${cntr.nm}</td>
+											<td>${cntr.cntrNm}</td>
 											<td>${cntr.crtDt}</td>
 											<td>${cntr.crtr}</td>
 											<td>${cntr.mdfyDt}</td>
@@ -172,7 +172,7 @@
 						 -->
 						<input type="hidden" id="isModify" value="false" />
 						<div class="input-group inline">
-							<label for="cntrId" style=" width:180px;">영화인 ID</label>
+							<label for="cntrId" style=" width:180px;">국가ID</label>
 							<input type="text" id="cntrId" readonly value=""/>
 						</div>
 						<div class="input-group inline">
