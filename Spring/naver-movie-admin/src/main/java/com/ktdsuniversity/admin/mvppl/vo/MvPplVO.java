@@ -4,57 +4,17 @@ package com.ktdsuniversity.admin.mvppl.vo;
  * MV_PPL
  */
 public class MvPplVO {
-
-	/**
-	 * 
-	 */
+	
 	private String mvPplId;
-
-	/**
-	 * 
-	 */
 	private String prflPctr;
-
-	/**
-	 * 
-	 */
 	private String nm;
-
-	/**
-	 * 
-	 */
 	private String rlNm;
-
-	/**
-	 * 
-	 */
 	private String crtDt;
-
-	/**
-	 * 
-	 */
 	private String crtr;
-
-	/**
-	 * 
-	 */
 	private String mdfyDt;
-
-	/**
-	 * 
-	 */
 	private String mdfyr;
-
-	/**
-	 * 
-	 */
 	private String useYn;
-
-	/**
-	 * 
-	 */
 	private String delYn;
-
 
 	public void setMvPplId(String mvPplId) {
 		this.mvPplId = mvPplId;
