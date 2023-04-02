@@ -4,7 +4,7 @@
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <div class="side-menu inline bg-black">
 	<ul class="menu-list">
-		<li class="menu-item active-item" >장르 관리</li>
+		<li class="menu-item active-item" > <a href="${context}/gnr/list">장르 관리</a></li>
 		<li class="menu-item" > <a href="${context}/cntr/list">제작지 관리</a></li>
 		<li class="menu-item" > <a href="${context}/cmpny/list">제작사 관리</a></li>
 		<li class="menu-item" > <a href="${context}/mvppl/list">영화인 관리</a></li>

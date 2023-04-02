@@ -24,9 +24,8 @@
 			$("#isModify").val("true"); //수정모드
 			
 			var data =$(this).data(); 
-			$("#mvPplId").val(data.mvpplid);
-			$("#nm").val(data.nm);
-			$("#rlNm").val(data.rlnm);
+			$("#cntrId").val(data.cntrid);
+			$("#cntrNm").val(data.cntrnm);
 			$("#crtDt").val(data.crtdt);
 			$("#crtr").val(data.crtr);
 			$("#mdfyDt").val(data.mdfydt);
@@ -40,9 +39,8 @@
 			$(this).hide();
 			$("#isModify").val("false"); //등록모드
 
-			$("#mvPplId").val("");
-			$("#nm").val("");
-			$("#rlNm").val("");
+			$("#cntrId").val("");
+			$("#cntrNm").val("");
 			$("#crtDt").val("");
 			$("#crtr").val("");
 			$("#mdfyDt").val("");
@@ -54,15 +52,15 @@
 		
 		$("#delete_btn").click(function(){
 			$(".grid > table > tbody > tr").siblings().css("backgroundColor","");
-			var mvPplId = $("#mvPplId").val();
-			if(mvPplId==""){
-				alret("선택된 영화인이 없습니다.");
+			var cntrId = $("#cntrId").val();
+			if(cntrId==""){
+				alret("선택된 국가가 없습니다.");
 				return;
 			}
 			if(!confirm("정말 삭제하시겠습니까?")){
 				return;
 			}
-			$.get("${context}/api/mvppl/delete/" +mvPplId, function(response){
+			$.get("${context}/api/cntr/delete/" +cntrId, function(response){
 				if(response.status =="200 OK"){
 					location.reload(); //새로고침	
 				}
@@ -78,7 +76,7 @@
 			
 			if( $("#isModify").val() =="false"){
 				console.log($("#useYn:checked").val());
-				$.post("${context}/api/mvppl/create", $("#detail_form").serialize(),function(response){
+				$.post("${context}/api/cntr/create", $("#detail_form").serialize(),function(response){
 					if(response.status =="200 OK"){
 						location.reload(); //새로고침	
 					}
@@ -88,7 +86,7 @@
 				});
 			}
 			else{
-				$.post("${context}/api/mvppl/update", {mvPplId: $('#mvPplId').val(), $("#detail_form").serialize()},function(response){
+				$.post("${context}/api/cntr/update", {cntrId: $('#cntrId').val(), $("#detail_form").serialize()},function(response){
 					if(response.status =="200 OK"){
 						location.reload(); //새로고침	
 					}
@@ -109,20 +107,18 @@
 		<div>
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
-				<div class="path"> 영화 > 영화인관리</div>
-				
+				<div class="path"> 영화 > 국가관리</div>
 				<div class="grid">
 					<div class="grid-count align-right">
-						총 ${mvPplList.size()}건
+						총 ${cntrList.size()}건
 					</div>
 					<table>
 						<thead>
 							<tr>
 								<th><input type="checkbox" id="all_check" /></th>
 								<th>순번</th>
-								<th>영화인ID</th>
-								<th>영화인명</th>
-								<th>본명</th>
+								<th>국가ID</th>
+								<th>국가명</th>
 								<th>등록일</th>
 								<th>등록자</th>
 								<th>수정일</th>
@@ -132,45 +128,40 @@
 						</thead>
 						<tbody>
 							<c:choose>
-								<c:when test="${not empty mvPplList}">
-									<c:forEach items="${mvPplList}"
-											   var="mvPpl">
-										<tr data-mvpplid="${mvPpl.mvPplId}"
-											data-nm="${mvPpl.nm}"
-											data-rlnm="${mvPpl.rlNm}"
-											data-crtdt="${mvPpl.crtDt}"
-											data-crtr="${mvPpl.crtr}"
-											data-mdfydt="${mvPpl.mdfyDt}"
-											data-mdfyr="${mvPpl.mdfyr}"
-											data-useyn="${mvPpl.useYn}">
+								<c:when test="${not empty cntrList}">
+									<c:forEach items="${cntrList}"
+											   var="cntr">
+										<tr data-cntrid="${cntr.cntrId}"
+											data-nm="${cntr.cntrNm}"
+											data-crtdt="${cntr.crtDt}"
+											data-crtr="${cntr.crtr}"
+											data-mdfydt="${cntr.mdfyDt}"
+											data-mdfyr="${cntr.mdfyr}"
+											data-useyn="${cntr.useYn}">
 											<td>
-												<input type="checkbox" class="check_idx" value="${mvPpl.mvPplId}" />
+												<input type="checkbox" class="check_idx" value="${cntr.cntrId}" />
 											</td>
 											<td>순번</td>
-											<td>${mvPpl.mvPplId}</td>
-											<td>${mvPpl.nm}</td>
-											<td>${mvPpl.rlNm}</td>
-											<td>${mvPpl.crtDt}</td>
-											<td>${mvPpl.crtr}</td>
-											<td>${mvPpl.mdfyDt}</td>
-											<td>${mvPpl.mdfyr}</td>
-											<td>${mvPpl.useYn}</td>
+											<td>${cntr.cntrId}</td>
+											<td>${cntr.nm}</td>
+											<td>${cntr.crtDt}</td>
+											<td>${cntr.crtr}</td>
+											<td>${cntr.mdfyDt}</td>
+											<td>${cntr.mdfyr}</td>
+											<td>${cntr.useYn}</td>
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
 									<tr>
-										<td colspan="10" class="no-items">
-											등록된 영화인이 없습니다.
-										</td>
-									
+										<td colspan="9" class="no-items">
+											등록된 국가가 없습니다.
+										</td>									
 									</tr>
 								</c:otherwise>
-							</c:choose>
-						
+							</c:choose>						
 						</tbody>
-					</table>
-					
+					</table>					
 				</div>
 				
 				<div class="grid-detail" >
@@ -181,16 +172,12 @@
 						 -->
 						<input type="hidden" id="isModify" value="false" />
 						<div class="input-group inline">
-							<label for="mvPplId" style=" width:180px;">영화인 ID</label>
-							<input type="text" id="mvPplId" readonly value=""/>
+							<label for="cntrId" style=" width:180px;">영화인 ID</label>
+							<input type="text" id="cntrId" readonly value=""/>
 						</div>
 						<div class="input-group inline">
-							<label for="nm" style=" width:180px;">영화인명</label>
-							<input type="text" id="nm"  name="nm" value=""/>
-						</div>
-						<div class="input-group inline">
-							<label for="rlNm" style=" width:180px;">본명</label>
-							<input type="text" id="nm"  name="rlNm" value=""/>
+							<label for="cntrNm" style=" width:180px;">국가명</label>
+							<input type="text" id="cntrNm"  name="cntrNm" value=""/>
 						</div>
 						<div class="input-group inline">
 							<label for="crtDt" style=" width:180px;">등록일</label>
@@ -207,27 +194,21 @@
 						<div class="input-group inline">
 							<label for="mdfyr" style=" width:180px;">수정자</label>
 							<input type="text" id="mdfyr" disabled value=""/>
-						</div>	
-						
+						</div>
 						<div class="input-group inline">
 							<label for="useYn" style=" width:180px;">사용여부</label>
 							<input type="checkbox" id="useYn" name="useYn" value="Y"/>
 						</div>
 							
 					</form>
-					
-					
+										
 				</div>
 				<div class="align-right">
 					<button id="new_btn" class="btn-primary">신규</button>
 					<button id="save_btn" class="btn-primary">저장</button>
 					<button id="delete_btn" class="btn-delete">삭제</button>
 				</div>
-				
-				
-				
-				
-				
+								
 			<jsp:include page="../include/footer.jsp"/>
 		</div>
 	</div>

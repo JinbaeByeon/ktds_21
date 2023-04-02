@@ -4,47 +4,15 @@ package com.ktdsuniversity.admin.cntr.vo;
  * CNTR
  */
 public class CntrVO {
-
-	/**
-	 * 
-	 */
+	
 	private int cntrId;
-
-	/**
-	 * 
-	 */
 	private String cntrNm;
-
-	/**
-	 * 
-	 */
 	private String crtDt;
-
-	/**
-	 * 
-	 */
 	private String crtr;
-
-	/**
-	 * 
-	 */
 	private String mdfyDt;
-
-	/**
-	 * 
-	 */
 	private String mdfyr;
-
-	/**
-	 * 
-	 */
 	private String useYn;
-
-	/**
-	 * 
-	 */
 	private String delYn;
-
 
 	public void setCntrId(int cntrId) {
 		this.cntrId = cntrId;

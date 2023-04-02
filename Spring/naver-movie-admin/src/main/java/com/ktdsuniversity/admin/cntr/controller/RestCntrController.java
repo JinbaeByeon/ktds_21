@@ -1,4 +1,4 @@
-package com.ktdsuniversity.admin.mvppl.controller;
+package com.ktdsuniversity.admin.cntr.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,34 +7,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.ktdsuniversity.admin.cntr.service.CntrService;
+import com.ktdsuniversity.admin.cntr.vo.CntrVO;
 import com.ktdsuniversity.admin.common.api.vo.APIResponseVO;
 import com.ktdsuniversity.admin.common.api.vo.APIStatus;
 import com.ktdsuniversity.admin.mbr.vo.MbrVO;
-import com.ktdsuniversity.admin.mvppl.service.MvPplService;
-import com.ktdsuniversity.admin.mvppl.vo.MvPplVO;
 
 @RestController
-public class RestMvPplController {
+public class RestCntrController {
 
 	@Autowired
-	private MvPplService mvPplService;
+	private CntrService cntrService;
 	
-	@PostMapping("/api/mvppl/create")
-	public APIResponseVO doCreateMvPpl(MvPplVO mvPplVO, @SessionAttribute("__ADMIN__") MbrVO admin) {
-		mvPplVO.setCrtr(admin.getMbrId());
-		mvPplVO.setMdfyr(admin.getMbrId());
+	@PostMapping("/api/cntr/create")
+	public APIResponseVO doCreateCntr(CntrVO cntrVO, @SessionAttribute("__ADMIN__") MbrVO admin) {
+		cntrVO.setCrtr(admin.getMbrId());
+		cntrVO.setMdfyr(admin.getMbrId());
 		
-		if(mvPplService.createOneMvPpl(mvPplVO)) {
+		if(cntrService.createOneCntr(cntrVO)){
 			return new APIResponseVO(APIStatus.OK);			
 		}
 		return new APIResponseVO(APIStatus.FAIL);
 	}
 	
-	@PostMapping("/api/mvppl/update")
-	public APIResponseVO doUpdateMvPpl(MvPplVO mvPplVO, @SessionAttribute("__ADMIN__") MbrVO admin) {
-		mvPplVO.setMdfyr(admin.getMbrId());
+	@PostMapping("/api/cntr/update")
+	public APIResponseVO doUpdateCntr(CntrVO cntrVO, @SessionAttribute("__ADMIN__") MbrVO admin) {
+		cntrVO.setMdfyr(admin.getMbrId());
 		
-		if(mvPplService.updateOneMvPpl(mvPplVO)) {
+		if(cntrService.updateOneCntr(cntrVO)) {
 			return new APIResponseVO(APIStatus.OK);			
 		}
 		return new APIResponseVO(APIStatus.FAIL);
@@ -42,9 +42,9 @@ public class RestMvPplController {
 	}
 	
 	
-	@GetMapping("/api/mvppl/delete/{mvPplId}")
-	public APIResponseVO doDeleteMvPpl(@PathVariable String mvPplId) {
-		if(mvPplService.deleteOneMvPpl(mvPplId)) {
+	@GetMapping("/api/cntr/delete/{cntrId}")
+	public APIResponseVO doDeleteCntr(@PathVariable int cntrId) {
+		if(cntrService.deleteOneCntrById(cntrId)) {
 			return new APIResponseVO(APIStatus.OK);
 		}
 		return new APIResponseVO(APIStatus.FAIL);
