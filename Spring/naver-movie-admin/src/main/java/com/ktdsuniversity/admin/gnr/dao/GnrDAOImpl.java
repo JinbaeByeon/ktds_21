@@ -19,8 +19,8 @@ public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO {
 	}
 
 	@Override
-	public List<GnrVO> readAllGnr(String gnrNm) {
-		return getSqlSession().selectList("Gnr.readAllGnr",gnrNm);
+	public List<GnrVO> readAllGnr(GnrVO gnrVO) {
+		return getSqlSession().selectList("Gnr.readAllGnr",gnrVO);
 	}
 
 	@Override
@@ -35,7 +35,12 @@ public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO {
 
 	@Override
 	public int deleteOntGnrByGnrId(int gnrId) {
-		return getSqlSession().delete("Gnr.deleteOntGnrByGnrId",gnrId);
+		return getSqlSession().update("Gnr.deleteOntGnrByGnrId",gnrId);
+	}
+
+	@Override
+	public int deleteGnrByGnrIdList(List<Integer> gnrIdList) {
+		return getSqlSession().update("Gnr.deleteGnrByGnrIdList",gnrIdList);
 	}
 
 	

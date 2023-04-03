@@ -19,7 +19,6 @@
 		</association>
 	</resultMap>
 	
-	
 	<insert id="createOneGnr"
 			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
 		INSERT INTO GNR
@@ -40,12 +39,12 @@
 		, #{mdfyr}
 		, NVL(#{useYn},'N')
 		, 'N' )
-		
 	</insert>
 	
 	<select id="readAllGnr"
-			parameterType="string"
+			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO"
 			resultType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
+		<include refid="Common.pageHeader"/>
 		SELECT G.GNR_ID
 			 , G.GNR_NM
 			 , TO_CHAR(G.CRT_DT,'YYYY-MM-DD HH24:MI:SS') CRT_DT
@@ -62,11 +61,11 @@
 		  JOIN MBR MM
 		  	ON MM.MBR_ID = G.MDFYR
 		 WHERE G.DEL_YN = 'N'
-		 <if test="_parameter != null and _parameter != ''">
-		 	AND GNR_NM = #{_parameter}
-		 </if>
-		  ORDER BY G.GNR_ID
-
+		<if test="gnrNm != null and gnrNm != ''">
+		   AND G.GNR_NM LIKE '%' || #{gnrNm} || '%'
+		</if>
+		 ORDER BY G.GNR_ID
+		<include refid="Common.pageFooter"/>
 	</select>
 	
 	<update id="updateOneGnr"
@@ -77,14 +76,22 @@
 		   	 , MDFYR=#{mdfyr}
 		   	 , USE_YN=NVL(#{useYn},'N')
 		 WHERE GNR_ID=#{gnrId}
-		
 	</update>
 	
-	<delete id="deleteOntGnrByGnrId"
+	<update id="deleteOntGnrByGnrId"
 			parameterType="_int">
 		UPDATE GNR
 		   SET DEL_YN = 'Y'
 		 WHERE GNR_ID=#{_parameter}
-
-	</delete>
+	</update>
+	
+	<update id="deleteGnrByGnrIdList"
+			parameterType="arraylist">
+		UPDATE GNR
+		   SET DEL_YN = 'Y'
+		 WHERE GNR_ID IN
+		 <foreach collection="list" item="gnrId" open="(" close=")" separator=", ">
+		 	#{gnrId}
+		 </foreach>
+	</update>
 </mapper>

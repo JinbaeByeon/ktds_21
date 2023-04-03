@@ -86,7 +86,7 @@
 				});
 			}
 			else{
-				$.post("${context}/api/cntr/update", {cntrId: $('#cntrId').val(), $("#detail_form").serialize()},function(response){
+				$.post("${context}/api/cntr/update",$("#detail_form").serialize(),function(response){
 					if(response.status =="200 OK"){
 						location.reload(); //새로고침	
 					}
@@ -98,7 +98,15 @@
 
 		});
 
+		$("#search-btn").click(function(){
+			movePage(0);
+		});
+		
 	});
+	function movePage(pageNo) {
+		var cntrNm= $("#search-keyword").val();
+		location.href = "${context}/cntr/list?cntrNm=" + cntrNm + "&pageNo=" + pageNo;
+	}
 </script>
 </head>
 <body>
@@ -108,6 +116,14 @@
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
 				<div class="path"> 영화 > 국가관리</div>
+				<div class="search-group">
+					<label for="search-keyword">국가명</label>
+					<input type="text"
+						   id="search-keyword" 
+						   class="search-input"
+						   value="${gnrNm}"/>
+					<button class="btn-search" id="search-btn">검색</button>
+				</div>
 				<div class="grid">
 					<div class="grid-count align-right">
 						총 ${cntrList.size()}건
@@ -161,7 +177,14 @@
 								</c:otherwise>
 							</c:choose>						
 						</tbody>
-					</table>					
+					</table>
+					<c:import url="../include/pagenate.jsp">
+						<c:param name="pageNo" value="${pageNo}"/>
+						<c:param name="pageCnt" value="${pageCnt}"/>
+						<c:param name="lastPage" value="${cntrVO.lastPage}"/>
+						<c:param name="path" value="${context}/cntr"/>
+					</c:import>
+					
 				</div>
 				
 				<div class="grid-detail" >

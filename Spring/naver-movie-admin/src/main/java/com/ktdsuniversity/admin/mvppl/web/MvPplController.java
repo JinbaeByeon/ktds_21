@@ -1,4 +1,4 @@
-package com.ktdsuniversity.admin.mvppl.controller;
+package com.ktdsuniversity.admin.mvppl.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

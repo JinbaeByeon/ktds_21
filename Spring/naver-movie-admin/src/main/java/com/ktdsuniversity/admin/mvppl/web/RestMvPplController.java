@@ -1,4 +1,4 @@
-package com.ktdsuniversity.admin.mvppl.controller;
+package com.ktdsuniversity.admin.mvppl.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ public class RestMvPplController {
 		mvPplVO.setMdfyr(admin.getMbrId());
 		
 		if(mvPplService.createOneMvPpl(mvPplVO)) {
-			return new APIResponseVO(APIStatus.OK);			
+			return new APIResponseVO(APIStatus.OK);
 		}
 		return new APIResponseVO(APIStatus.FAIL);
 	}
@@ -35,7 +35,7 @@ public class RestMvPplController {
 		mvPplVO.setMdfyr(admin.getMbrId());
 		
 		if(mvPplService.updateOneMvPpl(mvPplVO)) {
-			return new APIResponseVO(APIStatus.OK);			
+			return new APIResponseVO(APIStatus.OK);
 		}
 		return new APIResponseVO(APIStatus.FAIL);
 		

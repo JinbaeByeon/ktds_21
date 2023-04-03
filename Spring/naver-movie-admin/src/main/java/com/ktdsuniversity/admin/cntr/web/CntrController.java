@@ -1,4 +1,4 @@
-package com.ktdsuniversity.admin.cntr.controller;
+package com.ktdsuniversity.admin.cntr.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

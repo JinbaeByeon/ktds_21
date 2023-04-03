@@ -88,7 +88,7 @@
 				});
 			}
 			else{
-				$.post("${context}/api/mvppl/update", {mvPplId: $('#mvPplId').val(), $("#detail_form").serialize()},function(response){
+				$.post("${context}/api/mvppl/update", $("#detail_form").serialize(),function(response){
 					if(response.status =="200 OK"){
 						location.reload(); //새로고침	
 					}
@@ -100,7 +100,15 @@
 
 		});
 
+		$("#search-btn").click(function(){
+			movePage(0);
+		});
+		
 	});
+	function movePage(pageNo) {
+		var mvPplNm= $("#search-keyword").val();
+		location.href = "${context}/mvppl/list?mvPplNm=" + mvPplNm + "&pageNo=" + pageNo;
+	}
 </script>
 </head>
 <body>
@@ -110,7 +118,14 @@
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
 				<div class="path"> 영화 > 영화인관리</div>
-				
+				<div class="search-group">
+					<label for="search-keyword">이름</label>
+					<input type="text"
+						   id="search-keyword" 
+						   class="search-input"
+						   value="${gnrNm}"/>
+					<button class="btn-search" id="search-btn">검색</button>
+				</div>
 				<div class="grid">
 					<div class="grid-count align-right">
 						총 ${mvPplList.size()}건
@@ -171,6 +186,12 @@
 						</tbody>
 					</table>
 					
+					<c:import url="../include/pagenate.jsp">
+						<c:param name="pageNo" value="${pageNo}"/>
+						<c:param name="pageCnt" value="${pageCnt}"/>
+						<c:param name="lastPage" value="${mvPplVO.lastPage}"/>
+						<c:param name="path" value="${context}/mvppl"/>
+					</c:import>
 				</div>
 				
 				<div class="grid-detail" >

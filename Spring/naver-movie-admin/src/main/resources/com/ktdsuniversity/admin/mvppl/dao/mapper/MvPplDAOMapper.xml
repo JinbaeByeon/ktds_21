@@ -6,14 +6,34 @@
 	<insert id="createOneMvPpl"
 			parameterType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO">
 		INSERT INTO MV_PPL
-		()
+		 (MV_PPL_ID
+		, PRFL_PCTR
+		, NM
+		, RL_NM
+		, CRT_DT
+		, CRTR
+		, MDFY_DT
+		, MDFYR
+		, USE_YN
+		, DEL_YN)
 		VALUES
-		()
+		 (SEQ_MV_PPL_PK.NEXTVAL
+		, #{prflPctr}
+		, #{nm}
+		, #{rlNm}
+		, SYSDATE
+		, #{crtr}
+		, SYSDATE
+		, #{mdfyr}
+		, NVL(#{useYn},'N')
+		, 'N' )
+
 	</insert>
 	
 	<select id="readAllMvPpl"
-			parameterType="string"
+			parameterType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO"
 			resultType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO">
+		<include refid="Common.pageHeader"/>
 		SELECT MP.MV_PPL_ID
 			 , MP.PRFL_PCTR
 			 , MP.NM
@@ -28,14 +48,15 @@
 			 , MM.MBR_NM MDFYR_NM
 		  FROM MV_PPL MP
 		  JOIN MBR CM
-		  	ON CM.ID = MP.CRTR
+		  	ON CM.MBR_ID = MP.CRTR
 		  JOIN MBR MM
-		  	ON MM.ID = MP.MDFYR
+		  	ON MM.MBR_ID = MP.MDFYR
 		 WHERE DEL_YN = 'N'
 		 <if test="_paramter != null and _parameter != ''">
 		   AND NM = #{_parameter}
 		 </if>
 		 ORDER BY MV_PPL_ID
+		<include refid="Common.pageFooter"/>
 	</select>
 	
 	<update id="updateOneMvPpl"

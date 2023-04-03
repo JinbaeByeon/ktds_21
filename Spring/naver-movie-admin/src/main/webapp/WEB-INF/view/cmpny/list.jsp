@@ -86,7 +86,7 @@
 				});
 			}
 			else{
-				$.post("${context}/api/cmpny/update", {cmpnyId: $('#cmpnyId').val(), $("#detail_form").serialize()},function(response){
+				$.post("${context}/api/cmpny/update",$("#detail_form").serialize(),function(response){
 					if(response.status =="200 OK"){
 						location.reload(); //새로고침	
 					}
@@ -96,6 +96,10 @@
 				});
 			}
 
+		});
+		$("#search-btn").click(function(){
+			var cmpnyNm= $("#search-keyword").val();
+			location.href = "${context}/cmpny/list?cmpnyNm=" + cmpnyNm;
 		});
 
 	});
@@ -108,6 +112,14 @@
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
 				<div class="path"> 영화 > 회사관리</div>
+				<div class="search-group">
+					<label for="search-keyword">국가명</label>
+					<input type="text"
+						   id="search-keyword" 
+						   class="search-input"
+						   value="${gnrNm}"/>
+					<button class="btn-search" id="search-btn">검색</button>
+				</div>
 				<div class="grid">
 					<div class="grid-count align-right">
 						총 ${cmpnyList.size()}건

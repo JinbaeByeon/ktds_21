@@ -6,22 +6,70 @@
 
 	<insert id="createOneCmpny"
 			parameterType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO">
+		INSERT INTO CMPNY
+		 (CMPNY_ID
+		, CMPNY_NM
+		, CRT_DT
+		, CRTR
+		, MDFY_DT
+		, MDFYR
+		, USE_YN
+		, DEL_YN)
+		VALUES
+		 (SEQ_CMPNY_PK.NEXTVAL
+		, #{cmpnyNm}
+		, SYSDATE
+		, #{crtr}
+		, SYSDATE
+		, #{mdfyr}
+		, NVL(#{useYn},'N')
+		, 'N' )
 		
 	</insert>
 	
 	<select id="readAllCmpny"
-			parameterType="string"
+			parameterType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO"
 			resultType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO">
+		<include refid="Common.pageHeader"/>
+		SELECT C.CMPNY_ID
+			 , C.CMPNY_NM
+			 , TO_CHAR(C.CRT_DT,'YYYY-MM-DD HH24:MI:SS') CRT_DT
+			 , C.CRTR
+			 , TO_CHAR(C.MDFY_DT,'YYYY-MM-DD HH24:MI:SS') MDFY_DT
+			 , C.MDFYR
+			 , C.USE_YN
+			 , CM.MBR_NM CRTR_NM
+			 , MM.MBR_NM MDFYR_NM
+		  FROM CMPNY C
+		  JOIN MBR CM
+		  	ON CM.MBR_ID = C.CRTR
+		  JOIN MBR MM
+		  	ON MM.MBR_ID = C.MDFYR
+		 WHERE C.DEL_YN = 'N'
+		<if test="cmpnyNm != null and cmpnyNm != ''">
+		   AND C.CMPNY_NM LIKE '%' || #{cmpnyNm} || '%'
+		</if>
+		 ORDER BY C.CMPNY_ID
+		<include refid="Common.pageFooter"/>
 		
 	</select>
 	
 	<update id="updateOneCmpny"
 			parameterType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO">
+		UPDATE CMPNY
+		   SET CMPNY_NM=#{cmpnyNm}
+		   	 , MDFY_DT=SYSDATE
+		   	 , MDFYR=#{mdfyr}
+		   	 , USE_YN=NVL(#{useYn},'N')
+		 WHERE CMPNY_ID=#{cmpnyId}
 		
 	</update>
 	
 	<delete id="deleteOneCmpny"
 			parameterType="string">
+		UPDATE CMPNY
+		   SET DEL_YN = 'Y'
+		 WHERE CMPNY_ID=#{_parameter}
 		
 	</delete>
 </mapper>

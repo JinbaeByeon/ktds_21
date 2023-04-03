@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <c:set var="date" value="<%= new Random().nextInt() %>"/>
 <!DOCTYPE html>
@@ -12,10 +13,6 @@
 <jsp:include page="../include/stylescript.jsp"/>
 <script type="text/javascript">
 	$().ready(function(){
-
-		$("#all_check").click(function(){
-			$(".check_idx").prop("checked",$("#all_check:checked").val()=="on");
-		});
 		
 		$(".grid > table > tbody > tr").click(function(){
 			$(this).siblings().css("backgroundColor","");
@@ -52,7 +49,6 @@
 		
 		
 		$("#delete_btn").click(function(){
-			$(".grid > table > tbody > tr").siblings().css("backgroundColor","");
 			var gnrId = $("#gnrId").val();
 			if(gnrId==""){
 				alret("선택된 장르가 없습니다.");
@@ -62,6 +58,7 @@
 				return;
 			}
 			$.get("${context}/api/gnr/delete/" +gnrId, function(response){
+				$(".grid > table > tbody > tr").siblings().css("backgroundColor","");
 				if(response.status =="200 OK"){
 					location.reload(); //새로고침	
 				}
@@ -98,8 +95,45 @@
 			}
 
 		});
+		
+		$("#search-btn").click(function(){
+			movePage(0);
+		});
 
+		$("#all_check").change(function(){
+			$(".check_idx").prop("checked",$(this).prop("checked"));
+		});
+		
+		$(".check_idx").change(function(){
+			var cnt = $(".check_idx").length;
+			var checkCnt = $(".check_idx:checked").length;
+			$("#all_check").prop("checked",cnt==checkCnt)
+		});
+		
+		$("#delete_btns").click(function(){
+			var checked = $(".check_idx:checked");
+			var checkLen = checked.length;
+			if(checkLen==0){
+				alert("삭제할 장르가 없습니다.");
+			}
+			
+			var form = $("<form></form>");
+			checked.each(function(){
+				form.append("<input type='hidden' name='gnrIdList' value= '"+$(this).val()+"'>");
+			})
+			$.post("${context}/api/gnr/delete",form.serialize(),function(response){
+				if(response.status == "200 OK"){
+					location.reload();
+				} else{
+					alert(response.errorCode + "/" + response.message);
+				}
+			})
+		})
 	});
+	function movePage(pageNo) {
+		var gnrNm= $("#search-keyword").val();
+		location.href = "${context}/gnr/list?gnrNm=" + gnrNm + "&pageNo=" + pageNo;
+	}
 </script>
 </head>
 <body>
@@ -109,10 +143,17 @@
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
 				<div class="path"> 영화 > 장르관리</div>
-				
+				<div class="search-group">
+					<label for="search-keyword">장르명</label>
+					<input type="text"
+						   id="search-keyword" 
+						   class="search-input"
+						   value="${gnrNm}"/>
+					<button class="btn-search" id="search-btn">검색</button>
+				</div>
 				<div class="grid">
 					<div class="grid-count align-right">
-						총 ${gnrList.size()}건
+						총 ${gnrList.size() > 0 ? gnrList.get(0).totalCount : 0}건
 					</div>
 					<table>
 						<thead>
@@ -167,7 +208,18 @@
 						</tbody>
 					</table>
 					
+					<div class="align-right">
+						<button id="delete_btns" class="btn-delete">삭제</button>
+					</div>
+					
+					<c:import url="../include/pagenate.jsp">
+						<c:param name="pageNo" value="${pageNo}"/>
+						<c:param name="pageCnt" value="${pageCnt}"/>
+						<c:param name="lastPage" value="${gnrVO.lastPage}"/>
+						<c:param name="path" value="${context}/gnr"/>
+					</c:import>
 				</div>
+				
 				
 				<div class="grid-detail" >
 					<form id="detail_form" >

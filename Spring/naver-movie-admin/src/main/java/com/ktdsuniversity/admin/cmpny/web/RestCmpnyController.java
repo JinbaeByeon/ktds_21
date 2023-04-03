@@ -1,4 +1,4 @@
-package com.ktdsuniversity.admin.cmpny.controller;
+package com.ktdsuniversity.admin.cmpny.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -5,22 +5,72 @@
 <mapper namespace="Cntr">
 	<insert id="createOneCntr"
 			parameterType="com.ktdsuniversity.admin.cntr.vo.CntrVO">
-	
+		INSERT INTO CNTR
+		 (CNTR_ID
+		, CNTR_NM
+		, CRT_DT
+		, CRTR
+		, MDFY_DT
+		, MDFYR
+		, USE_YN
+		, DEL_YN)
+		VALUES
+		 (SEQ_CNTR_PK.NEXTVAL
+		, #{cntrNm}
+		, SYSDATE
+		, #{crtr}
+		, SYSDATE
+		, #{mdfyr}
+		, NVL(#{useYn},'N')
+		, 'N' )
+		
 	</insert>
 	
 	<select id="readAllCntr"
-			parameterType="string"
+			parameterType="com.ktdsuniversity.admin.cntr.vo.CntrVO"
 			resultType="com.ktdsuniversity.admin.cntr.vo.CntrVO">
+		<include refid="Common.pageHeader"/>
+		SELECT C.CNTR_ID
+			 , C.CNTR_NM
+			 , TO_CHAR(C.CRT_DT,'YYYY-MM-DD HH24:MI:SS') CRT_DT
+			 , C.CRTR
+			 , TO_CHAR(C.MDFY_DT,'YYYY-MM-DD HH24:MI:SS') MDFY_DT
+			 , C.MDFYR
+			 , C.USE_YN
+			 , C.DEL_YN
+			 , CM.MBR_NM CRTR_NM
+			 , MM.MBR_NM MDFYR_NM
+		  FROM CNTR C
+		  JOIN MBR CM
+		  	ON CM.MBR_ID = C.CRTR
+		  JOIN MBR MM
+		  	ON MM.MBR_ID = C.MDFYR
+		 WHERE C.DEL_YN = 'N'
+		<if test="cntrNm != null and cntrNm != ''">
+		   AND C.CNTR_NM LIKE '%' || #{cntrNm} || '%'
+		</if>
+		 ORDER BY C.CNTR_ID
+		<include refid="Common.pageFooter"/>
 	
 	</select>
 	
 	<update id="updateOneCntr"
 			parameterType="com.ktdsuniversity.admin.cntr.vo.CntrVO">
+		UPDATE CNTR
+		   SET CNTR_NM=#{cntrNm}
+		   	 , MDFY_DT=SYSDATE
+		   	 , MDFYR=#{mdfyr}
+		   	 , USE_YN=NVL(#{useYn},'N')
+		 WHERE CNTR_ID=#{cntrId}
 	
 	</update>
 	
 	<delete id="deleteOneCntr"
 			parameterType="_int">
+		UPDATE CNTR
+		   SET DEL_YN = 'Y'
+		 WHERE CNTR_ID=#{_parameter}
 	
 	</delete>
 </mapper>
+

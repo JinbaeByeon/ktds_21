@@ -1,9 +1,12 @@
 package com.ktdsuniversity.admin.gnr.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -43,6 +46,14 @@ public class RestGnrController {
 	@GetMapping("/api/gnr/delete/{gnrId}")
 	public APIResponseVO doDeleteGnr(@PathVariable int gnrId) {
 		if(gnrService.deleteOntGnrByGnrId(gnrId)) {
+			return new APIResponseVO(APIStatus.OK);
+		}
+		return new APIResponseVO(APIStatus.FAIL,"삭제 안댐","403","");
+	}
+	
+	@PostMapping("/api/gnr/delete")
+	public APIResponseVO doDeleteGnrs(@RequestParam List<Integer> gnrIdList) {
+		if(gnrService.deleteGnrByGnrIdList(gnrIdList)) {
 			return new APIResponseVO(APIStatus.OK);
 		}
 		return new APIResponseVO(APIStatus.FAIL,"삭제 안댐","403","");

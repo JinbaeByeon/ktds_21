@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ktdsuniversity.admin.common.exception.APIArgsException;
+import com.ktdsuniversity.admin.common.exception.APIException;
 import com.ktdsuniversity.admin.common.util.StringUtil;
 import com.ktdsuniversity.admin.gnr.dao.GnrDAO;
 import com.ktdsuniversity.admin.gnr.vo.GnrVO;
@@ -17,8 +18,8 @@ public class GnrServiceImpl implements GnrService{
 	private GnrDAO gnrDAO;
 	
 	@Override
-	public List<GnrVO> readAllGnr(String gnrNm) {
-		return gnrDAO.readAllGnr(gnrNm);
+	public List<GnrVO> readAllGnr(GnrVO gnrVO) {
+		return gnrDAO.readAllGnr(gnrVO);
 	}
 
 	@Override
@@ -40,6 +41,15 @@ public class GnrServiceImpl implements GnrService{
 	@Override
 	public boolean deleteOntGnrByGnrId(int gnrId) {
 		return gnrDAO.deleteOntGnrByGnrId(gnrId) > 0;
+	}
+
+	@Override
+	public boolean deleteGnrByGnrIdList(List<Integer> gnrIdList) {
+		int delCnt = gnrDAO.deleteGnrByGnrIdList(gnrIdList);
+		if(delCnt != gnrIdList.size()) {
+			throw new APIException("500", "삭제에 실패했습니다. 요청: "+gnrIdList.size()+" 건, 삭제: "+delCnt+"건");
+		}
+		return true;
 	}
 
 }

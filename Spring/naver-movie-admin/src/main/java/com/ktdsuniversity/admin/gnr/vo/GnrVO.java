@@ -1,11 +1,12 @@
 package com.ktdsuniversity.admin.gnr.vo;
 
+import com.ktdsuniversity.admin.common.vo.AbstractPageVO;
 import com.ktdsuniversity.admin.mbr.vo.MbrVO;
 
 /**
  * GNR
  */
-public class GnrVO {
+public class GnrVO extends AbstractPageVO{
 	private int gnrId;
 	private String gnrNm;
 	private String crtDt;

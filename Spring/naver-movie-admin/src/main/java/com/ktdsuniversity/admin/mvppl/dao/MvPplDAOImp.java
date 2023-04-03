@@ -25,7 +25,7 @@ public class MvPplDAOImp extends SqlSessionDaoSupport implements MvPplDAO {
 
 	@Override
 	public List<MvPplVO> readAllMvPpl(String nm) {
-		return getSqlSession().selectList("MvPpl.readAllMvPplByNm",nm);
+		return getSqlSession().selectList("MvPpl.readAllMvPpl",nm);
 	}
 
 	@Override
