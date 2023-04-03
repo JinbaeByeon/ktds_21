@@ -98,3 +98,6 @@ replay_pid*
 # svn folders
 general_achi/
 max_min_avg/
+
+# Spring/target
+target/
