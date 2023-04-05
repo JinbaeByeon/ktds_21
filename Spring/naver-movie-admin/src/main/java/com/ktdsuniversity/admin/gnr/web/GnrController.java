@@ -20,7 +20,10 @@ public class GnrController {
 	public String viewGnrListPage(Model model, GnrVO gnrVO) {
 		List<GnrVO> gnrList = gnrService.readAllGnr(gnrVO);
 		model.addAttribute("gnrList", gnrList);
-		model.addAttribute("gnrVO",gnrList.get(0));
+		model.addAttribute("gnrVO",gnrVO);
+		if(!gnrList.isEmpty()) {
+			model.addAttribute("lastPage",gnrList.get(0).getLastPage());
+		}
 		model.addAttribute("gnrNm", gnrVO.getGnrNm());
 		model.addAttribute("pageNo", gnrVO.getPageNo());
 		model.addAttribute("viewCnt", gnrVO.getViewCnt());

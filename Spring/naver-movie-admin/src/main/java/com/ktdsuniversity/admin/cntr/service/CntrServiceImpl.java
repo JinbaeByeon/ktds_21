@@ -20,8 +20,9 @@ public class CntrServiceImpl implements CntrService{
 	}
 
 	@Override
-	public List<CntrVO> readAllCntr(String cntrNm) {
-		return cntrDAO.readAllCntr(cntrNm);
+	public List<CntrVO> readAllCntr(CntrVO cntrVO) {
+		cntrVO.setPeriod();
+		return cntrDAO.readAllCntr(cntrVO);
 	}
 
 	@Override
@@ -30,8 +31,13 @@ public class CntrServiceImpl implements CntrService{
 	}
 
 	@Override
-	public boolean deleteOneCntrById(int cntrId) {
-		return cntrDAO.deleteOneCntr(cntrId) > 0;
+	public boolean deleteOneCntrByCntrId(int cntrId) {
+		return cntrDAO.deleteOneCntrByCntrId(cntrId) > 0;
+	}
+
+	@Override
+	public boolean deleteCntrByCntrIdList(List<Integer> cntrIdList) {
+		return cntrDAO.deleteCntrByCntrIdList(cntrIdList) > 0;
 	}
 	
 }

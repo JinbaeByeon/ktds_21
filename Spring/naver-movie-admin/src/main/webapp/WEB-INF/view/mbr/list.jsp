@@ -72,7 +72,7 @@
 			$(".grid > table > tbody > tr").siblings().css("backgroundColor","");
 			var mbrId = $("#mbrId").val();
 			if(mbrId==""){
-				alret("선택된 관리자가 없습니다.");
+				alert("선택된 관리자가 없습니다.");
 				return;
 			}
 			if(!confirm("정말 삭제하시겠습니까?")){
@@ -145,7 +145,9 @@
 </head>
 <body>
 	<div class="main-layout">
-		<jsp:include page="../include/header.jsp"/>
+		<c:import url="../include/header.jsp">
+			<c:param name="username" value="${user.mbrNm}"></c:param>
+		</c:import>
 		<div>
 			<jsp:include page="../include/sysMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>

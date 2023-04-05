@@ -51,7 +51,7 @@
 		$("#delete_btn").click(function(){
 			var gnrId = $("#gnrId").val();
 			if(gnrId==""){
-				alret("선택된 장르가 없습니다.");
+				alert("선택된 장르가 없습니다.");
 				return;
 			}
 			if(!confirm("정말 삭제하시겠습니까?")){
@@ -128,7 +128,7 @@
 					alert(response.errorCode + "/" + response.message);
 				}
 			})
-		})
+		});
 	});
 	function movePage(pageNo) {
 		var gnrNm= $("#search-keyword").val();
@@ -138,7 +138,9 @@
 </head>
 <body>
 	<div class="main-layout">
-		<jsp:include page="../include/header.jsp"/>
+		<c:import url="../include/header.jsp">
+			<c:param name="username" value="${user.mbrNm}"></c:param>
+		</c:import>
 		<div>
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
@@ -148,7 +150,7 @@
 					<input type="text"
 						   id="search-keyword" 
 						   class="search-input"
-						   value="${gnrNm}"/>
+						   value="${gnrVO.gnrNm}"/>
 					<button class="btn-search" id="search-btn">검색</button>
 				</div>
 				<div class="grid">
@@ -188,9 +190,9 @@
 											<td>${gnr.gnrId}</td>
 											<td>${gnr.gnrNm}</td>
 											<td>${gnr.crtDt}</td>
-											<td>${gnr.crtr}</td>
+											<td>${gnr.crtr}(${gnr.crtMbr.mbrNm})</td>
 											<td>${gnr.mdfyDt}</td>
-											<td>${gnr.mdfyr}</td>
+											<td>${gnr.mdfyr}(${gnr.mdfyMbr.mbrNm})</td>
 											<td>${gnr.useYn}</td>
 										</tr>
 									</c:forEach>
@@ -215,7 +217,7 @@
 					<c:import url="../include/pagenate.jsp">
 						<c:param name="pageNo" value="${pageNo}"/>
 						<c:param name="pageCnt" value="${pageCnt}"/>
-						<c:param name="lastPage" value="${gnrVO.lastPage}"/>
+						<c:param name="lastPage" value="${lastPage}"/>
 						<c:param name="path" value="${context}/gnr"/>
 					</c:import>
 				</div>

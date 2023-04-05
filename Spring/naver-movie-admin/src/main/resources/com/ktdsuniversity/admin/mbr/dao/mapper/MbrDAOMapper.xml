@@ -151,11 +151,11 @@
 		 WHERE MBR_ID=#{mbrId}
 	</update>
 	
-	<delete id="deleteOneNewAdminMbr"
+	<update id="deleteOneNewAdminMbr"
 			parameterType="string">
 		UPDATE MBR
 		   SET USE_YN = 'N'
 		 WHERE MBR_ID=#{mbrId}
 		   AND ADM_YN = 'Y'
-	</delete>
+	</update>
 </mapper>

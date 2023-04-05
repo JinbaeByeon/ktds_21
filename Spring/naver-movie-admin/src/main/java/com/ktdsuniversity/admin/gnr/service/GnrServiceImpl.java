@@ -19,6 +19,7 @@ public class GnrServiceImpl implements GnrService{
 	
 	@Override
 	public List<GnrVO> readAllGnr(GnrVO gnrVO) {
+		gnrVO.setPeriod();
 		return gnrDAO.readAllGnr(gnrVO);
 	}
 

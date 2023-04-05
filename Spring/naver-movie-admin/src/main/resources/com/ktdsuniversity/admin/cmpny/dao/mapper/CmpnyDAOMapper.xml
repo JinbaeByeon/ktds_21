@@ -3,6 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Cmpny">
+	<resultMap id="CmpnyMap"
+			   type="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO"
+			   autoMapping="true">
+		<id property="cmpnyId" column="CMPNY_ID" />
+		<association property="crtMbr"
+					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+			<id property="mbrId" column="CRTR" />
+			<result property="mbrNm" column="CRTR_NM" />
+		</association>
+		<association property="mdfyMbr"
+					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+			<id property="mbrId" column="MDFYR" />
+			<result property="mbrNm" column="MDFYR_NM" />
+		</association>
+	</resultMap>
 
 	<insert id="createOneCmpny"
 			parameterType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO">
@@ -29,7 +44,7 @@
 	
 	<select id="readAllCmpny"
 			parameterType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO"
-			resultType="com.ktdsuniversity.admin.cmpny.vo.CmpnyVO">
+			resultMap="CmpnyMap">
 		<include refid="Common.pageHeader"/>
 		SELECT C.CMPNY_ID
 			 , C.CMPNY_NM
@@ -40,15 +55,18 @@
 			 , C.USE_YN
 			 , CM.MBR_NM CRTR_NM
 			 , MM.MBR_NM MDFYR_NM
-		  FROM CMPNY C
+		  FROM (SELECT *
+		  		  FROM CMPNY
+		 		 WHERE DEL_YN = 'N'
+		  		   AND CRT_DT >= TO_DATE(#{startDt},'YYYY-MM-DD')
+		  		   AND CRT_DT <![CDATA[<]]> TO_DATE(#{endDt},'YYYY-MM-DD')+1
+				<if test="cmpnyNm != null and cmpnyNm != ''">
+				   AND CMPNY_NM LIKE '%' || #{cmpnyNm} || '%'
+				</if>)C
 		  JOIN MBR CM
 		  	ON CM.MBR_ID = C.CRTR
 		  JOIN MBR MM
 		  	ON MM.MBR_ID = C.MDFYR
-		 WHERE C.DEL_YN = 'N'
-		<if test="cmpnyNm != null and cmpnyNm != ''">
-		   AND C.CMPNY_NM LIKE '%' || #{cmpnyNm} || '%'
-		</if>
 		 ORDER BY C.CMPNY_ID
 		<include refid="Common.pageFooter"/>
 		
@@ -65,11 +83,19 @@
 		
 	</update>
 	
-	<delete id="deleteOneCmpny"
+	<update id="deleteOneCmpnyByCmpnyId"
 			parameterType="string">
 		UPDATE CMPNY
 		   SET DEL_YN = 'Y'
 		 WHERE CMPNY_ID=#{_parameter}
-		
-	</delete>
+	</update>
+	<update id="deleteCmpnyByCmpnyIdList"
+			parameterType="arraylist">
+		UPDATE CMPNY
+		   SET DEL_YN = 'Y'
+		 WHERE CMPNY_ID IN
+		<foreach collection="list" item="cmpnyId" open="(" close=")" separator=", ">
+			#{cmpnyId}
+		</foreach>
+	</update>
 </mapper>

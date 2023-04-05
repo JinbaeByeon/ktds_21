@@ -24,8 +24,8 @@ public class CntrDAOImpl extends SqlSessionDaoSupport implements CntrDAO {
 	}
 
 	@Override
-	public List<CntrVO> readAllCntr(String cntrNm) {
-		return getSqlSession().selectList("Cntr.readAllCntr",cntrNm);
+	public List<CntrVO> readAllCntr(CntrVO cntrVO) {
+		return getSqlSession().selectList("Cntr.readAllCntr",cntrVO);
 	}
 
 	@Override
@@ -34,8 +34,13 @@ public class CntrDAOImpl extends SqlSessionDaoSupport implements CntrDAO {
 	}
 
 	@Override
-	public int deleteOneCntr(int cntrId) {
-		return getSqlSession().delete("Cntr.deleteOneCntr",cntrId);
+	public int deleteOneCntrByCntrId(int cntrId) {
+		return getSqlSession().update("Cntr.deleteOneCntrByCntrId",cntrId);
+	}
+
+	@Override
+	public int deleteCntrByCntrIdList(List<Integer> cntrIdList) {
+		return getSqlSession().update("Cntr.deleteCntrByCntrIdList",cntrIdList);
 	}
 
 }

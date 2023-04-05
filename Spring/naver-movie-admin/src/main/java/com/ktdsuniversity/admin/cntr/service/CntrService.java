@@ -8,10 +8,11 @@ public interface CntrService {
 
 	public boolean createOneCntr(CntrVO cntrVO);
 	
-	public List<CntrVO> readAllCntr(String cntrNm);
+	public List<CntrVO> readAllCntr(CntrVO cntrVO);
 	
 	public boolean updateOneCntr(CntrVO cntrVO);
 	
-	public boolean deleteOneCntrById(int cntrId);
+	public boolean deleteOneCntrByCntrId(int cntrId);
 
+	public boolean deleteCntrByCntrIdList(List<Integer> cntrIdList);
 }

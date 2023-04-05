@@ -1,12 +1,12 @@
 package com.ktdsuniversity.admin.gnr.vo;
 
-import com.ktdsuniversity.admin.common.vo.AbstractPageVO;
+import com.ktdsuniversity.admin.common.vo.AbstractVO;
 import com.ktdsuniversity.admin.mbr.vo.MbrVO;
 
 /**
  * GNR
  */
-public class GnrVO extends AbstractPageVO{
+public class GnrVO extends AbstractVO{
 	private int gnrId;
 	private String gnrNm;
 	private String crtDt;
@@ -16,7 +16,7 @@ public class GnrVO extends AbstractPageVO{
 	private String useYn;
 	private String delYn;
 
-	private MbrVO ctrMbr;
+	private MbrVO crtMbr;
 	private MbrVO mdfyMbr;
 
 	public void setGnrId(int gnrId) {
@@ -83,12 +83,12 @@ public class GnrVO extends AbstractPageVO{
 		return this.delYn;
 	}
 
-	public MbrVO getCtrMbr() {
-		return ctrMbr;
+	public MbrVO getCrtMbr() {
+		return crtMbr;
 	}
 
-	public void setCtrMbr(MbrVO ctrMbr) {
-		this.ctrMbr = ctrMbr;
+	public void setCrtMbr(MbrVO crtMbr) {
+		this.crtMbr = crtMbr;
 	}
 
 	public MbrVO getMdfyMbr() {

@@ -8,10 +8,11 @@ public interface CmpnyService {
 
 	public boolean createOneCmpny(CmpnyVO cmpnyVO);
 	
-	public List<CmpnyVO> readAllCmpny(String cmpnyNm);
+	public List<CmpnyVO> readAllCmpny(CmpnyVO cmpnyVO);
 	
 	public boolean updateOneCmpny(CmpnyVO cmpnyVO);
 	
-	public boolean deleteOneCmpny(String cmpnyId);
+	public boolean deleteOneCmpnyByCmpnyId(String cmpnyId);
 
+	public boolean deleteCmpnyByCmpnyIdList(List<String> cmpnyIdList);
 }

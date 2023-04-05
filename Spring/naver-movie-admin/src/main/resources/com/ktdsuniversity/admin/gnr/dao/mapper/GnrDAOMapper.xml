@@ -7,7 +7,7 @@
 			   type="com.ktdsuniversity.admin.gnr.vo.GnrVO"
 			   autoMapping="true">
 		<id property="gnrId" column="GNR_ID" />
-		<association property="ctrMbr"
+		<association property="crtMbr"
 					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
 			<id property="mbrId" column="CRTR" />
 			<result property="mbrNm" column="CRTR_NM" />
@@ -43,7 +43,7 @@
 	
 	<select id="readAllGnr"
 			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO"
-			resultType="com.ktdsuniversity.admin.gnr.vo.GnrVO">
+			resultMap="GnrMap">
 		<include refid="Common.pageHeader"/>
 		SELECT G.GNR_ID
 			 , G.GNR_NM
@@ -55,15 +55,18 @@
 			 , G.DEL_YN
 			 , CM.MBR_NM CRTR_NM
 			 , MM.MBR_NM MDFYR_NM
-		  FROM GNR G
+		  FROM (SELECT *
+		  		  FROM GNR
+				 WHERE DEL_YN = 'N'
+		  		   AND CRT_DT >= TO_DATE(#{startDt},'YYYY-MM-DD')
+		  		   AND CRT_DT <![CDATA[<]]> TO_DATE(#{endDt},'YYYY-MM-DD')+1
+				<if test="gnrNm != null and gnrNm != ''">
+				   AND GNR_NM LIKE '%' || #{gnrNm} || '%'
+				</if>)G
 		  JOIN MBR CM
 		  	ON CM.MBR_ID = G.CRTR
 		  JOIN MBR MM
 		  	ON MM.MBR_ID = G.MDFYR
-		 WHERE G.DEL_YN = 'N'
-		<if test="gnrNm != null and gnrNm != ''">
-		   AND G.GNR_NM LIKE '%' || #{gnrNm} || '%'
-		</if>
 		 ORDER BY G.GNR_ID
 		<include refid="Common.pageFooter"/>
 	</select>

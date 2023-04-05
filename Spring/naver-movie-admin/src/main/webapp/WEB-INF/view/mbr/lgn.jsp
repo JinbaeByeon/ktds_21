@@ -11,27 +11,36 @@
 	<script type="text/javascript" src="${context}/js/jquery-3.6.4.min.js"></script>
 	<script type="text/javascript">
 		$().ready(function(){
-			$("#btn-lgn").click(function(){
-				var data = {
-					mbrId: $("#mbrId").val(),
-					pwd: $("#pwd").val()
-				};
-				$.post("${context}/api/mbr/lgn",data,function(response){
-					// Response Spec
-					/* { 
-						status: "200 OK",
-						message: "",
-						errorCode: "",
-						redirectURL: ""
-					} */
-					if(response.status !="200 OK"){
-						alert(response.errorCode + " / " + response.message);
-					}
-					if(response.redirectURL){
-						location.href="${context}" +response.redirectURL;
-					}
-				});
+			$("#pwd").keydown(function(key){
+				if(key.keyCode == 13){
+					doLogin();
+				}	
 			});
+			
+			$("#btn-lgn").click(function(){
+				doLogin();
+			});
+			function doLogin(){
+				var data = {
+						mbrId: $("#mbrId").val(),
+						pwd: $("#pwd").val()
+					};
+					$.post("${context}/api/mbr/lgn",data,function(response){
+						// Response Spec
+						/* { 
+							status: "200 OK",
+							message: "",
+							errorCode: "",
+							redirectURL: ""
+						} */
+						if(response.status !="200 OK"){
+							alert(response.errorCode + " / " + response.message);
+						}
+						if(response.redirectURL){
+							location.href="${context}" +response.redirectURL;
+						}
+					});
+			};
 		});
 	</script>
 </head>

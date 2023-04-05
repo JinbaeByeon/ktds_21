@@ -1,9 +1,12 @@
 package com.ktdsuniversity.admin.cmpny.vo;
 
+import com.ktdsuniversity.admin.common.vo.AbstractVO;
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+
 /**
  * CMPNY
  */
-public class CmpnyVO {
+public class CmpnyVO extends AbstractVO{
 
 	private String cmpnyId;
 
@@ -21,6 +24,8 @@ public class CmpnyVO {
 
 	private String delYn;
 
+	private MbrVO crtMbr;
+	private MbrVO mdfyMbr;
 
 	public void setCmpnyId(String cmpnyId) {
 		this.cmpnyId = cmpnyId;
@@ -84,6 +89,22 @@ public class CmpnyVO {
 
 	public String getDelYn() {
 		return this.delYn;
+	}
+
+	public MbrVO getCrtMbr() {
+		return crtMbr;
+	}
+
+	public void setCrtMbr(MbrVO crtMbr) {
+		this.crtMbr = crtMbr;
+	}
+
+	public MbrVO getMdfyMbr() {
+		return mdfyMbr;
+	}
+
+	public void setMdfyMbr(MbrVO mdfyMbr) {
+		this.mdfyMbr = mdfyMbr;
 	}
 
 }

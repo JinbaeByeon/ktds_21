@@ -1,9 +1,12 @@
 package com.ktdsuniversity.admin.cntr.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -41,10 +44,17 @@ public class RestCntrController {
 		
 	}
 	
-	
 	@GetMapping("/api/cntr/delete/{cntrId}")
 	public APIResponseVO doDeleteCntr(@PathVariable int cntrId) {
-		if(cntrService.deleteOneCntrById(cntrId)) {
+		if(cntrService.deleteOneCntrByCntrId(cntrId)) {
+			return new APIResponseVO(APIStatus.OK);
+		}
+		return new APIResponseVO(APIStatus.FAIL);
+	}
+	
+	@PostMapping("/api/cntr/delete")
+	public APIResponseVO doDeleteCntrs(@RequestParam List<Integer> cntrIdList) {
+		if(cntrService.deleteCntrByCntrIdList(cntrIdList)) {
 			return new APIResponseVO(APIStatus.OK);
 		}
 		return new APIResponseVO(APIStatus.FAIL);

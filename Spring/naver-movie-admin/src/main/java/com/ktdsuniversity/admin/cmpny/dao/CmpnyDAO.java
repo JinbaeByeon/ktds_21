@@ -8,9 +8,11 @@ public interface CmpnyDAO {
 
 	public int createOneCmpny(CmpnyVO cmpnyVO);
 	
-	public List<CmpnyVO> readAllCmpny(String cmpnyNm);
+	public List<CmpnyVO> readAllCmpny(CmpnyVO cmpnyVO);
 	
 	public int updateOneCmpny(CmpnyVO cmpnyVO);
 	
-	public int deleteOneCmpny(String cmpnyId);
+	public int deleteOneCmpnyByCmpnyId(String cmpnyId);
+
+	public int deleteCmpnyByCmpnyIdList(List<String> cmpnyIdList);
 }

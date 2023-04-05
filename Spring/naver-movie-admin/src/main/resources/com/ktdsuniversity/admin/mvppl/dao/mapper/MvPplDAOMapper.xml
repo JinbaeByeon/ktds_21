@@ -3,6 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MvPpl">
+	<resultMap id="MvPplMap"
+			   type="com.ktdsuniversity.admin.mvppl.vo.MvPplVO"
+			   autoMapping="true">
+		<id property="mvPplId" column="MV_PPL_ID" />
+		<association property="crtMbr"
+					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+			<id property="mbrId" column="CRTR" />
+			<result property="mbrNm" column="CRTR_NM" />
+		</association>
+		<association property="mdfyMbr"
+					 javaType="com.ktdsuniversity.admin.mbr.vo.MbrVO">
+			<id property="mbrId" column="MDFYR" />
+			<result property="mbrNm" column="MDFYR_NM" />
+		</association>
+	</resultMap>
+
 	<insert id="createOneMvPpl"
 			parameterType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO">
 		INSERT INTO MV_PPL
@@ -17,7 +33,7 @@
 		, USE_YN
 		, DEL_YN)
 		VALUES
-		 (SEQ_MV_PPL_PK.NEXTVAL
+		 ('PD-' || TO_CHAR(SYSDATE,'YYYYMMDD') || '-' || LPAD(SEQ_MV_PPL_PK.NEXTVAL,5,'0') 
 		, #{prflPctr}
 		, #{nm}
 		, #{rlNm}
@@ -32,7 +48,7 @@
 	
 	<select id="readAllMvPpl"
 			parameterType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO"
-			resultType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO">
+			resultMap="MvPplMap">
 		<include refid="Common.pageHeader"/>
 		SELECT MP.MV_PPL_ID
 			 , MP.PRFL_PCTR
@@ -46,35 +62,67 @@
 			 , MP.DEL_YN
 			 , CM.MBR_NM CRTR_NM
 			 , MM.MBR_NM MDFYR_NM
-		  FROM MV_PPL MP
+		  FROM (SELECT *
+		  		  FROM MV_PPL
+				 WHERE DEL_YN = 'N'
+		  		   AND CRT_DT >= TO_DATE(#{startDt},'YYYY-MM-DD')
+		  		   AND CRT_DT <![CDATA[<]]> TO_DATE(#{endDt},'YYYY-MM-DD')+1
+				<if test="nm != null and nm != ''">
+				   AND NM LIKE '%' || #{nm} || '%'
+				</if>
+				<if test="rlNm != null and rlNm != ''">
+				   AND RL_NM LIKE '%' || #{rlNm} || '%'
+				</if>) MP
 		  JOIN MBR CM
 		  	ON CM.MBR_ID = MP.CRTR
 		  JOIN MBR MM
 		  	ON MM.MBR_ID = MP.MDFYR
-		 WHERE DEL_YN = 'N'
-		 <if test="_paramter != null and _parameter != ''">
-		   AND NM = #{_parameter}
-		 </if>
-		 ORDER BY MV_PPL_ID
+		 ORDER BY MP.NM
 		<include refid="Common.pageFooter"/>
+	</select>
+	<select id="readOneMvPplByMvPplId"
+			parameterType="string"
+			resultType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO">
+		SELECT PRFL_PCTR
+			 , NM
+			 , RL_NM
+			 , USE_YN
+		  FROM MV_PPL
+		 WHERE MV_PPL_ID = #{_parameter}
+		   AND DEL_YN = 'N'
 	</select>
 	
 	<update id="updateOneMvPpl"
 			parameterType="com.ktdsuniversity.admin.mvppl.vo.MvPplVO">
 		UPDATE MV_PPL
-		   SET PRFL_PCTR = #{prflPctr}
-		     , NM = #{nm}
-		     , RL_NM = #{rlNm}
-		     , MDFY_DT = SYSDATE
+		   SET MDFY_DT = SYSDATE
 		     , MDFYR = #{mdfyr}
+		     , RL_NM = #{rlNm}
+		     , PRFL_PCTR = NVL(#{prflPctr},'base_profile.png')
+		   <if test="nm != null and nm != ''">
+		     , NM = #{nm}
+		   </if>
+		   <if test="useYn != null and useYn != ''">
 		     , USE_YN = #{useYn}
+		   </if>
 		 WHERE MV_PPL_ID = #{mvPplId}
 	</update>
 	
-	<delete id="deleteOneMvPpl"
+	<update id="deleteOneMvPplByMvPplId"
 			parameterType="string">
 		UPDATE MV_PPL
 		   SET DEL_YN = 'Y'
 		 WHERE MV_PPL_ID = #{_parameter}
-	</delete>
+	</update>
+	
+	
+	<update id="deleteMvPplByMvPplIdList"
+			parameterType="arraylist">
+		UPDATE MV_PPL
+		   SET DEL_YN = 'Y'
+		 WHERE MV_PPL_ID IN
+		<foreach collection="list" item="mvPplId" open="(" close=")" separator=", ">
+			#{mvPplId}
+		</foreach>
+	</update>
 </mapper>

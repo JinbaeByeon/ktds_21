@@ -8,9 +8,11 @@ public interface CntrDAO {
 
 	public int createOneCntr(CntrVO cntrVO);
 	
-	public List<CntrVO> readAllCntr(String cntrNm);
+	public List<CntrVO> readAllCntr(CntrVO cntrVO);
 	
 	public int updateOneCntr(CntrVO cntrVO);
 	
-	public int deleteOneCntr(int cntrId);
+	public int deleteOneCntrByCntrId(int cntrId);
+
+	public int deleteCntrByCntrIdList(List<Integer> cntrId);
 }

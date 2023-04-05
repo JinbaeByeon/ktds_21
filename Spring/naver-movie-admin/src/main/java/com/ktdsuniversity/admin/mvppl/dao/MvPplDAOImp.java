@@ -24,18 +24,26 @@ public class MvPplDAOImp extends SqlSessionDaoSupport implements MvPplDAO {
 	}
 
 	@Override
-	public List<MvPplVO> readAllMvPpl(String nm) {
-		return getSqlSession().selectList("MvPpl.readAllMvPpl",nm);
+	public List<MvPplVO> readAllMvPpl(MvPplVO mvPplVO) {
+		return getSqlSession().selectList("MvPpl.readAllMvPpl",mvPplVO);
 	}
-
+	@Override
+	public MvPplVO readOneMvPplByMvPplId(String mvPplId) {
+		return getSqlSession().selectOne("MvPpl.readOneMvPplByMvPplId",mvPplId);
+	}
 	@Override
 	public int updateOneMvPpl(MvPplVO mvPplVO) {
 		return getSqlSession().update("MvPpl.updateOneMvPpl",mvPplVO);
 	}
 
 	@Override
-	public int deleteOneMvPpl(String mvPplId) {
-		return getSqlSession().delete("MvPpl.deleteOneMvPpl",mvPplId);
+	public int deleteOneMvPplByMvPplId(String mvPplId) {
+		return getSqlSession().update("MvPpl.deleteOneMvPplByMvPplId",mvPplId);
+	}
+
+	@Override
+	public int deleteMvPplByMvPplIdList(List<String> mvPplIdList) {
+		return getSqlSession().update("MvPpl.deleteMvPplByMvPplIdList",mvPplIdList);
 	}
 
 }

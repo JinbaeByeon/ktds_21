@@ -20,8 +20,9 @@ public class CmpnyServiceImpl implements CmpnyService {
 	}
 
 	@Override
-	public List<CmpnyVO> readAllCmpny(String cmpnyNm) {
-		return cmpnyDAO.readAllCmpny(cmpnyNm);
+	public List<CmpnyVO> readAllCmpny(CmpnyVO cmpnyVO) {
+		cmpnyVO.setPeriod();
+		return cmpnyDAO.readAllCmpny(cmpnyVO);
 	}
 
 	@Override
@@ -30,8 +31,13 @@ public class CmpnyServiceImpl implements CmpnyService {
 	}
 
 	@Override
-	public boolean deleteOneCmpny(String cmpnyId) {
-		return cmpnyDAO.deleteOneCmpny(cmpnyId) > 0;
+	public boolean deleteOneCmpnyByCmpnyId(String cmpnyId) {
+		return cmpnyDAO.deleteOneCmpnyByCmpnyId(cmpnyId) > 0;
+	}
+
+	@Override
+	public boolean deleteCmpnyByCmpnyIdList(List<String> cmpnyIdList) {
+		return cmpnyDAO.deleteCmpnyByCmpnyIdList(cmpnyIdList) > 0;
 	}
 
 }

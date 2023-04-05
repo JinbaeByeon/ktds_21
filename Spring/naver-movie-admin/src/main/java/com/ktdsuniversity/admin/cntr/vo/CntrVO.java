@@ -1,9 +1,12 @@
 package com.ktdsuniversity.admin.cntr.vo;
 
+import com.ktdsuniversity.admin.common.vo.AbstractVO;
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+
 /**
  * CNTR
  */
-public class CntrVO {
+public class CntrVO extends AbstractVO{
 	
 	private int cntrId;
 	private String cntrNm;
@@ -13,7 +16,10 @@ public class CntrVO {
 	private String mdfyr;
 	private String useYn;
 	private String delYn;
-
+	
+	private MbrVO crtMbr;
+	private MbrVO mdfyMbr;
+	
 	public void setCntrId(int cntrId) {
 		this.cntrId = cntrId;
 	}
@@ -76,6 +82,22 @@ public class CntrVO {
 
 	public String getDelYn() {
 		return this.delYn;
+	}
+
+	public MbrVO getCrtMbr() {
+		return crtMbr;
+	}
+
+	public void setCrtMbr(MbrVO crtMbr) {
+		this.crtMbr = crtMbr;
+	}
+
+	public MbrVO getMdfyMbr() {
+		return mdfyMbr;
+	}
+
+	public void setMdfyMbr(MbrVO mdfyMbr) {
+		this.mdfyMbr = mdfyMbr;
 	}
 
 }

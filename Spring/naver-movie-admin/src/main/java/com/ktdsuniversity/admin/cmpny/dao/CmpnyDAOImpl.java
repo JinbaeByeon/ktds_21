@@ -24,8 +24,8 @@ public class CmpnyDAOImpl extends SqlSessionDaoSupport implements CmpnyDAO {
 	}
 
 	@Override
-	public List<CmpnyVO> readAllCmpny(String cmpnyNm) {
-		return getSqlSession().selectList("Cmpny.readAllCmpny",cmpnyNm);
+	public List<CmpnyVO> readAllCmpny(CmpnyVO cmpnyVO) {
+		return getSqlSession().selectList("Cmpny.readAllCmpny",cmpnyVO);
 	}
 
 	@Override
@@ -34,8 +34,13 @@ public class CmpnyDAOImpl extends SqlSessionDaoSupport implements CmpnyDAO {
 	}
 
 	@Override
-	public int deleteOneCmpny(String cmpnyId) {
-		return getSqlSession().delete("Cmpny.deleteOneCmpny",cmpnyId);
+	public int deleteOneCmpnyByCmpnyId(String cmpnyId) {
+		return getSqlSession().update("Cmpny.deleteOneCmpnyByCmpnyId",cmpnyId);
+	}
+
+	@Override
+	public int deleteCmpnyByCmpnyIdList(List<String> cmpnyIdList) {
+		return getSqlSession().update("Cmpny.deleteCmpnyByCmpnyIdList",cmpnyIdList);
 	}
 
 }

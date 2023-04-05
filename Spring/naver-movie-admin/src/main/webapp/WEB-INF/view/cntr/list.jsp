@@ -12,10 +12,6 @@
 <jsp:include page="../include/stylescript.jsp"/>
 <script type="text/javascript">
 	$().ready(function(){
-
-		$("#all_check").click(function(){
-			$(".check_idx").prop("checked",$("#all_check:checked").val()=="on");
-		});
 		
 		$(".grid > table > tbody > tr").click(function(){
 			$(this).siblings().css("backgroundColor","");
@@ -54,7 +50,7 @@
 			$(".grid > table > tbody > tr").siblings().css("backgroundColor","");
 			var cntrId = $("#cntrId").val();
 			if(cntrId==""){
-				alret("선택된 국가가 없습니다.");
+				alert("선택된 국가가 없습니다.");
 				return;
 			}
 			if(!confirm("정말 삭제하시겠습니까?")){
@@ -86,7 +82,9 @@
 				});
 			}
 			else{
-				$.post("${context}/api/cntr/update",$("#detail_form").serialize(),function(response){
+				$.post("${context}/api/cntr/update",{cntrId:$('#cntrId').val()
+												   ,cntrNm:$('#cntrNm').val()
+												   ,useYn:$('#useYn:checked').val()},function(response){
 					if(response.status =="200 OK"){
 						location.reload(); //새로고침	
 					}
@@ -101,7 +99,36 @@
 		$("#search-btn").click(function(){
 			movePage(0);
 		});
+
+		$("#all_check").change(function(){
+			$(".check_idx").prop("checked",$(this).prop("checked"));
+		});
 		
+		$(".check_idx").change(function(){
+			var cnt = $(".check_idx").length;
+			var checkCnt = $(".check_idx:checked").length;
+			$("#all_check").prop("checked",cnt==checkCnt)
+		});
+		
+		$("#delete_btns").click(function(){
+			var checked = $(".check_idx:checked");
+			var checkLen = checked.length;
+			if(checkLen==0){
+				alert("삭제할 국가가 없습니다.");
+			}
+			
+			var form = $("<form></form>");
+			checked.each(function(){
+				form.append("<input type='hidden' name='cntrIdList' value= '"+$(this).val()+"'>");
+			})
+			$.post("${context}/api/cntr/delete",form.serialize(),function(response){
+				if(response.status == "200 OK"){
+					location.reload();
+				} else{
+					alert(response.errorCode + "/" + response.message);
+				}
+			})
+		});
 	});
 	function movePage(pageNo) {
 		var cntrNm= $("#search-keyword").val();
@@ -111,7 +138,9 @@
 </head>
 <body>
 	<div class="main-layout">
-		<jsp:include page="../include/header.jsp"/>
+		<c:import url="../include/header.jsp">
+			<c:param name="username" value="${user.mbrNm}"></c:param>
+		</c:import>
 		<div>
 			<jsp:include page="../include/mvMgmtSidemenu.jsp"/>
 			<jsp:include page="../include/content.jsp"/>
@@ -121,12 +150,12 @@
 					<input type="text"
 						   id="search-keyword" 
 						   class="search-input"
-						   value="${gnrNm}"/>
+						   value="${cntrVO.cntrNm}"/>
 					<button class="btn-search" id="search-btn">검색</button>
 				</div>
 				<div class="grid">
 					<div class="grid-count align-right">
-						총 ${cntrList.size()}건
+						총 ${cntrList.size() > 0 ? cntrList.get(0).totalCount : 0}건
 					</div>
 					<table>
 						<thead>
@@ -161,9 +190,9 @@
 											<td>${cntr.cntrId}</td>
 											<td>${cntr.cntrNm}</td>
 											<td>${cntr.crtDt}</td>
-											<td>${cntr.crtr}</td>
+											<td>${cntr.crtr}(${cntr.crtMbr.mbrNm})</td>
 											<td>${cntr.mdfyDt}</td>
-											<td>${cntr.mdfyr}</td>
+											<td>${cntr.mdfyr}(${cntr.mdfyMbr.mbrNm})</td>
 											<td>${cntr.useYn}</td>
 										</tr>
 									</c:forEach>
@@ -178,13 +207,17 @@
 							</c:choose>						
 						</tbody>
 					</table>
+					
+					<div class="align-right">
+						<button id="delete_btns" class="btn-delete">삭제</button>
+					</div>
+					
 					<c:import url="../include/pagenate.jsp">
 						<c:param name="pageNo" value="${pageNo}"/>
 						<c:param name="pageCnt" value="${pageCnt}"/>
-						<c:param name="lastPage" value="${cntrVO.lastPage}"/>
+						<c:param name="lastPage" value="${lastPage}"/>
 						<c:param name="path" value="${context}/cntr"/>
 					</c:import>
-					
 				</div>
 				
 				<div class="grid-detail" >
