@@ -22,7 +22,10 @@ public class GnrDAOImpl extends SqlSessionDaoSupport implements GnrDAO {
 	public List<GnrVO> readAllGnr(GnrVO gnrVO) {
 		return getSqlSession().selectList("Gnr.readAllGnr",gnrVO);
 	}
-
+	@Override
+	public List<GnrVO> readAllGnrNoPagination(String gnrNm) {
+		return getSqlSession().selectList("Gnr.readAllGnrNoPagination",gnrNm);
+	}
 	@Override
 	public int createOneGnr(GnrVO gnrVO) {
 		return getSqlSession().insert("Gnr.createOneGnr",gnrVO);

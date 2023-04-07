@@ -1,50 +1,26 @@
 package com.ktdsuniversity.admin.mvgnr.vo;
 
+import java.util.List;
+
+import com.ktdsuniversity.admin.gnr.vo.GnrVO;
+import com.ktdsuniversity.admin.mbr.vo.MbrVO;
+
 /**
  * MV_GNR
  */
 public class MvGnrVO {
 
-	/**
-	 * 
-	 */
 	private String mvId;
-
-	/**
-	 * 
-	 */
 	private int gnrId;
-
-	/**
-	 * 
-	 */
 	private String crtDt;
-
-	/**
-	 * 
-	 */
 	private String crtr;
-
-	/**
-	 * 
-	 */
-	private String mdfyDt;
-
-	/**
-	 * 
-	 */
-	private String mdfyr;
-
-	/**
-	 * 
-	 */
 	private String useYn;
-
-	/**
-	 * 
-	 */
 	private String delYn;
 
+	private List<String> deleted;
+	
+	private GnrVO gnr;
+	private MbrVO ctrMbr;
 
 	public void setMvId(String mvId) {
 		this.mvId = mvId;
@@ -78,22 +54,6 @@ public class MvGnrVO {
 		return this.crtr;
 	}
 
-	public void setMdfyDt(String mdfyDt) {
-		this.mdfyDt = mdfyDt;
-	}
-
-	public String getMdfyDt() {
-		return this.mdfyDt;
-	}
-
-	public void setMdfyr(String mdfyr) {
-		this.mdfyr = mdfyr;
-	}
-
-	public String getMdfyr() {
-		return this.mdfyr;
-	}
-
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
@@ -110,4 +70,28 @@ public class MvGnrVO {
 		return this.delYn;
 	}
 
+	public List<String> getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(List<String> deleted) {
+		this.deleted = deleted;
+	}
+
+	public GnrVO getGnr() {
+		return gnr;
+	}
+
+	public void setGnr(GnrVO gnr) {
+		this.gnr = gnr;
+	}
+
+	public MbrVO getCtrMbr() {
+		return ctrMbr;
+	}
+
+	public void setCtrMbr(MbrVO ctrMbr) {
+		this.ctrMbr = ctrMbr;
+	}
+	
 }

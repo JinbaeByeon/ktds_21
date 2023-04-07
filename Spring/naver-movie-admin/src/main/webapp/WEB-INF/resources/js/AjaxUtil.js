@@ -16,7 +16,8 @@ function AjaxUtil() {
 		"input[type=url]",
 		"input[type=time]",
 		"input[type=week]",
-		"textarea"
+		"textarea",
+		"select"
 	]
 }
 

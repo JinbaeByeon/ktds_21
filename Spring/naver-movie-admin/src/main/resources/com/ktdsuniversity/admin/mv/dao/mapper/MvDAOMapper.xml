@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Mv">
+	<resultMap id="MvMap"
+			   type="com.ktdsuniversity.admin.mv.vo.MvVO"
+			   autoMapping="true">
+		<id property="mvId" column="MV_ID" />
+	</resultMap>
+	
+	<insert id="createNewMv"
+			parameterType="com.ktdsuniversity.admin.mv.vo.MvVO">
+			INSERT INTO MV
+			(MV_ID,
+			 MV_TTL,
+			 ENG_TTL,
+			 SCRN_STT,
+			 SCRN_TM,
+			 OPNG_DT,
+			 WTC_GRD,
+			 PSTR,
+			 SMR,
+			 CRT_DT,
+			 CRTR,
+			 MDFY_DT,
+			 MDFYR,
+			 USE_YN,
+			 DEL_YN)
+			VALUES
+			('MV-' || TO_CHAR(SYSDATE,'YYYYMMDD') || '-' || LPAD(SEQ_MV_PK.NEXTVAL,5,'0'),
+			 #{mvTtl},
+			 #{engTtl},
+			 #{scrnStt},
+			  #{scrnTm},
+			 TO_DATE(#{opngDt},'YYYY-MM-DD'),
+			 #{wtcGrd},
+			 #{pstr},
+			 #{smr},
+			 SYSDATE,
+			 #{crtr},
+			 SYSDATE,
+			 #{mdfyr},
+			 NVL(#{useYn},'N') ,
+			 'N' )
+	</insert>
+	
+	<select id="readOneMvByMvId"
+			parameterType="string"
+			resultMap="MvMap">
+		SELECT MV_ID
+			 , MV_TTL
+			 , ENG_TTL
+			 , SCRN_STT
+			 , SCRN_TM
+			 , OPNG_DT
+			 , WTC_GRD
+			 , PSTR
+			 , SMR
+			 , CRT_DT
+			 , CRTR
+			 , MDFY_DT
+			 , MDFYR
+			 , USE_YN
+			 , DEL_YN
+		  FROM (SELECT *
+		  		  FROM MV
+				 WHERE MV_ID = #{_parameter}) MV
+		  JOIN MV_GNR MG
+		  	ON MG.MV_ID = MV.MV_ID
+		  JOIN PRDC_PRTCPTN_PPL PPP
+		  	ON PPP.MV_ID = MV.MV_ID
+	</select>
+	
+	<select id="readAllMv"
+			parameterType="com.ktdsuniversity.admin.mv.vo.MvVO"
+			resultMap="MvMap">
+		<include refid="Common.pageHeader"/>
+		SELECT MV.MV_ID
+			 , MV.MV_TTL
+			 , MV.ENG_TTL
+			 , MV.SCRN_STT
+			 , MV.SCRN_TM
+			 , MV.OPNG_DT
+			 , MV.WTC_GRD
+			 , MV.PSTR
+			 , MV.SMR
+			 , MV.CRT_DT
+			 , MV.CRTR
+			 , MV.MDFY_DT
+			 , MV.MDFYR
+			 , MV.USE_YN
+			 , MV.DEL_YN
+		  FROM (SELECT *
+		  		  FROM MV
+				 WHERE MV_TTL = #{mvTtl}) MV
+		  JOIN MV_GNR MG
+		  	ON MG.MV_ID = MV.MV_ID
+		  JOIN PRDC_PRTCPTN_PPL PPP
+		  	ON PPP.MV_ID = MV.MV_ID
+		  	
+		<include refid="Common.pageFooter"/>
+	</select>
+	
+	<update id="updateOneMv"
+			parameterType="com.ktdsuniversity.admin.mv.vo.MvVO">
+		UPDATE MV
+		   SET MV_TTL = #{mvTtl}
+			 , ENG_TTL = #{engTtl}
+			 , SCRN_STT = #{scrnStt}
+			 , SCRN_TM = #{scrnTm}
+			 , OPNG_DT = TO_DATE(#{opngDt},'YYYY-MM-DD')
+			 , WTC_GRD = #{wtcGrd}
+			 , PSTR = #{pstr}
+			 , SMR = #{smr}
+			 , MDFY_DT = SYSDATE
+			 , MDFYR = #{mdfyr}
+			 , USE_YN = NVL(#{useYn},'N')
+		 WHERE MV_ID = #{mvId}
+	</update>
+	
+	<update id="deleteOneMv"
+			parameterType="string">
+		UPDATE MV
+		   SET DEL_YN = 'Y'
+		 WHERE MV_ID = #{_parameter}
+	</update>
+	
+	<update id="deleteMvByMvIdList"
+			parameterType="arraylist">
+		UPDATE MV
+		   SET DEL_YN = 'Y'
+		 WHERE MV_ID IN
+		 <foreach collection="list" item="mvId" open="(" close=")" separator=", ">
+		 	#{mvId}
+		 </foreach>
+	</update>
+	
+	
+	
+</mapper>

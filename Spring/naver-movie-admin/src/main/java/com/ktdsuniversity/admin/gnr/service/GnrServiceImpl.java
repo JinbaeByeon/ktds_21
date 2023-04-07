@@ -22,7 +22,11 @@ public class GnrServiceImpl implements GnrService{
 		gnrVO.setPeriod();
 		return gnrDAO.readAllGnr(gnrVO);
 	}
-
+	@Override
+	public List<GnrVO> readAllGnrNoPagination(String gnrNm) {
+		return gnrDAO.readAllGnrNoPagination(gnrNm);
+	}
+	
 	@Override
 	public boolean createOneGnr(GnrVO gnrVO) {
 		if(StringUtil.isEmpty(gnrVO.getGnrNm())) {

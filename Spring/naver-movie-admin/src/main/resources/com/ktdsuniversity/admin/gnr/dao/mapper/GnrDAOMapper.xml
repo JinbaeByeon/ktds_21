@@ -40,7 +40,30 @@
 		, NVL(#{useYn},'N')
 		, 'N' )
 	</insert>
-	
+	<select id="readAllGnrNoPagination"
+			parameterType="string"
+			resultMap="GnrMap">
+		SELECT G.GNR_ID
+			 , G.GNR_NM
+			 , TO_CHAR(G.CRT_DT,'YYYY-MM-DD HH24:MI:SS') CRT_DT
+			 , G.CRTR
+			 , TO_CHAR(G.MDFY_DT,'YYYY-MM-DD HH24:MI:SS') MDFY_DT
+			 , G.MDFYR
+			 , G.USE_YN
+			 , G.DEL_YN
+			 , CM.MBR_NM CRTR_NM
+			 , MM.MBR_NM MDFYR_NM
+		  FROM (SELECT *
+		  		  FROM GNR
+				 WHERE DEL_YN = 'N'
+				   AND USE_YN = 'Y'
+				   AND GNR_NM LIKE '%' || #{_parameter} || '%')G
+		  JOIN MBR CM
+		  	ON CM.MBR_ID = G.CRTR
+		  JOIN MBR MM
+		  	ON MM.MBR_ID = G.MDFYR
+		 ORDER BY G.GNR_NM
+	</select>
 	<select id="readAllGnr"
 			parameterType="com.ktdsuniversity.admin.gnr.vo.GnrVO"
 			resultMap="GnrMap">

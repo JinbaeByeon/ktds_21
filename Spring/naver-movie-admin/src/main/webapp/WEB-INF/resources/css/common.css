@@ -97,6 +97,7 @@ li{
 	font-size: 10px;
 	padding:5px;
 }
+
 #btn-lgn{
 	width :20%;
 }
@@ -345,7 +346,17 @@ li{
 	margin-right: 10px;
 }
 
+.search-popup {
+	margin-left: 10px;
+	margin-right: 10px;
+}
 
+.grow-1 {
+	flex-frow: 1;
+}
+.mr-10 {
+	margin-right: 10px;
+}
 
 /* Pagenate */
 .pagenate .page-no {
@@ -370,10 +381,30 @@ img.profile{
 
 
 
+/* 등록 폼*/
+.create-group {
+	display: flex;
+}
 
+.create-group label {
+	display: inline-block;
+	background-color: #e3e3e3;	
+	width: 130px;
+	padding: 10px;
+}
 
+.create-group button, 
+.create-group select,
+.create-group input {
+	flex-grow: 1;
+	margin: 10px;
+}
 
-
+.create-group textarea {
+	flex-grow: 1;	
+	margin: 10px;
+	height: 300px;
+}
 
 
 

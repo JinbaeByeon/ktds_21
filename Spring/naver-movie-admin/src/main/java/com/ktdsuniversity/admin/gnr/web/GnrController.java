@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ktdsuniversity.admin.common.util.StringUtil;
 import com.ktdsuniversity.admin.gnr.service.GnrService;
 import com.ktdsuniversity.admin.gnr.vo.GnrVO;
 
@@ -29,5 +31,15 @@ public class GnrController {
 		model.addAttribute("viewCnt", gnrVO.getViewCnt());
 		model.addAttribute("pageCnt", gnrVO.getPageCnt());
 		return "gnr/list";
+	}
+	
+	@GetMapping("/gnr/search")
+	public String viewGnrSearchPage(@RequestParam(required=false) String gnrNm, Model model) {
+		model.addAttribute("gnrNm", gnrNm);
+		if(!StringUtil.isEmpty(gnrNm)) {
+			List<GnrVO> gnrList = gnrService.readAllGnrNoPagination(gnrNm);
+			model.addAttribute("gnrList",gnrList);
+		}
+		return "gnr/search";
 	}
 }
